@@ -1,11 +1,12 @@
-Jack - personal portfolio
+Daniel Terra Gomes - Portfolio
 
 # HEDER
 
-Jack.
+Daniel T.
 
 En
-Ar
+De
+Br
 
 aria-label = Change Theme
 title = Change Theme
