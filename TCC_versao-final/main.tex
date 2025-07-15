@@ -1,0 +1,2648 @@
+%% abtex2-modelo-trabalho-academico.tex, v-1.9.5 laurocesar
+%% Copyright 2012-2015 by abnTeX2 group at http://www.abntex.net.br/
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainer of this work is the abnTeX2 team, led
+%% by Lauro César Araujo. Further information are available on
+%% http://www.abntex.net.br/
+%%
+%% This work consists of the files abntex2-modelo-trabalho-academico.tex,
+%% abntex2-modelo-include-comandos and abntex2-modelo-references.bib
+%%
+
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% abnTeX2: Modelo de Trabalho Academico (tese de doutorado, dissertacao de
+% mestrado e trabalhos monograficos em geral) em conformidade com
+% ABNT NBR 14724:2011: Informacao e documentacao - Trabalhos academicos -
+% Apresentacao
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+
+\documentclass[
+	% -- opções da classe memoir --
+	12pt,				% tamanho da fonte
+	%openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
+	%openany, % a chapter can start on any page, then many classes support option openany, e.g.:
+	oneside, %% straight PAGE alignment 
+ % With twoside layout (default for class book) chapters start at odd numbered pages and sometimes LaTeX needs to insert a page to ensure this.
+	%twoside,			% para impressão em verso e anverso. Oposto a oneside
+	a4paper,			% tamanho do papel.
+	% -- opções da classe abntex2 --
+	%chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
+	%section=TITLE,		% títulos de seções convertidos em letras maiúsculas
+	%subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
+	%subsubsection=TITLE,% títulos de subsubseções convertidos em letras maiúsculas
+	% -- opções do pacote babel --
+	english,			% idioma adicional para hifenização
+	french,				% idioma adicional para hifenização
+	spanish,			% idioma adicional para hifenização
+	brazil				% o último idioma é o principal do documento
+	]{abntex2}
+
+% ---
+% Pacotes básicos
+% ---
+\usepackage{lmodern}			% Usa a fonte Latin Modern
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+\usepackage{lastpage}			% Usado pela Ficha catalográfica
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
+\usepackage{color}				% Controle das cores
+\usepackage{graphicx}			% Inclusão de gráficos
+\usepackage{microtype} 			% para melhorias de justificação
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{ragged2e}
+\usepackage{tabto}
+
+\usepackage{subfig} % double image add to page % below
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsmath} % math matrix
+% --- https://www.overleaf.com/learn/latex/Code_listing
+\usepackage{amssymb} % \triangleq
+\usepackage{comment}
+%\usepackage{setspace}
+%\usepackage{empheq} %in case of error delete it 
+
+% label to verbatim
+% https://tex.stackexchange.com/questions/345926/crossreferencing-verbatim
+%\BeforeBeginEnvironment{verbatim}{%
+%\refstepcounter{myverb}%
+%\noindent\textbf{Verbatim stuff \themyverb}%
+%}
+
+%\usepackage{caption}
+%\usepackage{subcaption}
+\usepackage{float}
+
+%CMD
+%CMD
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstdefinestyle{cmdstyle}{
+    backgroundcolor=\color{black!5},   
+    basicstyle=\ttfamily\small,
+    frame=single,
+    breaklines=true,
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+}
+
+%CMD
+%CMD
+
+\usepackage{array,tabularx,calc}  %https://tex.stackexchange.com/questions/95838/how-to-write-a-perfect-equation-parameters-description
+
+
+\newlength{\conditionwd}
+\newenvironment{conditions}[1][Onde:]
+  {%
+   #1\tabularx{\textwidth-\widthof{#1}}[t]{
+     >{$}l<{$} @{${}={}$} X@{}
+   }%
+  }
+  {\endtabularx\\[\belowdisplayskip]}
+
+
+
+\usepackage{xcolor}
+\renewcommand\lstlistingname{Lista de código}
+\renewcommand\lstlistlistingname{Lista de trechos de código}
+
+% https://tex.stackexchange.com/questions/111580/removing-an-unwanted-page-between-two-chapters
+\let\cleardoublepage\clearpage % Unwanted one-page gap between two chapters can be eliminated using the syntax
+
+
+
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+%ref TROUBLESHOOTING = https://tex.stackexchange.com/questions/24528/having-problems-with-listings-and-utf-8-can-it-be-fixed
+%ref = https://www.overleaf.com/learn/latex/Code_listing
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    inputencoding = utf8,  % Input encoding
+    extendedchars = true,  % Extended ASCII
+    literate      =        % Support additional characters
+      {á}{{\'a}}1  {é}{{\'e}}1  {í}{{\'i}}1 {ó}{{\'o}}1  {ú}{{\'u}}1
+      {Á}{{\'A}}1  {É}{{\'E}}1  {Í}{{\'I}}1 {Ó}{{\'O}}1  {Ú}{{\'U}}1
+      {à}{{\`a}}1  {è}{{\`e}}1  {ì}{{\`i}}1 {ò}{{\`o}}1  {ù}{{\`u}}1
+      {À}{{\`A}}1  {È}{{\`E}}1  {Ì}{{\`I}}1 {Ò}{{\`O}}1  {Ù}{{\`U}}1
+      {ä}{{\"a}}1  {ë}{{\"e}}1  {ï}{{\"i}}1 {ö}{{\"o}}1  {ü}{{\"u}}1
+      {Ä}{{\"A}}1  {Ë}{{\"E}}1  {Ï}{{\"I}}1 {Ö}{{\"O}}1  {Ü}{{\"U}}1
+      {â}{{\^a}}1  {ê}{{\^e}}1  {î}{{\^i}}1 {ô}{{\^o}}1  {û}{{\^u}}1
+      {Â}{{\^A}}1  {Ê}{{\^E}}1  {Î}{{\^I}}1 {Ô}{{\^O}}1  {Û}{{\^U}}1
+      {œ}{{\oe}}1  {Œ}{{\OE}}1  {æ}{{\ae}}1 {Æ}{{\AE}}1  {ß}{{\ss}}1
+      {ẞ}{{\SS}}1  {ç}{{\c{c}}}1 {Ç}{{\c{C}}}1 {ø}{{\o}}1  {Ø}{{\O}}1
+      {å}{{\aa}}1  {Å}{{\AA}}1  {ã}{{\~a}}1  {õ}{{\~o}}1 {Ã}{{\~A}}1
+      {Õ}{{\~O}}1  {ñ}{{\~n}}1  {Ñ}{{\~N}}1  {¿}{{?`}}1  {¡}{{!`}}1
+      {°}{{\textdegree}}1 {º}{{\textordmasculine}}1 {ª}{{\textordfeminine}}1
+      {£}{{\pounds}}1  {©}{{\copyright}}1  {®}{{\textregistered}}1
+      {«}{{\guillemotleft}}1  {»}{{\guillemotright}}1  {Ð}{{\DH}}1  {ð}{{\dh}}1
+      {Ý}{{\'Y}}1    {ý}{{\'y}}1    {Þ}{{\TH}}1    {þ}{{\th}}1    {Ă}{{\u{A}}}1
+      {ă}{{\u{a}}}1  {Ą}{{\k{A}}}1  {ą}{{\k{a}}}1  {Ć}{{\'C}}1    {ć}{{\'c}}1
+      {Č}{{\v{C}}}1  {č}{{\v{c}}}1  {Ď}{{\v{D}}}1  {ď}{{\v{d}}}1  {Đ}{{\DJ}}1
+      {đ}{{\dj}}1    {Ė}{{\.{E}}}1  {ė}{{\.{e}}}1  {Ę}{{\k{E}}}1  {ę}{{\k{e}}}1
+      {Ě}{{\v{E}}}1  {ě}{{\v{e}}}1  {Ğ}{{\u{G}}}1  {ğ}{{\u{g}}}1  {Ĩ}{{\~I}}1
+      {ĩ}{{\~\i}}1   {Į}{{\k{I}}}1  {į}{{\k{i}}}1  {İ}{{\.{I}}}1  {ı}{{\i}}1
+      {Ĺ}{{\'L}}1    {ĺ}{{\'l}}1    {Ľ}{{\v{L}}}1  {ľ}{{\v{l}}}1  {Ł}{{\L{}}}1
+      {ł}{{\l{}}}1   {Ń}{{\'N}}1    {ń}{{\'n}}1    {Ň}{{\v{N}}}1  {ň}{{\v{n}}}1
+      {Ő}{{\H{O}}}1  {ő}{{\H{o}}}1  {Ŕ}{{\'{R}}}1  {ŕ}{{\'{r}}}1  {Ř}{{\v{R}}}1
+      {ř}{{\v{r}}}1  {Ś}{{\'S}}1    {ś}{{\'s}}1    {Ş}{{\c{S}}}1  {ş}{{\c{s}}}1
+      {Š}{{\v{S}}}1  {š}{{\v{s}}}1  {Ť}{{\v{T}}}1  {ť}{{\v{t}}}1  {Ũ}{{\~U}}1
+      {ũ}{{\~u}}1    {Ū}{{\={U}}}1  {ū}{{\={u}}}1  {Ů}{{\r{U}}}1  {ů}{{\r{u}}}1
+      {Ű}{{\H{U}}}1  {ű}{{\H{u}}}1  {Ų}{{\k{U}}}1  {ų}{{\k{u}}}1  {Ź}{{\'Z}}1
+      {ź}{{\'z}}1    {Ż}{{\.Z}}1    {ż}{{\.z}}1    {Ž}{{\v{Z}}}1
+      % ¿ and ¡ are not correctly displayed if inconsolata font is used
+      % together with the lstlisting environment. Consider typing code in
+      % external files and using \lstinputlisting to display them instead.      
+}
+
+\lstset{style=mystyle}
+
+
+
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+%The error indicates that the \uppercase command is being used in a context where it is not allowed, specifically within a PDF string. However, no direct usage of %\uppercase was found in the main.tex file. It might be used indirectly or through another command.
+%To resolve this, I will add the \pdfstringdefDisableCommands command in the %preamble to handle \uppercase properly.
+\pdfstringdefDisableCommands{\let\uppercase\relax}
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% Pacotes adicionais, usados apenas no âmbito do Modelo Canônico do abnteX2
+% ---
+\usepackage{lipsum}				% para geração de dummy text
+% ---
+\usepackage{pifont}
+
+
+% Pacotes para algoritmos
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{algorithmicx}
+
+% ---
+% Pacotes de citações
+% ---
+%\usepackage{hyperref}
+%\usepackage[unicode,brazilian,hyperpageref]{backref}
+%\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
+
+%\usepackage[brazilian,hyperpageref]{backref}
+%\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
+
+%\usepackage[unicode,brazilian,hyperpageref]{backref}
+\usepackage[brazilian,hyperpageref]{backref}
+
+
+%\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
+
+%%%%%%--- test pacote USPSC ---%%%%%%%%%
+%%%%%%--- test pacote USPSC ---%%%%%%%%%
+%%%%%%--- test pacote USPSC ---%%%%%%%%%
+\usepackage[alf, abnt-emphasize=bf, abnt-thesis-year=both, abnt-repeated-author-omit=no, abnt-last-names=abnt, abnt-etal-cite=3, abnt-etal-list=3, abnt-etal-text=it, abnt-and-type=e, abnt-doi=doi, abnt-url-package=none, abnt-verbatim-entry=no]{abntex2cite}
+\bibliographystyle{USPSC-classe/abntex2-alf-USPSC}
+
+% ----
+% Compatibilização com a ABNT NBR 6023:2018 e 10520:2023
+% Para tirar <> da URL e tornar as expressões latinas em itálico
+\usepackage{USPSC-classe/ABNT6023-10520}
+% As demais compatibilizações estão nos arquivos abntex2-alf-USPSC.bst,abntex2-alfeng-USPSC.bst, abntex2-num-USPSC.bst e abntex2-numeng-USPSC.bst, dependendo do idioma do textos e se o sistemas de chamada for autor-data ou numérico, conforme explicitado acima.
+% ----
+
+%%%%%%--- test pacote USPSC ---%%%%%%%%%
+%%%%%%--- test pacote USPSC ---%%%%%%%%%
+%%%%%%--- test pacote USPSC ---%%%%%%%%%
+
+% --- checkmark
+\usepackage{tikz}
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+
+\usepackage{multicol}  % Para múltiplas colunas
+
+
+%\usepackage{subcaption}
+
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{rotating}  % Adicione no preâmbulo do documento
+\usepackage{booktabs}  % Para linhas de tabela mais elegantes
+
+% First pip install pygments
+
+% CONFIGURAÇÕES DE PACOTES
+% ---
+
+% ---https://mirrors.ibiblio.org/CTAN/macros/latex/contrib/abntex2/doc/abntex2cite-alf.pdf
+% Configurações do pacote backref
+% Usado sem a opção hyperpageref de backref
+%\begin{comment}
+    
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+% Texto padrão antes do número das páginas
+\renewcommand{\backref}{}
+% Define os textos da citação
+\renewcommand*{\backrefalt}[4]{
+	\ifcase #1 %
+		Nenhuma citação no texto.%
+	\or
+		Citado na página #2.%
+	\else
+		Citado #1 vezes nas páginas #2.%
+	\fi}%
+%\end{comment}
+% --- https://mirrors.ibiblio.org/CTAN/macros/latex/contrib/abntex2/doc/abntex2cite-alf.pdf
+
+\newcommand{\datadeaprovacao}{30 de junho de 2025}
+
+
+% ---
+% Informações de dados para CAPA e FOLHA DE ROSTO
+% ---
+
+%\titulo{Simulação de Detecção de Objetos em Tempo Real para Veículos Autônomos}
+\titulo{Sistema de Assistência à Condução Baseado em Detecção de Objetos YOLO: Desenvolvimento e Validação Experimental no Simulador CARLA}
+%\titulo{Sistema Integrado de Assistência à Condução com Detecção de Placas de Trânsito YOLO: Implementação e Validação Experimental em Simulador CARLA}
+\autor{Daniel Terra Gomes}
+\local{Campos dos Goytacazes, RJ}
+%\data{\today}
+\data{30 de junho de 2025}  % <--  altera a data
+\orientador{Profa. Dra. Annabell Del Real Tamariz}
+%\coorientador{Equipe \abnTeX}
+\instituicao{%
+Universidade Estadual do Norte Fluminense Darcy Ribeiro
+  \par
+  Centro de Ciência e Tecnologia
+  \par
+  Laboratório de Ciências Matemáticas
+  \par
+  Ciência da Computação
+  }
+\tipotrabalho{Trabalho de Conclusão de Curso}
+% O preambulo deve conter o tipo do trabalho, o objetivo,
+% o nome da instituição e a área de concentração
+\preambulo{Trabalho de Conclusão de Curso apresentado
+ao Curso de Graduação em Ciência da
+Computação da Universidade Estadual do
+Norte Fluminense Darcy Ribeiro como
+requisito para a obtenção do título de Bacharel
+em Ciência da Computação, sob orientação de Annabell Del Real Tamariz
+}
+% ---
+
+% ---
+% Configurações de aparência do PDF final
+
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{41,5,195}
+
+% informações do PDF
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		pdftitle={\@title},
+		pdfauthor={\@author},
+    	pdfsubject={\imprimirpreambulo},
+	    pdfcreator={LaTeX with abnTeX2},
+		pdfkeywords={abnt}{latex}{abntex}{abntex2}{trabalho acadêmico},
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=blue,          	% color of internal links
+    	citecolor=blue,        		% color of links to bibliography
+    	filecolor=magenta,      		% color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+\makeatother
+% ---
+% ---
+% Seguindo a NBR 6023 joao
+% Seguindo a NBR 6023 https://github.com/abntex/abntex2/issues/210#issuecomment-633050367
+\usepackage{url6023}
+%\ProvidesPackage{url6023}
+
+
+% Seguindo a NBR6023
+
+% ---
+% Espaçamentos entre linhas e parágrafos
+% ---
+
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% ---
+% compila o indice
+% ---
+\makeindex
+% ---
+
+% ----
+% Início do documento
+% ----
+\begin{document}
+
+
+
+
+% Seleciona o idioma do documento (conforme pacotes do babel)
+%\selectlanguage{english}
+\selectlanguage{brazil}
+
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+\pretextual
+
+% ---
+% Capa
+% ---
+\begin{center}
+\large
+\textbf{UNIVERSIDADE ESTADUAL DO NORTE FLUMINENSE DARCY RIBEIRO} \\
+\textit{Centro de Ciência e Tecnologia\\
+Laboratório de Ciências Matemáticas\\}
+\end{center}
+\vspace{2.5cm}
+
+\imprimircapa
+% ---
+
+% ---
+% Folha de rosto
+% (o * indica que haverá a ficha bibliográfica)
+% ---
+\imprimirfolhaderosto*
+% ---
+
+% ---
+% Inserir a ficha bibliografica
+% ---
+
+% Isto é um exemplo de Ficha Catalográfica, ou ``Dados internacionais de
+% catalogação-na-publicação''. Você pode utilizar este modelo como referência.
+% Porém, provavelmente a biblioteca da sua universidade lhe fornecerá um PDF
+% com a ficha catalográfica definitiva após a defesa do trabalho. Quando estiver
+% com o documento, salve-o como PDF no diretório do seu projeto e substitua todo
+% o conteúdo de implementação deste arquivo pelo comando abaixo:
+%
+%\begin{fichacatalografica}
+%     \includepdf{fig_ficha_catalografica.pdf}
+%\end{fichacatalografica}
+\begin{comment}
+    
+\begin{fichacatalografica}
+	\sffamily
+	\vspace*{\fill}					% Posição vertical
+	\begin{center}					% Minipage Centralizado
+	\fbox{\begin{minipage}[c][8cm]{13.5cm}		% Largura
+	\small
+	\imprimirautor
+	%Sobrenome, Nome do autor
+
+	\hspace{0.5cm} \imprimirtitulo  / \imprimirautor. --
+	\imprimirlocal, \imprimirdata-
+
+	\hspace{0.5cm} \pageref{LastPage} p. : il. \\ % (algumas color.) ; 30 cm.\\
+
+	\hspace{0.5cm} \imprimirorientadorRotulo~\imprimirorientador\\
+
+	\hspace{0.5cm}
+	\parbox[t]{\textwidth}{\imprimirtipotrabalho~--~\imprimirinstituicao,
+	\imprimirdata.}\\
+
+	\hspace{0.5cm}
+		1. Veículos autônomos.
+		2. Inteligência Artificial.
+		3. Machine Learning.
+		4. Condução Autônoma.
+		I. Manuel Antonio Molina Palma.
+II. Universidade Estadual do Norte Fluminense Darcy Ribeiro.
+		III. Faculdade de Ciência da Computação.
+		IV. Veículos autônomos e inteligência artificial:
+ um estudo sobre a implementação no brasil.
+	\end{minipage}}
+	\end{center}
+\end{fichacatalografica}
+\end{comment}
+% ---
+\begin{folhadeaprovacao}
+
+  \begin{center}
+    {\ABNTEXchapterfont\large\imprimirautor}
+
+    \vspace*{\fill}\vspace*{\fill}
+    \begin{center}
+      \ABNTEXchapterfont\bfseries\Large\imprimirtitulo
+    \end{center}
+    \vspace*{\fill}
+    
+    \hspace{.45\textwidth}
+    \begin{minipage}{.5\textwidth}
+        \imprimirpreambulo
+    \end{minipage}%
+    \vspace*{\fill}
+   \end{center}
+     \begin{center}
+
+   Trabalho aprovado em \datadeaprovacao.  % <-- aqui você altera a data. 
+   \end{center}
+\assinatura{\textbf{\imprimirorientador} \\ Orientadora}
+
+\assinatura{\textbf{Prof. Dr. João Luiz de Almeida Filho} \\ Membro da Banca - UENF}
+
+\assinatura{\textbf{Prof. Dr. Luis M. Del Val Cura} \\ Membro da Banca - UENF}
+
+%\assinatura{\textbf{Prof. Dr. Fermín A. Tang Montané} \\ Suplente - UENF}
+      
+   \begin{center}
+    \vspace*{0.5cm}
+    {\large\imprimirlocal}
+    \par
+    {\large\imprimirdata}
+    \vspace*{1cm}
+  \end{center}
+  
+\end{folhadeaprovacao}
+% ---
+% Inserir errata
+% ---
+% Inserir folha de aprovação
+% ---
+
+% Isto é um exemplo de Folha de aprovação, elemento obrigatório da NBR
+% 14724/2011 (seção 4.2.1.3). Você pode utilizar este modelo até a aprovação
+% do trabalho. Após isso, substitua todo o conteúdo deste arquivo por uma
+% imagem da página assinada pela banca com o comando abaixo:
+%
+%\includepdf{folhadeaprovacao_final.pdf}
+%
+%%%%%%%%%%\ %%%%%%%%%%\ folhadeaprovacao DELETED
+
+% ---
+
+% ---
+% Dedicatória
+% ---
+
+% ---
+% Agradecimentos
+% ---
+\begin{agradecimentos}
+
+Expresso minha profunda gratidão a todos que contribuíram significativamente para a realização deste Trabalho de Conclusão de Curso e para minha formação acadêmica e pessoal ao longo desta trajetória.
+
+À Profa. Dra. Annabell Del Real Tamariz, minha orientadora, pela orientação científica rigorosa, dedicação contínua e apoio durante os três anos de iniciação científica, estágio supervisionado e desenvolvimento deste trabalho. Suas contribuições foram fundamentais para o aprofundamento dos conhecimentos em veículos autônomos, visão computacional e metodologia científica.
+
+À Universidade Estadual do Norte Fluminense Darcy Ribeiro e ao Laboratório de Ciências Matemáticas, pelo suporte acadêmico e pelos recursos disponibilizados para o desenvolvimento desta pesquisa. Em especial, ao Laboratório P5, cujos equipamentos foram essenciais para a execução dos experimentos computacionais.
+
+À minha família, em especial aos meus pais, Carlos e Delma, pelo apoio incondicional e incentivo permanente ao longo de toda a trajetória acadêmica. À Maria, minha noiva, pela compreensão, paciência e encorajamento nos momentos desafiadores desta jornada, sempre apoiando meu crescimento acadêmico e profissional.
+
+Aos colegas e amigos que compartilharam desta caminhada acadêmica, pelas discussões científicas enriquecedoras, colaborações intelectuais e apoio mútuo diante dos desafios da pesquisa. Suas contribuições, seja por questionamentos ou pelo suporte emocional, foram essenciais para o amadurecimento intelectual que culminou nesta pesquisa.
+
+Aos pesquisadores e autores cujos trabalhos fundamentaram teoricamente esta investigação, contribuindo para o avanço do conhecimento na área de veículos autônomos e sistemas de detecção de objetos em tempo real.
+
+Por fim, registro meu reconhecimento a todos que, direta ou indiretamente, contribuíram para a realização desta pesquisa, consolidando uma experiência acadêmica transformadora que certamente influenciará minha trajetória de vida.
+
+\end{agradecimentos}
+% ---
+
+% ---
+% Epígrafe
+% ---
+\begin{epigrafe}
+	\vspace*{\fill}
+	\begin{flushright}
+		\textit{``Behind me lies a farm. \\
+			I wonder if there is bread above the hearth \\
+			and if I will ever return.'' \\
+			(Pantheon, League of Legends)}
+	\end{flushright}
+\end{epigrafe}
+% ---
+
+% ---
+% RESUMOS
+% ---
+
+% resumo em português
+%\begin{singlespacing} 
+%\end{singlespacing}
+\setlength{\absparsep}{18pt} 
+\begin{resumo}
+
+%Este trabalho apresenta o desenvolvimento e validação experimental de um sistema integrado de detecção de objetos em tempo real para veículos autônomos (VA), fundamentado na integração entre algoritmos de visão computacional e controle veicular autônomo em ambiente simulado. O objetivo geral consiste em desenvolver e validar um sistema de detecção e reconhecimento de placas de trânsito em tempo real utilizando algoritmos YOLO e ambiente de simulação CARLA, visando promover uma condução assistida mais segura e confiável. A metodologia empregada baseia-se em uma arquitetura modular de três camadas: percepção ambiental utilizando câmeras e algoritmo YOLOv8 para detecção de objetos, planejamento de movimento com capacidade de resposta a sinalizações de trânsito implementado por máquina de estados finitos, e controle veicular via controladores PID para controle longitudinal e controlador de perseguição pura para controle lateral. O sistema foi validado experimentalmente no simulador CARLA utilizando o mapa Town01, com coleta sistemática de métricas quantitativas de desempenho. Os resultados demonstram que o sistema alcançou desempenho superior aos critérios estabelecidos: processamento em tempo real com taxa média de 17,01 FPS, precisão de detecção de 100\% para todas as classes de objetos testadas (carros e placas de parada), tempo de resposta de 0,0588 segundos por \textit{frame}, conclusão bem-sucedida do trajeto sem colisões e efetividade de \textit{feedback} visual. A validação experimental confirmou integralmente a hipótese de que um sistema de assistência à condução baseado em detecção de objetos pode oferecer \textit{feedback} visual de placas de trânsito em tempo real, contribuindo para uma condução mais confiável. As principais contribuições científicas incluem a arquitetura de processamento distribuído via Sockets integrando Python 3.6 e Python 3.12, o \textit{framework} de métricas abrangente para avaliação quantitativa de sistemas de assistência à condução, e a demonstração da viabilidade de arquiteturas modulares para VA de níveis intermediários de automação SAE. Os resultados estabelecem fundamentos metodológicos sólidos para pesquisas futuras em sistemas de assistência à condução baseados em simulação, demonstrando que algoritmos YOLO podem ser efetivamente integrados com sistemas de controle veicular para aplicações de condução autônoma.
+
+Este trabalho apresenta o desenvolvimento e a validação experimental de um sistema integrado de detecção de objetos em tempo real para veículos autônomos (VA), fundamentado na integração entre algoritmos de visão computacional (YOLOv8) e controle veicular em ambiente simulado. O objetivo consistiu em implementar e validar um sistema capaz de detectar e reconhecer placas de trânsito em tempo real, fornecendo \textit{feedback} visual ao condutor, utilizando o simulador CARLA como plataforma de testes. A metodologia adotada baseou-se em uma arquitetura modular de três camadas: percepção ambiental por câmeras e YOLOv8, planejamento de movimento com máquina de estados finitos e controle veicular via controladores PID (longitudinal) e perseguição pura (lateral). O sistema foi avaliado em seis simulações independentes, abrangendo três condições climáticas distintas (céu limpo, chuva intensa ao pôr do sol e ao meio-dia), com coleta sistemática de métricas quantitativas. Os resultados demonstraram processamento em tempo real com média de 17,13 FPS, tempo médio de detecção de 0,0594 s por \textit{frame} e precisão de detecção de 100\% para placas de pare e veículos. A confiança média na detecção de placas de trânsito manteve-se acima de 0,73 em todas as condições, superando o limiar de 0,70 estabelecido, com coeficiente de variação de 0,58\%, evidenciando robustez mesmo sob condições adversas. A análise estatística (ANOVA) confirmou diferença significativa para o tempo de detecção (p = 0,025), sem impacto estatístico relevante na confiança das detecções de placas (p = 0,651). O sistema concluiu todos os trajetos simulados sem colisões e gerou \textit{feedback} visual consistente em 100\% dos casos. As principais limitações incluem o ambiente exclusivamente simulado, o número reduzido de execuções por condição climática e o foco restrito à detecção de placas de pare. Apesar dessas restrições, os resultados validam empiricamente a hipótese de que sistemas de assistência à condução baseados em detecção de objetos podem fornecer \textit{feedback} visual confiável de placas de trânsito em tempo real, contribuindo para maior segurança e confiabilidade na condução. O trabalho estabelece fundamentos metodológicos sólidos para pesquisas futuras em sistemas de assistência à condução, demonstrando a viabilidade de arquiteturas modulares e processamento distribuído para aplicações em VA.
+
+\textbf{Palavras-chave}: Carros autônomos. Detecção de Objetos. Controle Veicular. Simulação. CARLA. YOLO.
+
+
+\end{resumo}
+
+% resumo em inglês
+\begin{resumo}[Abstract]
+ \begin{otherlanguage*}{english}
+
+This work presents the development and experimental validation of an integrated real-time object detection system for autonomous vehicles (AV), based on the integration of computer vision algorithms (YOLOv8) and vehicle control in a simulated environment. The objective was to implement and validate a system capable of detecting and recognizing traffic signs in real-time, providing visual feedback to the driver, using the CARLA simulator as the testing platform. The adopted methodology was based on a modular three-layer architecture: environmental perception using cameras and YOLOv8, motion planning with a finite state machine, and vehicle control via PID controllers (longitudinal) and pure pursuit (lateral). The system was evaluated in six independent simulations, covering three distinct weather conditions (clear sky, heavy rain at sunset, and heavy rain at noon), with a systematic collection of quantitative metrics. The results demonstrated real-time processing with an average of 17.13 FPS, an average detection time of 0.0594 s per frame, and 100\% detection accuracy for stop signs and vehicles. The average confidence in stop sign detection remained above 0.73 in all conditions, surpassing the established threshold of 0.70, with a coefficient of variation of 0.58\%, evidencing robustness even under adverse conditions. Statistical analysis (ANOVA) revealed a significant difference in detection time (p = 0.025), with no statistically significant impact on stop sign detection confidence (p = 0.651). The system completed all simulated routes without collisions and generated consistent visual feedback in 100\% of cases. The main limitations include the exclusively simulated environment, the reduced number of runs per weather condition, and the restricted focus on stop sign detection. Despite these constraints, the results empirically validate the hypothesis that object detection-based driver assistance systems can provide reliable real-time visual feedback on traffic signs, contributing to greater safety and reliability in autonomous driving. The work establishes solid methodological foundations for future research in driver assistance systems, demonstrating the feasibility of modular architectures and distributed processing for AV applications.
+
+
+
+   \vspace{\onelineskip}
+ 
+   \noindent 
+    \textbf{Keywords}: Self-driving car. Objects Detection. Vehicle Control. Simulation. CARLA. YOLO.
+ \end{otherlanguage*}
+\end{resumo}
+% resumo em inglês
+
+
+
+%%%%%%%%%%%
+% ---
+% inserir lista de ilustrações
+% ---
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+% ---
+
+% ---
+% inserir lista de tabelas
+% ---
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+
+
+% codigos lista
+\pdfbookmark[0]{\lstlistingname}{lop}%
+\lstlistoflistings
+
+
+% ---
+
+% ---
+% inserir lista de abreviaturas e siglas
+% --
+\newpage % in order to the documentation structure be right, when clicking on siglas
+\begin{siglas} \label{eq:1}
+    \item[VA] Veículo Autônomo / Veículos Autônomos
+    \item[IA] Inteligência Artificial
+    \item[SAE] Society of Automotive Engineers
+    \item[GPS] Global Positioning System
+    \item[LiDAR] Light Detection and Ranging
+    \item[ICR] Instantaneous Center of Rotation
+    \item[RPM] Rotação Por Minuto
+    \item[P] Proporcional
+    \item[PI] Proporcional Integral
+    \item[PD] Proporcional Derivativo
+    \item[PID] Proporcional Integral Derivativo
+    \item[Feedback] Realimentação
+    \item[Feedforward] Antecipação
+    \item[2D] Bidimensional
+    \item[3D] Tridimensional
+    \item[MPC] Model Predictive Controller
+    \item[ADAS] Advanced Driver-Assistance System
+    \item[ADS] Automated Driving System
+    \item[CNN] Convolutional Neural Networks
+    \item[RCNN] Region Convolution Neural Network
+    \item[RNN] Recurrent Neural Network
+    \item[TCC] Trabalho de Conclusão de Curso
+    \item[ms] Milissegundo
+    \item[YOLO] You Only Look Once
+    \item[YOLOv8] You Only Look Once version 8
+    \item[API] Application Programming Interface
+    \item[TCP/IP] Transmission Control Protocol/Internet Protocol
+    \item[UDP] User Datagram Protocol
+    \item[GPU] Graphics Processing Unit
+    \item[CPU] Central Processing Unit
+    \item[CUDA] Compute Unified Device Architecture
+    \item[RGB] Red Green Blue
+    \item[IMU] Inertial Measurement Unit
+    \item[ODD] Operational Design Domain
+    \item[DDT] Dynamic Driving Task
+    \item[FSM] Finite State Machine
+    \item[CARLA] Car Learning to Act
+    \item[V2X] Vehicle-to-Everything
+    \item[FOV] Field of View
+    \item[FPS] Frames Per Second
+    \item[IoU] Intersection over Union
+    \item[mAP] mean Average Precision
+    \item[CSV] Comma-Separated Values
+    \item[HTML] HyperText Markup Language
+    \item[PDF] Portable Document Format
+    \item[km/h] quilômetros por hora
+    \item[m/s] metros por segundo
+\end{siglas}
+% ---
+
+% ---
+% inserir lista de símbolos
+% ---
+
+
+% ---
+% inserir o sumario
+% ---
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+% ---
+
+
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+\textual
+
+% ----------------------------------------------------------
+% Introdução (exemplo de capítulo sem numeração, mas presente no Sumário)
+% ----------------------------------------------------------
+\chapter[Introdução]{Introdução} 
+%\addcontentsline{toc}{chapter}{Introdução}
+\label{introducao_cap}
+% ----------------------------------------------------------
+Veículos Autônomos (VA) representam um dos avanços tecnológicos mais promissores para transformar a mobilidade urbana e a segurança no transporte \cite{eu_safer_roads, mundobrasil}. Seu surgimento acompanha o crescimento do mercado de veículos elétricos \cite{sebo2024impact}, permitindo que empresas como ZOOX\textsuperscript{\textregistered}, WAYMO\textsuperscript{\textregistered} e LUME ROBOTICS\textsuperscript{\textregistered} invistam significativamente em sistemas de condução autônoma. Os quais, devido a tecnologias embarcadas de visão computacional, sensores de proximidade, entre outros (Figura \ref{figura_compone})%,  (add razoes- de forma q permite e leve maior eficiência, seguranca(PQ >>>)), os quais 
+, prometem maior eficiência, segurança e conveniência nos sistemas de transporte público e privado \cite{Center_of_Automotive_Management2022, review-auto, intro-pm}. A partir da incorporação em ampla escala dessa tecnologia será possível notar %(incorporação dessa tecnologia) Essa mudança deverá produzir 
+impactos transformadores na infraestrutura urbana, na configuração das cidades e no comportamento social das pessoas, afetando positivamente a mobilidade cotidiana de diversos grupos populacionais, incluindo crianças, idosos e pessoas com mobilidade reduzida \cite{4cenarios_ocidental, KPMG}. Desses impactos, um dos mais significativos seria em redução nos acidentes de trânsito. Estudos indicam que erros humanos são responsáveis por mais de 90\% dos acidentes de trânsito \cite{nhtsa_crash_causation}, fazendo da tecnologia de VA uma solução promissora para reduzir significativamente esses acidentes. Visto que esses veículos podem tomar ações por conta própria, e dar assistência ao motorista em casos de situações perigosas \cite{okpono2024advanced}. Estimativas sugerem que a adoção em larga escala de VA poderia evitar até 585.000 mortes ao longo de uma década a partir de 2035 \cite{lanctot_passenger_economy}. %Tais acidentes podem ocorrer devido à baixa atenção do condutor a via, erros humanos na condução, e/ou eventos inesperados. %(esse acidentes normalmente ocorrem devido a baixa atencao do usuário, erros humanos, e eventos inesperados)(). 
+Nesse quesito, soluções de detecção de objetos e a análise de cenários em tempo real, podem ser um aliado dos motoristas no seu dia a dia \cite{fhwa_speed_crashes}. Visto que tais tecnologias embarcadas, podem auxiliar e assistir os condutores durante uma tarefa de condução %.  essenciais para a segurança dos VA, são especialmente críticas em ambientes urbanos, onde tempos de resposta rápidos são necessários para 
+evitando acidentes e garantindo uma navegação segura \cite{janai_computer_vision_av}.
+
+
+No entanto, para que a tecnologia de VA avance até o ponto de uma direção autônoma nível 5 SAE \cite[p. ~28]{SAE}, é necessário enfrentar uma série de desafios técnicos, especialmente em relação à visão computacional e sistemas de detecção de objetos, onde se faz necessário identificar e informar rapidamente sobre novas detecções durante uma tarefa de condução. Avanços em estudos de desempenho de soluções de visão computacional em detecção de objetos enfrentam desafios quanto a % (na area de visao computacional em sistemas de detc de obj. e a resposta do VA e/ou usuarios ao objeto detectado) DD nas áreas de inteligência artificial, processamento de imagens, visão computacional e tecnologias embarcadas DD.  Devido aos 
+altos custos na infraestrutura, logística e legislação associados a testes em veículos no mundo real. Devido a isso, pesquisadores estão cada vez mais recorrendo a simulações virtuais para desenvolver e validar essas soluções em sistemas autônomos \cite{dosovitskiy2017carla, ahire2024simulating}. Ambientes simulados oferecem um cenário controlado e econômico para testar algoritmos de condução autônoma em diversas situações, sem os riscos imediatos ou custos com recursos dos testes físicos. \citeonline{dosovitskiy2017carla} destacam que as simulações democratizam o acesso a ferramentas de pesquisa e desenvolvimento para VA, reduzindo barreiras financeiras e logísticas para a inovação. 
+Em soluções autônomas, especialmente em VA, a detecção de objetos é fundamental para a interpretação em tempo real do ambiente, permitindo que os veículos reconheçam e classifiquem obstáculos, placas de trânsito, pedestres e outros objetos essenciais ao seu redor \cite{conge, software-review, sensors-yet}. Algoritmos de visão computacional alcançam isso ao utilizar extensos dados de imagem para interpretar pistas visuais, identificar formas, cores,  distâncias e objetos, aspectos essenciais para a segurança e a eficiência da condução autônoma. Esses algoritmos são alimentados usando dados oriundos de sensores, por exemplo: câmeras que capturam dados em tempo real, processados pelos VA para tomar decisões informadas e assistir o condutor durante uma tarefa de condução \cite[p. ~15]{aplicacao2}, \cite[p. ~6]{sensors-yet}. 
+Para que a tarefa de percepção (Figura \ref{componentes_da_tarefa_de_conducao}) dos VA se torne eficaz em ambientes variados, os pesquisadores estão investigando abordagens sofisticadas para simular com precisão a detecção de objetos em tempo real \cite[p. ~1]{dosovitskiy2017carla}. As soluções integram, geralmente, conjuntos de ferramentas de aprendizado profundo com dados de sensores em tempo real para melhorar a precisão na identificação de objetos. Esses algoritmos são treinados com extensos dados de sensores coletados de simulações virtuais, onde são expostos a milhões de quilômetros de cenários de estrada virtuais, garantindo que encontrem várias condições ambientais, obstáculos, % e possíveis perigos ao quais Por meio de simulações de 
+casos extremos e situações de alto risco que, de outra forma, seriam raros ou inseguros de replicar em testes no mundo real \cite{wachenfeld_release_autonomous_vehicles}. Esse grande volume de dados aumenta a robustez dos modelos de detecção de objetos, garantindo que soluções tomem ações mais precisas, de modo a manter conformidade com a regulação de trânsito, alcançando uma condução segura.% os VA interpretem corretamente os sinais de velocidade e mantenham a conformidade regulatória.
+
+Nos últimos anos, algoritmos baseados em Redes Neurais Convolucionais ou \textit{Convolutional Neural Networks} (CNNs) em inglês e técnicas de aprendizado profundo têm sido amplamente utilizados para tarefas de detecção de objetos em VA, aproveitando as melhorias no poder computacional \cite[p. ~4]{s23167145}. Por exemplo, redes treinadas em conjuntos de dados de trânsito podem ser usadas para detectar e classificar % objetos em tempo real, com ênfase no reconhecimento e resposta a 
+placas \cite[p. ~6]{sensors-yet}, e passar essas informações para a camada de Planejamento ou Sistemas Avançados de Assistência ao Condutor em inglês:  \textit{Advanced Driver Assistance Systems} (ADAS). Os quais utilizam essas informações para reagir a obstáculos modificando sua rota e movimento ou assistir o condutor com
+%levar 
+informações de trânsito 
+%ao condutor com 
+baseadas nos resultados dessas detecções e classificações \cite[p. ~46]{ahire2024simulating}, \cite{okpono2024advanced}, \cite[p. ~4]{sensors-yet}. Esses recursos de assistência são amplamente implementados em veículos com níveis de automação inferiores ao nível 4, conforme a classificação SAE \cite{SAE}. Por esses níveis demandarem atenção constante ou parcial do condutor durante a tarefa de condução, esses sistemas de assistência durante a condução, desempenham um papel crucial no suporte aos motoristas, aprimorando a segurança de todos os usuários \cite{okpono2024advanced}.
+
+\section{Problema}
+
+A falha na detecção e interpretação precisa e oportuna de sinais de trânsito, muitas vezes decorrente de limitações humanas, permanece um desafio significativo, contribuindo para acidentes e comprometendo a segurança. 
+
+Estudos apontam que erros humanos são responsáveis por mais de 90\% dos acidentes de trânsito, evidenciando a necessidade de soluções tecnológicas capazes de mitigar esses riscos \cite{nhtsa_crash_causation}. Embora os sistemas \textit{ADAS} representem um avanço, sua eficácia depende da precisão dos algoritmos de detecção de objetos, que nem sempre apresentam resultados satisfatórios \cite{ahire2024simulating}, \cite{sensors-yet}.
+
+Além disso, a introdução de tecnologias autônomas, especialmente nos níveis mais altos de automação, segundo a classificação da \citeonline{SAE}, enfrenta barreiras técnicas e práticas significativas, incluindo desafios relacionados à capacidade de processamento em tempo real, confiabilidade em condições ambientais variadas e integração com outros módulos do veículo \cite{dosovitskiy2017carla}, \cite{wachenfeld_release_autonomous_vehicles}. Esses desafios são agravados pelos altos custos associados ao treinamento e teste de algoritmos em ambientes reais, bem como pelas limitações legais e logísticas \cite{dosovitskiy2017carla}, \cite{ahire2024simulating}.
+
+Portanto, é essencial desenvolver e validar soluções que integrem detecção de objetos com precisão elevada e processamento em tempo real, utilizando plataformas simuladas para contornar as limitações de custo e risco. Tais soluções simuladas representam uma abordagem promissora para validação de sistemas de assistência à condução, com potencial para aumentar significativamente a segurança viária \cite{janai_computer_vision_av, sensors-yet}.
+
+\section{Hipótese} \label{hipotese}
+
+\textbf{Um sistema de assistência à condução em carros autônomos pode oferecer \textit{feedback} visual de placas de trânsito em tempo real, tornando a condução mais confiável.} 
+
+De modo a validar essa hipótese, se faz necessário desenvolver um sistema autônomo para testagem de solução de assistência à condução, baseado em algoritmo de visão computacional YOLO, capaz de detectar placa de trânsito e dar alerta visuais em tempo real aos condutores, com validação realizada por meio de simulação no ambiente CARLA.
+\\
+% 
+%\textbf{É possível desenvolver um sistema autônomo de testagem de automação veicular para solução de assistência à condução, baseado em algoritmo de visão computacional, capaz de detectar sinais de trânsito e dar \textit{feedback} visual em tempo real aos condutores, validado por meio de ambientes simulados.}% simulações no ambiente CARLA.}
+
+
+%\textbf{É possível desenvolver um sistema de assistência à condução, baseado em algoritmo de visão computacional YOLO, capaz de detectar placa de trânsito e dar \textit{feedback} visual em tempo real, com validação realizada por meio de simulação no ambiente CARLA.}
+
+%\textbf{Será possível criar um sistema autônomo para testagem de automação veicular para solução de visão computacional baseado em YOLO que visam dar \textit{feedback} aos condutores no ambiente CARLA?} 
+%\textbf{É possível desenvolver um sistema de assistência à condução, baseado no algoritmo YOLO, capaz de detectar sinais de trânsito e fornecer \textit{feedback} visual em tempo real aos condutores, validado por meio de simulações no ambiente CARLA.}
+
+%\textbf{Um sistema de assistência à condução baseado em YOLO, implementado no simulador CARLA, consegue detectar placas de trânsito e dar \textit{feedback} visual em tempo real aos condutores, com precisão e latência compatíveis com os requisitos de segurança veicular.}
+%Um sistema de assistência à condução baseado em YOLO, implementado no simulador CARLA, é capaz de detectar placas de trânsito e fornecer feedback visual em tempo real aos condutores, com precisão e latência compatíveis com os requisitos de segurança veicular.
+
+% sistema de validação de soluções autônomas para 
+%sera possivel criar um sistema autonomo para testagem de automacao veicular para solução de visao computacional baseado em YOLO que visam dar feedback aos condutores no ambiente CARLA?
+
+
+Essa hipótese é fundamentada na viabilidade técnica e nos resultados dos trabalhos a seguir e Trabalhos Relacionados \ref{trabalhos_relacionados}, os quais demonstram a eficácia de soluções baseadas em algoritmos avançados de detecção de objetos aplicados ao reconhecimento de sinais de trânsito. Nesse quesito, \citeonline{dosovitskiy2017carla}, demonstraram a eficácia do uso de simuladores como o CARLA para validar sistemas de condução autônoma, reduzindo custos e riscos associados a testes em ambientes reais. Por meio de simulações, \citeonline{sanchez_speed_sign_detection}, alcançou uma precisão de 92\% na detecção de placas de limite de velocidade utilizando o algoritmo YOLO, destacando sua capacidade de processar imagens em tempo real e fornecer informações críticas ao motorista. Esse sistema foi testado com tempos de execução rápidos (8 ms em GPU), mostrando ser adequado para aplicações que demandam baixa latência.
+
+Trabalhos como \citeonline{s23167145} e \citeonline{Wu_2022} propuseram melhorias em algoritmos de detecção, como YOLOv7 e YOLOv4, aumentando a precisão na identificação de alvos pequenos, como placas de trânsito. Tais aprimoramentos incluem o uso de métricas específicas que permitem melhor captação de características visuais em ambientes complexos. Essas abordagens comprovam ser possível aprimorar ainda mais a detecção de placas, mesmo em condições adversas.
+
+Além disso, \citeonline{andrade_object_detection_distance}, demonstrou a integração entre detecção de objetos e cálculos de distância, validando soluções robustas em simulações no CARLA. Essas implementações reforçam a possibilidade de desenvolver sistemas que, além de reconhecerem placas de trânsito, forneçam informações detalhadas, como distâncias relativas, para apoio em tarefas de condução.
+
+Portanto, baseando-se nos trabalhos supracitados, é factível concluir que sistemas de assistência à condução, integrados com algoritmos avançados e testados em simulações virtuais, podem oferecer uma solução prática e eficiente para mitigar falhas humanas na interpretação de sinais de trânsito. Esses sistemas podem aprimorar a segurança e confiabilidade da condução, especialmente em VA e semi-autônomos, conforme apontam estudos anteriores \cite{ahire2024simulating, sensors-yet}.
+
+\section{Objetivos} \label{objetivos}
+
+Desenvolver e validar um sistema autônomo para testagem de solução de visão computacional: detecção e reconhecimento de placas de trânsito em tempo real para VA, utilizando algoritmo da série YOLO e ambiente de simulação CARLA.
+
+\subsection{Objetivos Específicos} \label{objetivos_esp}
+\begin{enumerate}
+    \item Implementar um sistema de carro autônomo capaz de percorrer trajeto predefinido em ambiente urbano simulado. A solução deve integrar as três camadas essenciais da condução autônoma: percepção ambiental utilizando câmeras e algoritmo YOLO para detecção de objetos, planejamento de movimento com capacidade de resposta a sinalizações de trânsito, e controle veicular via controladores PID para controle longitudinal e controlador de perseguição pura para controle lateral;
+    
+    \item Desenvolver um módulo de detecção e classificação de objetos em tempo real baseado no algoritmo YOLO, especificamente configurado para identificar placas de parada no simulador CARLA em sua versão inicial. O sistema deve processar \textit{frames} de vídeo em tempo real (média de <100 ms), realizando detenções dos \textit{frames} em uma média de >10 FPS e dar \textit{feedback} visual das detecções.
+    
+    \item Implementar sistema de resposta comportamental a sinalizações de trânsito que permita reação a placa. Especificamente, o sistema deve ser capaz de: reduzir a velocidade ou parar completamente quando uma placa de parada for informada para o módulo de planejamento;
+    
+    \item Estabelecer uma interface de visualização e \textit{feedback} em tempo real para monitoramento das detecções e desempenho do sistema. A interface deve exibir: (i) \textit{stream} de vídeo com sobreposição das detecções realizadas (\textit{bounding boxes}, classificações e níveis de confiança), (ii) métricas de desempenho em tempo real incluindo FPS de detecção, latência de processamento e estatísticas de precisão, (iii) indicadores visuais do estado atual do veículo e ações tomadas em resposta os dados de objetos, e (iv) alerta de segurança quando necessário. Essa interação é fundamental para permitir que operadores humanos compreendam o comportamento do sistema e validem sua eficácia em diferentes cenários;
+    
+    \item Validar experimentalmente o sistema mediante testes sistemáticos no simulador CARLA, coletando métricas quantitativas de desempenho que incluam: taxa de detecções de placas de trânsito e tempo de processamento, capacidade do sistema reagir a placas e completar o trajeto predefinido sem colisões. Os resultados obtidos devem possibilitar a validação da Hipótese \ref{hipotese}.
+\end{enumerate}
+
+\section{Justificativa}
+
+A elevada taxa de acidentes de trânsito causadas por falhas humanas, muitas vezes ocasionados por falhas na percepção e interpretação de sinalizações de trânsito \cite{nhtsa_crash_causation}, evidencia a necessidade de soluções tecnológicas que auxiliem os motoristas a identificar e reagir rapidamente às condições do ambiente.
+Sinalizações visuais como placas de trânsito são essenciais para a segurança, mas podem ser mal interpretadas ou ignoradas devido a fatores como visibilidade reduzida, distração ou cansaço do condutor.
+A implementação de um sistema de assistência baseado em visão computacional oferece um suporte adicional ao motorista, aumentando a segurança \cite{okpono2024advanced}. Além disso, avanços em tecnologias automotivas e o maior acesso a veículos com tecnologias embarcadas contribuem para encontrar soluções que usem todos os recursos desses veículos, de modo a promover maior segurança aos seus passageiros \cite{castro2009human}.%a democratização de sensores de câmeras justificam a pesquisa e o desenvolvimento de soluções mais acessíveis e eficazes.
+
+
+\section{Método} \label{metodo}
+
+De modo a alcançar os Objetivos \ref{objetivos} propostos, este trabalho adota uma abordagem metodológica baseada no método científico (Figura \ref{metodo_cientifico}), estruturada em etapas sequenciais e sistemáticas que integram desenvolvimento de software, experimentação controlada e discussão dos resultados obtidos.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=16cm]{Figures/metodo_cientifico.png}
+\caption{Método Científico \cite[p. ~4]{wazlawick_metodologia_pesquisa}.}
+\label{metodo_cientifico}
+\end{figure}
+
+Essas etapas visam validar a Hipótese \ref{hipotese} de que um sistema de assistência à condução pode oferecer \textit{feedback} visual de placas de trânsito em tempo real, contribuindo para uma condução mais confiável. A metodologia foi estruturada para superar limitações técnicas específicas e garantir a reprodutibilidade dos resultados experimentais. Adotando o seguinte ferramental técnico para alcançar os Objetivos \ref{objetivos}:
+
+\begin{enumerate}
+    
+    \item \textbf{Ferramental:}
+    \begin{itemize}
+        \item \textbf{YOLO:} utilizou-se o modelo YOLOv8 pré-treinado, que demonstrou eficácia superior em \textit{benchmarks} de detecção de objetos \cite{wang2024yolov10realtimeendtoendobject} e facilidade de implementação em nosso trabalho. Apresentamos uma visão geral desta tecnologia na Seção \ref{yolo_section} e sua aplicação na Seção \ref{per_visual_carro}. A escolha por modelos pré-treinados fundamenta-se nos resultados experimentais obtidos durante o desenvolvimento, que indicaram precisão superior a 90\% para detecção de placas de trânsito no simulador CARLA. A validação do modelo YOLO ocorreu em tempo real durante a execução da simulação, dispensando conjuntos de dados de validação externos, discutido no capítulo \ref{resultados}.
+        
+        \item \textbf{Ambiente de Simulação Customizado:} foi utilizada uma versão modificada do simulador CARLA 0.9.x (disponível nos apêndices \ref{apendices}), incluindo cenários urbanos personalizados com placas de trânsito e objetos. Na Seção \ref{controlador_controle_de_VA-simulador} apresentamos o papel desses ambientes simulados no avanço científico metódico. 
+        
+        \item \textbf{Infraestrutura de Desenvolvimento:}
+            \begin{itemize}
+            \item \textbf{Sistema Operacional:} Windows 11, proporcionando ambiente estável para desenvolvimento e execução das simulações.
+            \item \textbf{VScode \& Git:} Visual Studio Code como ambiente de desenvolvimento integrado, facilitando depuração e controle de versão com Git;
+            \item \textbf{Arquitetura Dual Python:} implementação de sistema híbrido com conexão via socket, usando Python 3.6 para módulos de controle e planejamento (compatibilidade com CARLA) com processamento em CPU e Python 3.12 com conda para módulo de percepção/feedback (compatibilidade com bibliotecas modernas de aprendizado profunda) com processamento em GPU. A Subseção \ref{subsec:limitacoes_tecnicas} apresenta a justificativa para essa escolha metodológica de arquitetura.
+            \end{itemize}
+        
+        \item \textbf{Ferramentas e Bibliotecas Técnicas Essenciais:}
+            \begin{itemize}
+            \item \textbf{CUDA Toolkit 11.8 + cuDNN 8.7:} aceleração GPU NVIDIA para processamento de inferência em tempo real, essencial para manter latência inferior a 100ms;
+            \item \textbf{PyTorch 2.1.2+cu118:} \textit{framework} de aprendizado profundo com suporte CUDA para execução eficiente do YOLOv8;
+            \item \textbf{OpenCV 4+:} Biblioteca para processamento de imagens, manipulação de \textit{frames} e visualização de resultados de detecção;
+            \item \textbf{MessagePack:} protocolo de serialização binária para comunicação de baixa latência entre processos Python, otimizando transferência de dados entre módulos;
+            \item \textbf{NumPy + SciPy:} bibliotecas para computação científica, processamento e implementação de algoritmos de otimização de trajetórias.
+            \end{itemize}
+    \end{itemize}
+    
+    \item \textbf{Desenvolvimento da Arquitetura de Condução Autônoma:}
+    
+    A solução implementa uma arquitetura hierárquica de três módulos, conforme estabelecido na literatura \citeonline{University_of_Toronto2018-fe} de VA e apresentado de forma geral na Seção \ref{ar_soft} e em detalhes específicos para este trabalho no Capítulo \ref{ModelagemConceitual}:
+    
+    \begin{itemize}
+    \item \textbf{Módulo de Percepção:}
+        \begin{itemize}
+        \item Uso de uma câmera adicionada no carro do ambiente de simulação CARLA, visto em detalhas na Subseção \ref{camera};
+        \item Algoritmo YOLOv8 para Detecção e Classificação; %configurado com \textit{threshold} de confiança de 0.5 e \textit{Non-Maximum Suppression} com \textit{threshold} de 0.3;
+
+        \item Assistência visual com \textit{feedback} das detecções dos objetos encontrados pelo caminho, visualizados a partir de \textit{interface} (Janela) de visualização \textit{pop-up}; 
+        \item Implementação do \textit{ThreadedDetector} para processamento assíncrono de \textit{frames}, garantindo o requisito mínimo de 10 FPS;
+        \item Sistema de classificação de risco de tráfego baseado na proximidade e tipo de objetos detectados enviados para a \textit{interface} de assistência visual.
+        \end{itemize}
+        
+    \item \textbf{Módulo de Planejamento:}
+        \begin{itemize}
+        \item \textit{Planejador de Movimento:} implementando máquina de estados finitos com três estados: FOLLOW\_LANE, DECELERATE\_TO\_STOP, STAY\_STOPPED para lidar com Placas de Pare;
+        \item \textit{Planejador Local:} responsável por gerar as trajetórias possíveis;
+        \item \textit{Checador de Colisão:} utilizando aproximação por círculos múltiplos para verificação de colisões em tempo real;
+        \item \textit{Planejador de Velocidade:} implementando perfis de velocidade adaptativos.
+        \end{itemize}
+        
+    \item \textbf{Módulo de Controle:}
+        \begin{itemize}
+        \item Controlador longitudinal PID com parâmetros para controle de velocidade.
+        \item Controlador lateral de perseguição pura (\textit{pure pursuit}).
+        \end{itemize}
+    \end{itemize}
+    
+    \item \textbf{Sistema de Métricas e Monitoramento:}
+    
+    Desenvolvimento de um sistema abrangente de coleta e análise de métricas que registra os dados da simulação:
+    
+    \begin{itemize}
+    \item \textbf{Métricas de Detecção:} tempo de processamento, taxa de \textit{frames} por segundo, distribuição de classes detectadas, níveis de confiança;
+    \item \textbf{Métricas Ambientais:} desempenho estratificado por condições climáticas (CLEARNOON, CLOUDYNOON, RAINYNOON, etc.);
+    \item \textbf{Métricas de Segurança:} distância de frenagem, tempo de resposta comparativo humano vs. sistema, esse baseado somente na literatura.
+    \end{itemize}
+    
+    \item \textbf{Protocolo Experimental:}
+    \begin{itemize}
+    \item \textbf{Cenários de Teste:} trajetos predefinidos em ambiente urbano incluindo placas de parada e veículos estacionados conforme parâmetros de configuração específicos;
+    \item \textbf{Variáveis Controladas:} condições climáticas, posição inicial do veículo, parâmetros de detecção;
+    \item \textbf{Coleta de Dados:} registro automático em arquivos CSV;
+    \item \textbf{Análise Estatística:} implementação de testes de hipótese.
+    \end{itemize}
+    
+    \item \textbf{Validação e Análise de Resultados:}
+    \begin{itemize}
+    \item Análise automática de métricas através do módulo \textit{ResultsReporter}, gerando relatórios HTML com visualizações;
+    \item Validação dos critérios quantitativos: FPS > 10, confiança média > 0.7, precisão de detecção > 0.9;
+    \item Análise comparativa com tempos de reação humanos baseada em literatura científica estabelecida;
+    \item Geração de gráficos de validação estatística, incluindo distribuições, intervalos de confiança e entre outros.
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Variáveis Experimentais e Hipóteses}
+
+\textbf{Variáveis Dependentes:}
+\begin{itemize}
+\item Taxa de precisão na detecção de placas de trânsito por classe e distância;
+\item Tempo de processamento por \textit{frame} (latência média, máxima e mínima);
+\item Taxa de FPS do sistema integrado;
+\item Resposta do veículo a sinalizações;
+\item Capacidade do sistema de realizar o \textit{feedback};
+\item Taxa de sucesso na conclusão do trajeto sem colisões.
+\end{itemize}
+
+\textbf{Variáveis Independentes:}
+\begin{itemize}
+\item Condições climáticas simuladas (CLEARNOON, HARDRAINNOON, HARDRAINSUNSET.);
+\item Tipo de sinalização (placa de parada, placas de limite de velocidade, semáforos).
+\end{itemize}
+
+\textbf{Hipótese Experimental Refinada:}
+
+O sistema integrado de detecção baseado em YOLOv8, operando via arquitetura distribuída por Sockets, pode detectar e classificar placas de trânsito com precisão superior a 90\%, processar \textit{frames} a uma taxa mínima de 10 FPS, e dar \textit{feedback} visual em tempo real com latência inferior a 100ms, mantendo esses parâmetros de desempenho em diferentes condições climáticas simuladas no ambiente CARLA, resultando em conclusão bem-sucedida de trajetos urbanos predefinidos sem colisões.
+
+Desse forma, esta metodologia oferece uma estrutura robusta e cientificamente rigorosa para alcançar os Objetivos \ref{objetivos} do trabalho, permitindo validação quantitativa das capacidades e limitações da solução proposta, contribuindo significativamente para o avanço do conhecimento em sistemas de assistência à condução autônoma.
+
+\section{Organização do Trabalho}
+
+Este trabalho está estruturado em uma sequência lógica que conduz o leitor desde a fundamentação teórica até a validação experimental dos resultados obtidos. A organização adotada segue uma progressão metodológica que facilita a compreensão dos conceitos desenvolvidos e das soluções implementadas.
+
+O Capítulo \ref{introducao_cap} estabelece o contexto da pesquisa, apresentando a problemática dos VA, formulando a hipótese de investigação, definindo os objetivos gerais e específicos, justificando a relevância científica do estudo e descrevendo a metodologia experimental aplicada.
+
+Os fundamentos teóricos são desenvolvidos em dois capítulos complementares. O Capítulo \ref{direcao_autonoma} explora os conceitos fundamentais de VA, abrangendo classificações de automação segundo padrões SAE, tecnologias essenciais para condução autônoma, arquiteturas de software e ambientes de simulação, com ênfase particular no simulador CARLA. O Capítulo \ref{ModelagemConceitual} apresenta a modelagem conceitual do sistema proposto, desenvolvendo modelos cinemáticos de veículos, controladores longitudinais PID, controladores laterais por Perseguição Pura e estratégias de planejamento de movimento hierárquico.
+
+A implementação experimental é detalhada no Capítulo \ref{Implementação}, que materializa os conceitos teóricos anteriormente desenvolvidos, descrevendo a integração entre algoritmos YOLO para detecção de objetos, sistemas de controle veicular e planejamento de trajetórias no ambiente CARLA.
+
+Os resultados experimentais e sua análise crítica são apresentados no Capítulo \ref{resultados}, incluindo validação quantitativa das métricas de desempenho, discussão dos achados científicos e avaliação da eficácia da solução proposta para sistemas de assistência à condução.
+
+O trabalho é concluído com três capítulos de síntese e perspectivas futuras. O Capítulo \ref{concl} apresenta as considerações finais, sintetizando as principais contribuições científicas, limitações identificadas e alinhamento com os objetivos estabelecidos. O Capítulo \ref{continuidade} delineia direcionamentos para pesquisas futuras, propondo extensões metodológicas e tecnológicas para aprofundamento do conhecimento na área.
+
+Complementarmente, o Apêndice \ref{apendices} disponibiliza o material técnico completo desenvolvido, incluindo códigos-fonte, dados experimentais e recursos de implementação, enquanto o Anexo \ref{anexo} fornece referências bibliográficas de relevância para estudos complementares na área de VA.
+
+Para facilitar a consulta terminológica, uma lista das principais siglas e abreviações utilizadas neste trabalho encontra-se disponível na página \pageref{eq:1}.
+% ----------------------------------------------------------
+
+
+% PARTE
+% ----------------------------------------------------------
+%\part{Preparação da pesquisa}
+% ----------------------------------------------------------
+
+% ---
+% Capitulo com exemplos de comandos inseridos de arquivo externo
+% ---
+%\include{abntex2-modelo-include-comandos}
+
+\include{projeto}
+% ---
+% ----------------------------------------------------------
+% PARTE
+% ----------------------------------------------------------
+%\part{Referenciais teóricos}
+% ----------------------------------------------------------
+% ---
+% Capitulo de revisão de literatura
+% ---
+% ----------------------------------------------------------
+% PARTE
+% ----------------------------------------------------------
+%\part{Resultados}
+% ----------------------------------------------------------
+% ---
+% primeiro capitulo de Resultados
+% ---
+% ---
+% ---
+% ---
+% segundo capitulo de Resultados
+% ---
+% ----------------------------------------------------------
+% Finaliza a parte no bookmark do PDF
+% para que se inicie o bookmark na raiz
+% e adiciona espaço de parte no Sumário
+% ----------------------------------------------------------
+\phantompart
+% ---
+% Conclusão
+% ---
+%\chapter{Conclusão}
+% ---
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+\postextual
+% ----------------------------------------------------------
+% ----------------------------------------------------------
+% Referências bibliográficas
+% ----------------------------------------------------------
+\bibliography{bibli}
+
+
+
+% ----------------------------------------------------------
+% Glossário
+% ----------------------------------------------------------
+%
+% Consulte o manual da classe abntex2 para orientações sobre o glossário.
+%
+%\glossary
+
+% ----------------------------------------------------------
+% Apêndices
+% ----------------------------------------------------------
+
+% ---
+% Inicia os apêndices
+% ---
+\begin{apendicesenv} 
+
+% Imprime uma página indicando o início dos apêndices
+\partapendices 
+
+% ----------------------------------------------------------
+\chapter{Material Completo} \label{apendices} 
+% ----------------------------------------------------------
+Neste apêndice, disponibilizamos o link para o material completo desenvolvido ao longo do presente trabalho. O conteúdo abrange todos os códigos, dados, gráficos e informações detalhadas referentes ao tema em questão. O acesso ao material completo proporciona uma compreensão mais aprofundada do trabalho realizado, permitindo uma análise mais minuciosa dos resultados obtidos.
+
+Para acessar o repositório com toda a solução desenvolvida neste trabalho, clique no seguinte link: \url{https://github.com/ARRETdaniel/CARLA_simulator_YOLO-openCV_realTime_objectDetection_for_autonomousVehicles}
+
+Para acessar o material completo sobre a subseção \textbf{Configurando o Carla} \ref{configuracao_carla}, o link: \url{https://github.com/ARRETdaniel/CARLA_simulator_YOLO-openCV_realTime_objectDetection_for_autonomousVehicles}
+
+%Para acessar o material completo sobre a subseção \textbf{Implementação Controle de Veículos Autônomos} \ref{controladores_imple}, clique no seguinte link: \url{https://github.com/ARRETdaniel/Self-Driving_Cars_Specialization/tree/main/CarlaSimulator/PythonClient/Course1FinalProject}
+
+Recomendamos a exploração deste recurso para uma apreciação abrangente das etapas apresentadas ao longo do trabalho. O material está disponível online para facilitar o acesso e a referência contínua. Se houver problema ao tentar consultar qualquer um desses materiais, não hesite em nos contactar via e-mail: \href{mailto:danielterra@pq.uenf.br}{danielterra@pq.uenf.br}.
+
+Agradecemos a atenção e interesse na pesquisa apresentada, esperamos que o material disponibilizado enriqueça ainda mais a compreensão sobre o assunto abordado.
+
+% ----------------------------------------------------------
+\section{Trechos de Códigos}
+
+Nesta seção, são apresentados os trechos de códigos implementados e analisados no Capítulo \ref{Implementação}.
+
+\begin{lstlisting}[language=Python, caption=Construtor da classe Controller2D., label=lst:controller-init]
+def __init__(self, waypoints):
+    # Inicializa o objeto de utilidades do controlador
+    self.vars = cutils.CUtils()
+    
+    # Define a distância de antecipação para o algoritmo de perseguição pura (em metros)
+    self._lookahead_distance = 2.0
+    
+    # Inicializa as variáveis de estado atual do veículo
+    self._current_x = 0            # Posição x atual do veículo (m)
+    self._current_y = 0            # Posição y atual do veículo (m)
+    self._current_yaw = 0          # Ângulo de guinada atual do veículo (rad)
+    self._current_speed = 0        # Velocidade atual do veículo (m/s)
+    self._desired_speed = 0        # Velocidade desejada do veículo (m/s)
+    
+    # Variáveis de controle do ciclo de simulação
+    self._current_frame = 0        # Contador de quadros da simulação
+    self._current_timestamp = 0    # Timestamp atual da simulação (s)
+    self._start_control_loop = False  # Flag para iniciar o loop de controle
+    
+    # Inicializa os comandos de controle veicular
+    self._set_throttle = 0         # Comando do acelerador [0, 1]
+    self._set_brake = 0            # Comando do freio [0, 1]
+    self._set_steer = 0            # Comando da direção [-1, 1]
+    
+    # Armazena os pontos de referência da trajetória desejada
+    self._waypoints = waypoints
+    
+    # Fator de conversão entre radianos e o formato normalizado esperado pelo simulador
+    # O valor 70.0 representa o ângulo máximo de esterçamento em graus
+    self._conv_rad_to_steer = 180.0 / 70.0 / np.pi
+    
+    # Constantes matemáticas para cálculos de ângulos
+    self._pi = np.pi               # pi (3.14159...)
+    self._2pi = 2.0 * np.pi        # 2pi (6.28318...)
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Método de atualização de estado do controlador., label=lst:controller-update]
+def update_values(self, x, y, yaw, speed, timestamp, frame):
+    self._current_x         = x
+    self._current_y         = y
+    self._current_yaw       = yaw
+    self._current_speed     = speed
+    self._current_timestamp = timestamp
+    self._current_frame     = frame
+    if self._current_frame:
+        self._start_control_loop = True
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Implementação do controle longitudinal PID., label=lst:longitudinal-control]
+# Configuração dos parâmetros PID
+self.vars.create_var('kp', 0.50)
+self.vars.create_var('ki', 0.30)
+self.vars.create_var('integrator_min', 0.0)
+self.vars.create_var('integrator_max', 10.0)
+self.vars.create_var('kd', 0.13)
+self.vars.create_var('v_error', 0.0)
+self.vars.create_var('v_error_prev', 0.0)
+self.vars.create_var('v_error_integral', 0.0)
+
+# Cálculo do erro de velocidade
+self.vars.v_error = v_desired - v
+self.vars.v_error_integral += self.vars.v_error * \
+                              (t - self.vars.t_prev)
+v_error_rate_of_change = (self.vars.v_error - self.vars.v_error_prev) /\
+                          (t - self.vars.t_prev)
+
+# Limitação do termo integral para evitar wind-up
+self.vars.v_error_integral = \
+        np.fmax(np.fmin(self.vars.v_error_integral,
+                        self.vars.integrator_max),
+                self.vars.integrator_min)
+
+# Cálculo do sinal de controle PID
+throttle_output = self.vars.kp * self.vars.v_error +\
+                  self.vars.ki * self.vars.v_error_integral +\
+                  self.vars.kd * v_error_rate_of_change
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Implementação do controle lateral por perseguição pura., label=lst:lateral-control]
+# Parâmetros do controlador lateral
+self.vars.create_var('kp_heading', 8.00)
+self.vars.create_var('k_speed_crosstrack', 0.00)
+self.vars.create_var('cross_track_deadband', 0.01)
+
+# Encontrar o ponto alvo baseado na distância de lookahead
+ce_idx = self.get_lookahead_index(self._lookahead_distance)
+crosstrack_vector = np.array([waypoints[ce_idx][0] - \
+                            x - self._lookahead_distance*np.cos(yaw),
+                            waypoints[ce_idx][1] - \
+                            y - self._lookahead_distance*np.sin(yaw)])
+crosstrack_error = np.linalg.norm(crosstrack_vector)
+
+# Aplicar zona morta para reduzir oscilações
+if crosstrack_error < self.vars.cross_track_deadband:
+    crosstrack_error = 0.0
+
+# Determinar o sinal do erro de alinhamento
+crosstrack_heading = np.arctan2(crosstrack_vector[1],
+                                crosstrack_vector[0])
+crosstrack_heading_error = crosstrack_heading - yaw
+crosstrack_heading_error = \
+        (crosstrack_heading_error + self._pi) % \
+        self._2pi - self._pi
+
+crosstrack_sign = np.sign(crosstrack_heading_error)
+
+# Calcular o ângulo de direção baseado no erro
+steer_output = heading_error + \
+        np.arctan(self.vars.kp_heading * \
+                  crosstrack_sign * \
+                  crosstrack_error / \
+                  (v + self.vars.k_speed_crosstrack))
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Método para determinação do ponto de referência., label=lst:lookahead-method]
+def get_lookahead_index(self, lookahead_distance):
+    # Inicializa o índice do ponto mais próximo e a distância mínima
+    min_idx = 0
+    min_dist = float("inf")
+    # Primeira etapa: encontra o waypoint mais próximo da posição atual do veículo
+    for i in range(len(self._waypoints)):
+        # Calcula a distância euclidiana entre o waypoint atual e a posição do veículo
+        dist = np.linalg.norm(np.array([
+                self._waypoints[i][0] - self._current_x,  # Diferença na coordenada x
+                self._waypoints[i][1] - self._current_y])) # Diferença na coordenada y
+        # Atualiza o índice e a distância se encontrou um ponto mais próximo
+        if dist < min_dist:
+            min_dist = dist
+            min_idx = i
+    # Inicializa a distância total percorrida com a distância até o ponto mais próximo
+    total_dist = min_dist
+    # O índice lookahead começa no ponto mais próximo
+    lookahead_idx = min_idx
+    # Segunda etapa: avança ao longo da trajetória até atingir a distância de lookahead desejada
+    for i in range(min_idx + 1, len(self._waypoints)):
+        # Interrompe se já alcançou ou ultrapassou a distância de lookahead
+        if total_dist >= lookahead_distance:
+            break 
+        # Acumula a distância adicionando o comprimento do segmento entre waypoints consecutivos
+        total_dist += np.linalg.norm(np.array([
+                self._waypoints[i][0] - self._waypoints[i-1][0],  # Diferença na coordenada x
+                self._waypoints[i][1] - self._waypoints[i-1][1]])) # Diferença na coordenada y  
+        # Atualiza o índice do ponto lookahead
+        lookahead_idx = i
+    # Retorna o índice do waypoint que está aproximadamente à distância de lookahead
+    return
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Métodos para definição dos comandos de controle., label=lst:command-setting]
+def set_throttle(self, input_throttle):
+    # Limita o comando do acelerador para valores válidos entre 0.0 e 1.0
+    # np.fmax seleciona o maior valor entre input_throttle e 0.0 (garante que não seja negativo)
+    # np.fmin seleciona o menor valor entre o resultado anterior e 1.0 (garante que não exceda 1.0)
+    throttle           = np.fmax(np.fmin(input_throttle, 1.0), 0.0)
+    self._set_throttle = throttle
+
+def set_steer(self, input_steer_in_rad):
+    # Converte o ângulo de direção de radianos para o intervalo normalizado [-1, 1]
+    # O fator _conv_rad_to_steer é calculado com base nas características físicas do veículo
+    # e converte o valor físico (radianos) para o valor de comando esperado pelo simulador
+    input_steer = self._conv_rad_to_steer * input_steer_in_rad
+
+    # Limita o comando de direção para valores válidos entre -1.0 e 1.0
+    # -1.0 representa máxima viragem à esquerda, 1.0 representa máxima viragem à direita
+    steer           = np.fmax(np.fmin(input_steer, 1.0), -1.0)
+    self._set_steer = steer
+
+def set_brake(self, input_brake):
+    # Limita o comando do freio para valores válidos entre 0.0 e 1.0
+    # 0.0 representa freio não acionado, 1.0 representa freio totalmente acionado
+    brake           = np.fmax(np.fmin(input_brake, 1.0), 0.0)
+    self._set_brake = brake
+
+def get_commands(self):
+    # Retorna uma tupla contendo os três comandos de controle atuais
+    # (acelerador, direção, freio) para serem enviados ao simulador
+    return self._set_throttle,
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=Python, caption=Método principal de atualização do controlador., label=lst:update-controls]
+def update_controls(self):
+    # OBTER FEEDBACK DO SIMULADOR
+    x               = self._current_x
+    y               = self._current_y
+    yaw             = self._current_yaw
+    v               = self._current_speed
+    self.update_desired_speed()
+    v_desired       = self._desired_speed
+    t               = self._current_timestamp
+    waypoints       = self._waypoints
+    throttle_output = 0
+    steer_output    = 0
+    brake_output    = 0
+
+    # ... [inicialização de variáveis]
+
+    # Pula o primeiro quadro para armazenar valores anteriores corretamente
+    if self._start_control_loop:
+        # ... [implementação do controle PID e perseguição pura]
+
+        # CONFIGURAR SAÍDA DOS CONTROLES
+        self.set_throttle(throttle_output)  # em porcentagem (0 a 1)
+        self.set_steer(steer_output)        # em radianos (-1.22 a 1.22)
+        self.set_brake(brake_output)        # em porcentagem (0 a 1)
+
+    self.vars.x_prev       = x
+    self.vars.y_prev       = y
+    self.vars.yaw_prev     = yaw
+    self.vars.v_prev       = v
+    self.vars.v_error_prev = self.vars.v_error
+    self.vars.t_prev       =
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=Python, caption=Integração do controlador com o sistema CARLA., label=lst:system-integration]
+def send_control_command(client, throttle, steer, brake,
+                      hand_brake=False, reverse=False):
+    """Enviar comando de controle para o cliente CARLA.
+
+    Enviar comando de controle para o cliente CARLA.
+
+    Args:
+        client: O objeto cliente CARLA
+        throttle: Comando do acelerador para o carro simulado [0, 1]
+        steer: Comando de direção para o carro simulado [-1, 1]
+        brake: Comando do freio para o carro simulado [0, 1]
+        hand_brake: Se o freio de mão está acionado
+        reverse: Se o carro simulado está na marcha ré
+    """
+    control = VehicleControl()
+    # Limita todos os valores dentro de seus limites
+    steer = np.fmax(np.fmin(steer, 1.0), -1.0)
+    throttle = np.fmax(np.fmin(throttle, 1.0), 0)
+    brake = np.fmax(np.fmin(brake, 1.0), 0)
+
+    control.steer = steer
+    control.throttle = throttle
+    control.brake = brake
+    control.hand_brake = hand_brake
+    control.reverse = reverse
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Implementação da função para determinação do \textit{waypoint} mais próximo., label=lst:closest_index_implementation]
+def get_closest_index(waypoints, ego_state):
+    # Inicializa a menor distância como infinito
+    closest_len = float('Inf')
+    # Inicializa o índice do ponto mais próximo como zero
+    closest_index = 0
+    
+    # Itera sobre todos os waypoints disponíveis
+    for i in range(len(waypoints)):
+        # Calcula a distância euclidiana entre a posição atual do veículo (ego_state)
+        # e o waypoint atual, considerando apenas as coordenadas x e y (primeiros dois elementos)
+        leng = np.linalg.norm(np.subtract(ego_state[0:2], waypoints[i][0:2]))
+        
+        # Se a distância calculada for menor que a menor distância encontrada até agora
+        if leng < closest_len:
+            # Atualiza a menor distância
+            closest_len = leng
+            # Atualiza o índice do ponto mais próximo
+            closest_index = i
+    
+    # Retorna a menor distância e o índice do waypoint mais próximo
+    return closest_len, closest_index
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Implementação da função para determinação do \textit{waypoint} objetivo., label=lst:get_goal_index_implementation]
+def get_goal_index(self, waypoints, ego_state, closest_len, closest_index):
+    arc_length = closest_len
+    wp_index = closest_index
+    
+    # Se o ponto mais próximo já está além da distância de antecipação
+    if arc_length > self._lookahead:
+        return wp_index
+    
+    # Se já estamos no final do caminho
+    if wp_index == len(waypoints) - 1:
+        return wp_index
+    
+    # Avança no caminho até atingir a distância de antecipação
+    while wp_index < len(waypoints) - 1:
+        arc_length += np.linalg.norm(np.subtract(waypoints[wp_index+1][0:2],
+                                      waypoints[wp_index][0:2]))
+        wp_index += 1
+        if arc_length > self._lookahead:
+            break
+    
+    return wp_index
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Implementação parcial da função de transição de estados., label=lst:transition_state_implementation]
+def transition_state(self, waypoints, ego_state, closed_loop_speed):
+    if self._state == FOLLOW_LANE:
+        # Encontra o índice mais próximo do veículo
+        closest_len, closest_index = get_closest_index(waypoints, ego_state)
+        
+        # Encontra o índice objetivo dentro da distância de antecipação
+        goal_index = self.get_goal_index(waypoints, ego_state,
+                                        closest_len, closest_index)
+        
+        # Verifica a presença de placas de parada no caminho
+        goal_index, stop_sign_found = self.check_for_stop_signs(waypoints,
+                                                closest_index, goal_index)
+        self._goal_index = goal_index
+        self._goal_state = waypoints[goal_index]
+        
+        # Se encontrou placa de parada, transiciona para desaceleração
+        if stop_sign_found:
+            self._goal_state[2] = 0.0
+            self._state = DECELERATE_TO_STOP
+            
+    elif self._state == DECELERATE_TO_STOP:
+        # Verifica se o veículo está completamente parado
+        if abs(closed_loop_speed) < STOP_THRESHOLD:
+            self._state = STAY_STOPPED
+            
+    elif self._state == STAY_STOPPED:
+        # Verifica se o tempo de parada foi atingido
+        if self._stop_count == STOP_COUNTS:
+            # Recalcula índices após parada
+            closest_len, closest_index = get_closest_index(waypoints, ego_state)
+            goal_index = self.get_goal_index(waypoints, ego_state,
+                                        closest_len, closest_index)
+            
+            # Verifica se ainda há placa de parada no caminho
+            stop_sign_found = self.check_for_stop_signs(waypoints,
+                                                closest_index, goal_index)[1]
+            self._goal_index = goal_index
+            self._goal_state = waypoints[goal_index]
+            
+            # Se não há mais placa de parada, retorna a seguir o caminho
+            if not stop_sign_found:
+                self._state = FOLLOW_LANE
+                self._stop_count = 0
+        else:
+            # Caso contrário, incrementa o contador de parada
+            self._stop_count += 1
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Implementação parcial da verificação de interseção com cercas virtuais., label=lst:check_stop_signs_implementation]
+def check_for_stop_signs(self, waypoints, closest_index, goal_index):
+    if self._stopsign_fences != None:
+        for i in range(closest_index, goal_index):
+            # Verifica se o segmento de caminho cruza alguma linha de parada
+            intersect_flag = False
+            for stopsign_fence in self._stopsign_fences:
+                wp_1 = np.array(waypoints[i][0:2])
+                wp_2 = np.array(waypoints[i+1][0:2])
+                s_1 = np.array(stopsign_fence[0:2])
+                s_2 = np.array(stopsign_fence[2:4])
+
+                # Cálculos de produto vetorial para verificar interseção
+                v1 = np.subtract(wp_2, wp_1)
+                v2 = np.subtract(s_1, wp_2)
+                sign_1 = np.sign(np.cross(v1, v2))
+                v2 = np.subtract(s_2, wp_2)
+                sign_2 = np.sign(np.cross(v1, v2))
+
+                v1 = np.subtract(s_2, s_1)
+                v2 = np.subtract(wp_1, s_2)
+                sign_3 = np.sign(np.cross(v1, v2))
+                v2 = np.subtract(wp_2, s_2)
+                sign_4 = np.sign(np.cross(v1, v2))
+
+                # Verifica interseção de segmentos de linha
+                if (sign_1 != sign_2) and (sign_3 != sign_4):
+                    intersect_flag = True
+                
+                # Casos de colinearidade
+                if (sign_1 == 0) and pointOnSegment(wp_1, s_1, wp_2):
+                    intersect_flag = True
+                # ... outros casos de colinearidade
+
+                # Se há interseção, atualiza o índice objetivo
+                if intersect_flag:
+                    goal_index = i
+                    return goal_index, True
+                    
+        return goal_index, False
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Implementação do método para geração de estados-objetivo do \textit{Conformal Lattice Planner}., label=lst:get_goal_state_set_implementation]
+def get_goal_state_set(self, goal_index, goal_state, waypoints, ego_state):
+    # Calcula a orientação final com base no próximo waypoint
+    if goal_index == len(waypoints) - 1:
+        delta_x = waypoints[-1][0] - waypoints[-2][0]
+        delta_y = waypoints[-1][1] - waypoints[-2][1]
+    else: 
+        delta_x = waypoints[goal_index+1][0] - waypoints[goal_index][0]
+        delta_y = waypoints[goal_index+1][1] - waypoints[goal_index][1]
+    heading = np.arctan2(delta_y, delta_x)
+    
+    # Transforma o estado objetivo para o referencial local do veículo
+    goal_state_local = copy.copy(goal_state)
+    goal_state_local[0] -= ego_state[0]
+    goal_state_local[1] -= ego_state[1]
+    
+    # Rotação para que o veículo tenha orientação zero no referencial local
+    goal_x = goal_state_local[0]*np.cos(-ego_state[2]) \
+                            - goal_state_local[1]*np.sin(-ego_state[2])
+    goal_y = goal_state_local[0]*np.sin(-ego_state[2]) \
+                            + goal_state_local[1]*np.cos(-ego_state[2])
+    
+    # Calcula a orientação objetivo no referencial local
+    goal_t = heading - ego_state[2]
+    
+    # Mantém a orientação objetivo entre -pi e pi
+    if goal_t > pi:
+        goal_t -= 2*pi
+    elif goal_t < -pi:
+        goal_t += 2*pi
+    
+    # Velocidade é preservada após a transformação
+    goal_v = goal_state[2]
+    
+    # Gera conjunto de estados-objetivo com deslocamentos laterais
+    goal_state_set = []
+    for i in range(self._num_paths):
+        # Calcula deslocamentos que abrangem o número de caminhos definido
+        offset = (i - self._num_paths // 2) * self._path_offset
+        
+        # Calcula a projeção do deslocamento lateral nos eixos x e y
+        x_offset = offset*np.cos(goal_t + pi/2)
+        y_offset = offset*np.sin(goal_t + pi/2)
+        
+        goal_state_set.append([goal_x + x_offset, 
+                               goal_y + y_offset, 
+                               goal_t, 
+                               goal_v])
+       
+    return goal_state_set
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Implementação do método de otimização de espirais paramétricas., label=lst:optimize_spiral_implementation]
+def optimize_spiral(self, xf, yf, tf):
+    # Salva os valores terminais de x, y e theta
+    self._xf = xf
+    self._yf = yf
+    self._tf = tf
+    
+    # A distância em linha reta serve como limite inferior para o
+    # comprimento do arco da espiral
+    sf_0 = np.linalg.norm([xf, yf])
+    
+    # Variáveis iniciais correspondentes a uma linha reta
+    p0 = [0.0, 0.0, sf_0]
+    
+    # Define os limites para cada variável de otimização
+    bounds = ((-0.5, 0.5), (-0.5, 0.5), (sf_0, None))
+    
+    # Chama scipy.optimize.minimize para otimizar a espiral
+    res = scipy.optimize.minimize(self.objective, p0, method='L-BFGS-B', 
+                                    bounds=bounds, jac=self.objective_grad)
+    
+    spiral = self.sample_spiral(res.x)
+    return spiral
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Implementação do método para amostragem de pontos ao longo da espiral otimizada., label=lst:sample_spiral_implementation]
+def sample_spiral(self, p):
+    # Mapeamento dos parâmetros de otimização para os parâmetros da espiral
+    p = [0.0, p[0], p[1], 0.0, p[2]]    # p0 e p3 são definidos como 0
+                                         # p4 é o comprimento final do arco
+    a = p[0]
+    b = -(11.0*p[0]/2.0 - 9.0*p[1] + 9.0*p[2]/2.0 - p[3])/p[4]
+    c = (9.0*p[0] - 45.0*p[1]/2.0 + 18.0*p[2] - 9.0*p[3]/2.0)/p[4]**2
+    d = -(9.0*p[0]/2.0 - 27.0*p[1]/2.0 + 27.0*p[2]/2.0 - 9.0*p[3]/2.0)/p[4]**3
+
+    # Define os pontos s (valores de comprimento de arco) de 0.0 a p[4]
+    s_points = np.linspace(0.0, p[4])
+    
+    # Calcula os valores de theta, x e y a partir dos pontos s
+    t_points = self.thetaf(a,b,c,d,s_points)
+    x_points = scipy.integrate.cumtrapz(np.cos(t_points), s_points, initial=0)
+    y_points = scipy.integrate.cumtrapz(np.sin(t_points), s_points, initial=0)
+    
+    return [x_points, y_points, t_points]
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Implementação do cálculo de orientação a partir da integração da equação de curvatura., label=lst:thetaf_implementation]
+def thetaf(self, a, b, c, d, s):
+    # Integração da curvatura para obter a orientação
+    s = np.array(s)
+    thetas = a*s + b/2*s**2 + c/3*s**3 + d/4*s**4
+    return thetas
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Implementação do método de verificação de colisões., label=lst:collision_check_implementation]
+def collision_check(self, paths, obstacles):
+    collision_check_array = np.zeros(len(paths), dtype=bool)
+    for i in range(len(paths)):
+        collision_free = True
+        path = paths[i]
+
+        # Itera sobre os pontos no caminho
+        for j in range(len(path[0])):
+            # Calcula as posições dos círculos ao longo deste ponto no caminho
+            circle_locations = np.zeros((len(self._circle_offsets), 2))
+            
+            # Posiciona os círculos considerando a orientação do veículo
+            circle_locations[:, 0] = path[0][j] \
+                                + self._circle_offsets*np.array(np.cos(path[2][j]))
+            circle_locations[:, 1] = path[1][j] \
+                                + self._circle_offsets*np.array(np.sin(path[2][j]))
+
+            # Verifica colisões com obstáculos
+            for k in range(len(obstacles)):
+                collision_dists = \
+                    scipy.spatial.distance.cdist(obstacles[k],
+                                                 circle_locations)
+                collision_dists = np.subtract(collision_dists,
+                                              self._circle_radii)
+                collision_free = collision_free and \
+                                 not np.any(collision_dists < 0)
+
+                if not collision_free:
+                    break
+            if not collision_free:
+                break
+
+        collision_check_array[i] = collision_free
+
+    return collision_check_array
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Implementação do método para seleção do melhor caminho., label=lst:select_best_path_implementation]
+def select_best_path_index(self, paths, collision_check_array, goal_state):
+    best_index = None
+    best_score = float('Inf')
+    for i in range(len(paths)):
+        # Processa caminhos livres de colisão
+        if collision_check_array[i]:
+            # Calcula a pontuação de "distância da linha central"
+            score = np.linalg.norm(np.array([paths[i][0][-1] - goal_state[0],
+                                        paths[i][1][-1] - goal_state[1]]))
+            # Adiciona pontuação de "proximidade a outros caminhos em colisão"
+            for j in range(len(paths)):
+                if j == i:
+                    continue
+                else:
+                    if not collision_check_array[j]:
+                        score += self._weight * np.linalg.norm(np.array([
+                                        paths[i][0][-1] - paths[j][0][-1],
+                                        paths[i][1][-1] - paths[j][1][-1]]))
+        else:
+            score = float('Inf')
+
+        # Seleciona o índice com menor pontuação
+        if score < best_score:
+            best_score = score
+            best_index = i
+
+    return best_index
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Implementação do método principal para cálculo do perfil de velocidade., label=lst:compute_velocity_profile_implementation]
+def compute_velocity_profile(self, path, desired_speed, ego_state, 
+                             closed_loop_speed, decelerate_to_stop, 
+                             lead_car_state, follow_lead_vehicle):
+    profile = []
+    # Usa a velocidade em malha aberta como velocidade inicial
+    start_speed = ego_state[3]
+    
+    # Gera um perfil trapezoidal para desaceleração até parada
+    if decelerate_to_stop:
+        profile = self.decelerate_profile(path, start_speed)
+
+    # Se precisamos seguir um veículo à frente, desacelera até sua velocidade
+    elif follow_lead_vehicle:
+        profile = self.follow_profile(path, start_speed, desired_speed, 
+                                      lead_car_state)
+
+    # Caso contrário, calcula o perfil para alcançar a velocidade desejada
+    else:
+        profile = self.nominal_profile(path, start_speed, desired_speed)
+
+    # Interpolação entre o estado inicial e o primeiro estado
+    if len(profile) > 1:
+        interpolated_state = [
+            (profile[1][0] - profile[0][0]) * 0.1 + profile[0][0], 
+            (profile[1][1] - profile[0][1]) * 0.1 + profile[0][1], 
+            (profile[1][2] - profile[0][2]) * 0.1 + profile[0][2]
+        ]
+        del profile[0]
+        profile.insert(0, interpolated_state)
+
+    # Salva o perfil planejado para estimativa de velocidade em malha aberta
+    self._prev_trajectory = profile
+
+    return profile
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Implementação parcial do método para geração de perfil de desaceleração., label=lst:decelerate_profile_implementation]
+def decelerate_profile(self, path, start_speed): 
+    profile = []
+    slow_speed = self._slow_speed
+    stop_line_buffer = self._stop_line_buffer
+
+    # Calcula as distâncias para o comportamento trapezoidal de parada
+    decel_distance = calc_distance(start_speed, slow_speed, -self._a_max)
+    brake_distance = calc_distance(slow_speed, 0, -self._a_max)
+
+    # Calcula o comprimento total do caminho
+    path_length = 0.0
+    for i in range(len(path[0])-1):
+        path_length += np.linalg.norm([path[0][i+1] - path[0][i], 
+                                       path[1][i+1] - path[1][i]])
+
+    # Cálculo do índice onde devemos parar
+    stop_index = len(path[0]) - 1
+    temp_dist = 0.0
+    while (stop_index > 0) and (temp_dist < stop_line_buffer):
+        temp_dist += np.linalg.norm([path[0][stop_index] - path[0][stop_index-1], 
+                                     path[1][stop_index] - path[1][stop_index-1]])
+        stop_index -= 1
+    
+    # Se a distância de frenagem excede o comprimento do caminho,
+    # realiza uma desaceleração mais brusca
+    if brake_distance + decel_distance + stop_line_buffer > path_length:
+        # Implementação da desaceleração rápida
+        # ...
+    else:
+        # Implementação do perfil trapezoidal completo
+        # ...
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Implementação das funções para cálculo de distância e velocidade final., label=lst:velocity_utility_functions]
+def calc_distance(v_i, v_f, a):
+    """Calcula a distância dado uma velocidade inicial e final,
+    com aceleração constante."""
+    d = (v_f**2 - v_i**2) / (2 * a)
+    return d
+
+def calc_final_speed(v_i, a, d):
+    """Calcula a velocidade final dada uma velocidade inicial,
+    distância percorrida e aceleração constante."""
+    A = v_i**2 + 2*a*d
+    if A < 0:
+        return 0.0
+    else:
+        v_f = np.sqrt(A)
+        return v_f
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Inicialização dos componentes de planejamento., label=lst:planning_initialization]
+# Parâmetros de planejamento
+NUM_PATHS = 7
+BP_LOOKAHEAD_BASE = 8.0       # m
+BP_LOOKAHEAD_TIME = 2.0       # s
+PATH_OFFSET = 1.5             # m
+CIRCLE_OFFSETS = [-1.0, 1.0, 3.0] # m
+CIRCLE_RADII = [1.5, 1.5, 1.5]    # m
+TIME_GAP = 1.0                # s
+PATH_SELECT_WEIGHT = 10
+A_MAX = 1.5                   # m/s^2
+SLOW_SPEED = 2.0              # m/s
+STOP_LINE_BUFFER = 3.5        # m
+LEAD_VEHICLE_LOOKAHEAD = 20.0 # m
+LP_FREQUENCY_DIVISOR = 2      # Divisor de frequência
+
+# Inicialização dos componentes
+# Carregamento de waypoints
+waypoints = np.loadtxt('waypoints.txt', delimiter=',')
+
+# Carregamento de cercas virtuais para placas de parada
+stopsign_fences = get_stop_sign('stop_sign_params.txt')
+
+# Inicialização do planejador comportamental
+behavioral_planner = BehaviouralPlanner(BP_LOOKAHEAD_BASE, stopsign_fences, 
+                                       LEAD_VEHICLE_LOOKAHEAD)
+
+# Inicialização do planejador local
+local_planner = LocalPlanner(NUM_PATHS, PATH_OFFSET, CIRCLE_OFFSETS, 
+                            CIRCLE_RADII, PATH_SELECT_WEIGHT, TIME_GAP,
+                            A_MAX, SLOW_SPEED, STOP_LINE_BUFFER)
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Ciclo principal de planejamento hierárquico., label=lst:planning_main_loop]
+# Atualiza o estado do veículo com base nas medições
+ego_state = [current_x, current_y, current_yaw, current_speed]
+
+# Atualiza o planejador comportamental
+behavioral_planner.transition_state(waypoints, ego_state, current_speed)
+
+# Obtém o estado objetivo do planejador comportamental
+goal_index = behavioral_planner._goal_index
+goal_state = behavioral_planner._goal_state
+
+# Gera conjunto de estados-objetivo para o planejador local
+goal_state_set = local_planner.get_goal_state_set(goal_index, goal_state, 
+                                                 waypoints, ego_state)
+
+# Planeja os caminhos candidatos
+paths, path_validity = local_planner.plan_paths(goal_state_set)
+
+# Transforma os caminhos para o referencial global
+paths = local_planner.transform_paths(paths, ego_state)
+
+# Verifica colisões com obstáculos
+collision_check_array = collision_checker.collision_check(paths, obstacles)
+
+# Seleciona o melhor caminho
+best_index = collision_checker.select_best_path_index(paths, 
+                                                     collision_check_array, 
+                                                     goal_state)
+best_path = paths[best_index]
+
+# Gera o perfil de velocidade para o caminho selecionado
+decelerate_to_stop = behavioral_planner._state == DECELERATE_TO_STOP or \
+                     behavioral_planner._state == STAY_STOPPED
+follow_lead_vehicle = behavioral_planner._follow_lead_vehicle
+
+velocity_profile = velocity_planner.compute_velocity_profile(
+    best_path, desired_speed, ego_state, current_speed,
+    decelerate_to_stop, lead_car_state, follow_lead_vehicle)
+
+# Atualiza os comandos de controle com base na trajetória gerada
+controller.update_waypoints(velocity_profile)
+controller.update_controls()
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Inicialização do cliente de detecção., label=lst:detector_client_init]
+class DetectionClient:
+    def __init__(self, host="localhost", port=5555, reconnect_attempts=3):
+        self.host = host
+        self.port = port
+        self.socket = None
+        self.reconnect_attempts = reconnect_attempts
+        self.connected = False
+        self.labels = [
+            'person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train',
+            'truck', 'boat', 'traffic light', 'fire hydrant', 'stop sign',
+            # ... outros rótulos COCO ...
+        ]
+
+        # Define classes relevantes para condução
+        self.driving_relevant_classes = {
+            0: 'person',           # pedestres
+            1: 'bicycle',          # ciclistas
+            2: 'car',              # carros
+            3: 'motorcycle',       # motocicletas
+            5: 'bus',              # ônibus
+            7: 'truck',            # caminhões
+            9: 'traffic light',    # semáforos
+            11: 'stop sign',       # placas de parada
+            # ... outras classes relevantes ...
+        }
+
+        # Conecta ao servidor
+        self.connect()
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Inicialização do servidor de detecção YOLOv8., label=lst:detector_server_init]
+class DetectionServer:
+    def __init__(self, host="localhost", port=5555, model_type="yolov8s.pt", confidence=0.6,
+             batch_size=4, batch_timeout=0.05):
+        self.host = host
+        self.port = port
+        self.confidence = confidence
+
+        # Verifica disponibilidade de CUDA antes de carregar o modelo
+        self.has_cuda = torch.cuda.is_available()
+
+        if self.has_cuda:
+            print(f"CUDA disponível. Usando GPU: {torch.cuda.get_device_name(0)}")
+            self.device = "0"  # Usa primeira GPU
+            # Limpa memória GPU
+            torch.cuda.empty_cache()
+            gc.collect()
+        else:
+            print("CUDA não disponível. Usando CPU")
+            self.device = "cpu"
+
+        # Carrega múltiplos modelos com diferentes compromissos velocidade-precisão
+        self.model_fast = YOLO("yolov8n.pt")  # Modelo rápido para condução normal
+        self.model_accurate = YOLO("yolov8s.pt")  # Modelo preciso para cenários críticos
+
+        # Inicializa socket do servidor
+        self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        self.server_socket.bind((self.host, self.port))
+        self.server_socket.listen(1)
+        print(f"Servidor de detecção executando em {host}:{port}")
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Método de detecção de objetos do cliente., label=lst:detector_client_detect]
+def detect_objects(self, image_array):
+    """Envia imagem ao servidor e obtém resultados de detecção com compressão"""
+    if not self.connected:
+        self.connect()
+        if not self.connected:
+            return image_array, [], [], [], []
+
+    try:
+        # Comprime a imagem antes do envio
+        encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 85]
+        _, compressed_image = cv2.imencode('.jpg', image_array, encode_param)
+        compressed_data = compressed_image.tobytes()
+
+        # Empacota dados da imagem com flag de compressão
+        data = {
+            'image_compressed': compressed_data,
+            'shape': image_array.shape,
+            'vehicle_state': {
+                'speed': 0,
+                'near_intersection': False
+            }
+        }
+        packed_data = msgpack.packb(data, default=m.encode)
+
+        # Envia tamanho dos dados seguido dos dados
+        self.socket.sendall(len(packed_data).to_bytes(4, byteorder='little'))
+        self.socket.sendall(packed_data)
+
+        # Recebe tamanho do resultado
+        result_size_bytes = self.socket.recv(4)
+        if not result_size_bytes:
+            raise ConnectionError("Nenhum dado recebido do servidor")
+
+        result_size = int.from_bytes(result_size_bytes, byteorder='little')
+
+        # Recebe resultados
+        received_data = b''
+        while len(received_data) < result_size:
+            chunk = self.socket.recv(min(4096, result_size - len(received_data)))
+            if not chunk:
+                break
+            received_data += chunk
+
+        # Desempacota resultados
+        results = msgpack.unpackb(received_data, raw=False, object_hook=m.decode)
+
+        # Processa resultados
+        # ...
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Processamento de imagens no servidor com YOLOv8., label=lst:server_process_image]
+def process_image(self, image_data, vehicle_state=None):
+    """Processa a imagem com filtragem específica para o domínio"""
+    # Inicia cronometragem
+    start_time = time.time()
+
+    # Verifica se a imagem está comprimida e descomprime se necessário
+    # ...
+
+    # Obtém dimensões da imagem
+    height, width = image_data.shape[:2]
+    filtered_boxes = []
+    filtered_confidences = []
+    filtered_class_ids = []
+
+    # Tenta modelo rápido primeiro para eficiência
+    results_fast = self.model_fast(image_data, conf=self.confidence, device=self.device)
+
+    # Verifica se temos resultados relevantes
+    has_detections = False
+    for r in results_fast:
+        for box in r.boxes:
+            cls_id = int(box.cls[0])
+            # Conta apenas detecções relevantes para condução
+            if cls_id in self.driving_relevant_classes:
+                has_detections = True
+                break
+        if has_detections:
+            break
+
+    # Se não há detecções com modelo rápido ou periodicamente, usa modelo preciso
+    if not has_detections or self.frame_counter % 10 == 0:
+        print("Usando modelo preciso para este frame")
+        results = self.model_accurate(image_data, conf=self.confidence * 0.7, device=self.device)
+    else:
+        results = results_fast
+
+    # Extrai e filtra resultados
+    for result in results:
+        for box in result.boxes:
+            x1, y1, x2, y2 = box.xyxy[0].tolist()
+            x, y = int(x1), int(y1)
+            w, h = int(x2 - x1), int(y2 - y1)
+            conf = float(box.conf[0])
+            cls_id = int(box.cls[0])
+
+            # Pula classes não relevantes para condução
+            if cls_id not in self.driving_relevant_classes:
+                continue
+
+            label = self.labels[cls_id] if cls_id < len(self.labels) else "unknown"
+
+            # Validação contextual baseada na classe do objeto
+            # ...
+
+    # Aplica consistência temporal se tivermos detecções suficientes
+    if len(filtered_boxes) > 0:
+        filtered_boxes, filtered_confidences, filtered_class_ids = self.apply_temporal_consistency(
+            filtered_boxes, filtered_confidences, filtered_class_ids)
+
+    processing_time = time.time() - start_time
+    return {
+        'boxes': filtered_boxes,
+        'confidences': filtered_confidences,
+        'class_ids': filtered_class_ids,
+        'fps': 1.0 / processing_time,
+        'processing_time': processing_time
+    }
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Implementação de detector assíncrono com \textit{threads}., label=lst:threaded_detector]
+class ThreadedDetector:
+    """
+    Um wrapper assíncrono para detecção de objetos que processa frames
+    em thread de background para melhorar performance e responsividade.
+    """
+    def __init__(self, detector, max_queue_size=5):
+        """Inicializa um detector assíncrono que processa frames em background
+
+        Args:
+            detector: Instância do detector (DetectionClient)
+            max_queue_size: Tamanho máximo da fila de frames para processamento
+        """
+        self.detector = detector
+        self.frame_queue = Queue(maxsize=max_queue_size)
+        self.result_queue = Queue()
+        self.running = True
+        self.latest_result = None
+        self.latest_frame = None
+        self.latest_metrics = None
+
+        # Inicia thread de processamento
+        self.worker_thread = threading.Thread(target=self._process_frames, daemon=True)
+        self.worker_thread.start()
+
+        # Para cálculo de FPS
+        self.process_times = []
+        self.max_times = 30  # Média das últimas 30 frames
+
+        # Controle de pulo de frames
+        self.frame_counter = 0
+        self.skip_rate = 0  # Adaptativo baseado na carga
+
+        print("ThreadedDetector inicializado")
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Método de processamento assíncrono de \textit{frames}., label=lst:process_frames]
+def _process_frames(self):
+    """Thread de trabalho que processa frames da fila"""
+    while self.running:
+        try:
+            # Obtém um frame da fila com timeout
+            frame = self.frame_queue.get(timeout=0.1)
+
+            # Processa o frame com melhor tratamento de erros
+            try:
+                start_time = time.time()
+                processed_frame, boxes, confidences, classids, idxs = self.detector.detect_objects(frame)
+                process_time = time.time() - start_time
+
+                # Calcula e rastreia FPS
+                self.process_times.append(process_time)
+                if len(self.process_times) > self.max_times:
+                    self.process_times.pop(0)
+
+                # Coloca o resultado na fila de resultados
+                result = {
+                    'frame': processed_frame,
+                    'boxes': boxes,
+                    'confidences': confidences,
+                    'classids': classids,
+                    'idxs': idxs,
+                    'process_time': process_time
+                }
+                self.result_queue.put(result)
+            except Exception as e:
+                print(f"Erro processando frame na thread: {e}")
+                # Coloca um resultado parcial com o frame original para evitar bloqueio
+                result = {
+                    'frame': frame,
+                    'boxes': [],
+                    'confidences': [],
+                    'classids': [],
+                    'idxs': [],
+                    'process_time': 0.0,
+                    'error': str(e)
+                }
+                self.result_queue.put(result)
+
+            # Marca tarefa como concluída independente de sucesso/falha
+            self.frame_queue.task_done()
+
+            # Atualiza taxa de pulo baseado no tempo de processamento
+            # Se o processamento estiver levando muito tempo, aumenta taxa de pulo
+            avg_time = sum(self.process_times) / max(1, len(self.process_times))
+            if avg_time > 0.1:  # > 100ms por frame
+                self.skip_rate = min(3, self.skip_rate + 1)  # Máximo de pulo de 3 frames
+            else:
+                self.skip_rate = max(0, self.skip_rate - 1)  # Mínimo de pulo de 0 frames
+
+        except Empty:
+            # Sem frames para processar, apenas continua
+            continue
+        except Exception as e:
+            print(f"Erro na thread de detecção: {e}")
+            # Coloca um resultado None para indicar erro
+            self.result_queue.put(None)
+            self.frame_queue.task_done()
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Controle adaptativo de taxa de processamento., label=lst:adaptive_rate_control]
+def process_frame(self, frame, metrics=None):
+    """Adiciona um frame à fila de processamento
+
+    Args:
+        frame: O frame a ser processado
+        metrics: Objeto de métricas opcional para registrar desempenho
+
+    Returns:
+        Tupla de (processed_frame, boxes, confidences, classids, idxs)
+        Se nenhum resultado estiver disponível, retorna o frame de entrada e listas vazias
+    """
+    self.frame_counter += 1
+
+    # Pula frames baseado na taxa adaptativa de pulo
+    if self.frame_counter % (self.skip_rate + 1) != 0:
+        # Se estamos pulando este frame mas temos um resultado anterior, retorna-o
+        if self.latest_result is not None:
+            return (
+                self.latest_frame,
+                self.latest_result['boxes'],
+                self.latest_result['confidences'],
+                self.latest_result['classids'],
+                self.latest_result['idxs']
+            )
+        else:
+            return frame, [], [], [], []
+
+    # Se a fila estiver cheia, pula este frame para evitar atraso
+    if self.frame_queue.full():
+        print("Aviso: Fila de detecção cheia, pulando frame")
+        return frame, [], [], [], []
+
+    # Adiciona o frame à fila
+    try:
+        self.frame_queue.put(frame, block=False)
+    except:
+        # Fila está cheia
+        return frame, [], [], [], []
+
+    # Tenta obter um resultado, mas não bloqueia se nenhum estiver disponível
+    try:
+        result = self.result_queue.get(block=False)
+        if result is not None:
+            self.latest_result = result
+            self.latest_frame = result['frame']
+
+            # Registra métricas se fornecidas
+            if metrics is not None:
+                metrics.record_detection_metrics(
+                    result['process_time'],
+                    result['boxes'],
+                    result['confidences'],
+                    result['classids'],
+                    result['idxs']
+                )
+
+                # Registra nível de risco
+                risk_level = self.detector._calculate_traffic_risk(
+                    result['boxes'],
+                    result['classids'],
+                    result['confidences']
+                )
+                metrics.record_risk_level(risk_level)
+
+                # Processa dados de avisos
+                self._process_warning_data(
+                    result['boxes'],
+                    result['confidences'],
+                    result['classids'],
+                    result['idxs'],
+                    metrics
+                )
+
+        self.result_queue.task_done()
+    except Empty:
+        # Nenhum resultado disponível ainda, usa o último se tivermos um
+        pass
+
+    if self.latest_result is None:
+        return frame, [], [], [], []
+    else:
+        return (
+            self.latest_frame,
+            self.latest_result['boxes'],
+            self.latest_result['confidences'],
+            self.latest_result['classids'],
+            self.latest_result['idxs']
+        )
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Implementação do sistema de \textit{feedback} visual., label=lst:add_warnings]
+def _add_warnings(self, img, boxes, confidences, class_ids, detected_classes):
+    """Adiciona sobreposições de avisos à imagem baseado nas detecções"""
+    global warning_timers
+
+    # Classes prioritárias para avisos
+    priority_classes = {
+        'person': 'ATENÇÃO: PEDESTRE DETECTADO',
+        'car': 'VEÍCULO À FRENTE',
+        'truck': 'VEÍCULO GRANDE À FRENTE',
+        'bus': 'ÔNIBUS À FRENTE',
+        'stop sign': 'APROXIMANDO-SE DE PLACA DE PARADA',
+        'traffic light': 'SEMÁFORO À FRENTE',
+        'bicycle': 'CICLISTA PRÓXIMO',
+        'motorcycle': 'MOTOCICLISTA PRÓXIMO'
+    }
+
+    # Obtém dimensões da imagem
+    height, width = img.shape[:2]
+
+    # Rastreamento para avisos
+    critical_warnings = []
+    standard_warnings = []
+
+    # Processa cada detecção
+    for i, cls_id in enumerate(class_ids):
+        if cls_id < len(self.labels):
+            label = self.labels[cls_id]
+            conf = confidences[i]
+            x, y, w, h = boxes[i]
+
+            # Verifica se é uma classe sobre a qual queremos avisar
+            if label in priority_classes:
+                warning_msg = priority_classes[label]
+                box_area = w * h  # Proxy para distância
+                conf_percent = int(conf * 100)
+
+                # Adiciona à lista de avisos apropriada
+                if label in ['person', 'stop sign']:
+                    critical_warnings.append((warning_msg, conf_percent, box_area, label))
+                    # Reproduz aviso sonoro
+                    self._play_audio_warning(label)
+                else:
+                    standard_warnings.append((warning_msg, conf_percent, box_area, label))
+
+    # Atualiza timers de aviso para classes detectadas
+    for class_name in detected_classes:
+        if class_name in warning_timers:
+            persistence = WARNING_PERSISTENCE.get(class_name, WARNING_PERSISTENCE['default'])
+            warning_timers[class_name] = persistence
+
+    # Lida com persistência de avisos para classes não detectadas neste frame
+    for class_name, timer in list(warning_timers.items()):
+        if class_name not in detected_classes and timer > 0:
+            # Diminui timer
+            warning_timers[class_name] = timer - 1
+
+            # Adiciona aviso persistido com confiança reduzida
+            if timer > 2:  # Mostra apenas avisos persistidos que ainda são relevantes
+                fading_conf = max(40, int(70 * (timer / WARNING_PERSISTENCE.get(class_name, WARNING_PERSISTENCE['default']))))
+                warning_msg = priority_classes.get(class_name, "Aviso")
+                size_factor = 0.75  # Menor que detecções diretas
+
+                # Adiciona à lista de avisos apropriada com tag "(Persistido)"
+                if class_name in ['person', 'stop sign']:
+                    critical_warnings.append((f"{warning_msg} (Persistido)", fading_conf, size_factor, class_name))
+                else:
+                    standard_warnings.append((f"{warning_msg} (Persistido)", fading_conf, size_factor, class_name))
+
+    # Exibe avisos se tivermos algum
+    if critical_warnings or standard_warnings:
+        # Ordena por importância (tamanho da caixa/proximidade)
+        critical_warnings.sort(key=lambda x: x[2], reverse=True)
+        standard_warnings.sort(key=lambda x: x[2], reverse=True)
+
+        # Combina avisos, priorizando os críticos
+        all_warnings = critical_warnings[:2] + standard_warnings[:1]
+
+        if all_warnings:
+            # Renderiza os avisos no frame
+            # ...
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Constantes de persistência para avisos visuais., label=lst:warning_persistence]
+# Persistência temporal para cada tipo de aviso
+WARNING_PERSISTENCE = {
+    'person': 15,       # Crítico - mantém avisos por 15 frames
+    'stop sign': 15,    # Crítico - mantém avisos por 15 frames
+    'traffic light': 10,# Importante - mantém avisos por 10 frames
+    'default': 8        # Padrão - mantém avisos por 8 frames
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Método de cálculo de risco de tráfego., label=lst:calculate_traffic_risk]
+def _calculate_traffic_risk(self, boxes, class_ids, confidences):
+    """Calcula risco de tráfego baseado em objetos detectados e suas posições"""
+    if not boxes:
+        return "BAIXO"
+
+    # Obtém dimensões da imagem
+    height, width = 600, 800
+
+    # Indicadores de classes críticas - presença imediatamente eleva nível de risco
+    critical_classes = {'person', 'stop sign'}
+    high_risk_classes = {'traffic light', 'motorcycle', 'bicycle'}
+
+    # Inicializa contadores e métricas
+    risk_score = 0
+    max_single_risk = 0
+    critical_count = 0
+    high_risk_count = 0
+    vehicle_count = 0
+    central_hazard = False
+
+    # Analisa cada detecção
+    for i, box in enumerate(boxes):
+        if i >= len(confidences) or i >= len(class_ids):
+            continue
+
+        x, y, w, h = box
+        cls_id = class_ids[i]
+        conf = confidences[i]
+
+        # Pula classes irrelevantes ou confiança baixa
+        if cls_id not in self.driving_relevant_classes or conf < 0.25:
+            continue
+
+        label = self.labels[cls_id] if cls_id < len(self.labels) else "unknown"
+
+        # Conta por categoria
+        if label in critical_classes:
+            critical_count += 1
+        elif label in high_risk_classes:
+            high_risk_count += 1
+        elif label in ['car', 'truck', 'bus']:
+            vehicle_count += 1
+
+        # Calcula métricas de posição
+        box_area = w * h
+        image_area = height * width
+        size_ratio = box_area / image_area
+
+        center_x = x + w/2
+        center_y = y + h/2
+        center_ratio_x = center_x / width  # 0 a 1 da esquerda para direita
+        center_ratio_y = center_y / height  # 0 a 1 de cima para baixo
+
+        # Verifica perigos centrais com tamanho substancial
+        in_center = (0.3 < center_ratio_x < 0.7)
+        is_close = (center_ratio_y > 0.6)
+        is_substantial = (size_ratio > 0.02)  # Objeto ocupa pelo menos 2% do frame
+
+        if in_center and is_close and is_substantial and label in ['person', 'car', 'truck', 'motorcycle']:
+            central_hazard = True
+
+        # Risco base por tipo de objeto
+        base_risk = {
+            'person': 1.0,      # Maior risco
+            'stop sign': 0.9,   # Muito importante
+            'traffic light': 0.8,
+            'car': 0.6,
+            'truck': 0.7,
+            'bus': 0.7,
+            'motorcycle': 0.8,
+            'bicycle': 0.8,
+        }.get(label, 0.2)
+
+        # Adiciona fatores de posição
+        position_factor = 1.0
+        if in_center:
+            position_factor = 1.5  # Maior peso para objetos centrais
+        if is_close:
+            position_factor *= 1.5  # Maior peso para objetos próximos
+
+        # Calcula pontuação de risco do objeto
+        object_risk = base_risk * position_factor * conf
+
+        # Rastreia maior risco de objeto único
+        max_single_risk = max(max_single_risk, object_risk)
+
+        # Adiciona à pontuação total de risco
+        risk_score += object_risk
+
+    # Decisão baseada em regras
+    if central_hazard or critical_count >= 1 or max_single_risk > 0.8:
+        return "ALTO"
+    elif (high_risk_count >= 1 or vehicle_count >= 2 or max_single_risk > 0.5 or
+        risk_score > 1.0):
+        return "MÉDIO"
+    else:
+        return "BAIXO"
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Método para reprodução de avisos sonoros., label=lst:play_audio_warning]
+def _play_audio_warning(self, warning_type):
+    """Reproduz aviso sonoro para detecções críticas"""
+    global last_audio_warning
+
+    # Verifica se devemos reproduzir um aviso (evita avisos muito frequentes)
+    current_time = time.time()
+    last_time = last_audio_warning.get(warning_type, 0)
+
+    # Reproduz apenas a cada 3 segundos para cada tipo
+    if current_time - last_time < 3.0:
+        return
+
+    # Atualiza tempo do último aviso
+    last_audio_warning[warning_type] = current_time
+
+    # Não cria nova thread se uma ainda estiver em execução
+    if hasattr(self, 'audio_thread') and self.audio_thread and self.audio_thread.is_alive():
+        return
+
+    # Caminho para o som de aviso
+    sound_file = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                            "sound_warning", "car_beeping.mp3")
+
+    # Verifica se o arquivo existe
+    if not os.path.exists(sound_file):
+        print(f"Aviso: Arquivo de som não encontrado: {sound_file}")
+        return
+
+    try:
+        if sys.platform == 'win32':
+            # Em Windows, usa uma abordagem diferente para arquivos MP3
+            import winsound
+            # Usa o som de alerta integrado do Windows como fallback
+            winsound.MessageBeep(winsound.MB_ICONEXCLAMATION)
+            print(f"Reproduzindo som de aviso para {warning_type}")
+        else:
+            # Plataformas Linux/Mac (requer mpg123 ou similar)
+            sound_command = f'mpg123 "{sound_file}" 2>/dev/null || ' \
+                        f'ffplay -nodisp -autoexit -loglevel quiet "{sound_file}" || ' \
+                        f'mplayer -really-quiet "{sound_file}"'
+
+            # Cria e inicia thread
+            self.audio_thread = threading.Thread(
+                target=lambda: subprocess.run(sound_command, shell=True, timeout=5))
+            self.audio_thread.daemon = True
+            self.audio_thread.start()
+            print(f"Reproduzindo som de aviso para {warning_type}")
+    except Exception as e:
+        print(f"Aviso: Erro na reprodução de áudio: {e}")
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Integração do módulo de percepção com sistema completo., label=lst:main_integration]
+def exec_waypoint_nav_demo(args):
+    """ Executa demonstração de navegação por waypoints.
+    """
+    with make_carla_client(args.host, args.port) as client:
+        # ...
+        # Inicializa o cliente de detecção
+        yolo_detector = DetectionClient(host="localhost", port=5555)
+        labels = yolo_detector.labels
+
+        # Inicializa o wrapper de detector assíncrono
+        threaded_detector = ThreadedDetector(yolo_detector)
+        # ...        
+        # Loop principal de simulação
+        while True:
+            # Captura imagem da câmera
+            measurement_data, sensor_data = client.read_data()
+            image = sensor_data['CAMERA']
+            
+            # Converte imagem para formato numpy
+            image_array = to_rgb_array(image)
+            
+            # Processa o frame através do detector assíncrono
+            processed_img, boxes, confidences, classids, idxs = threaded_detector.process_frame(
+                image_array, metrics)
+                
+            # Renderiza a imagem processada (ou usa em outros módulos)
+            # ...
+            
+            # Atualiza o controlador com informações atuais
+            controller.update_values(current_x, current_y, current_yaw,
+                                  current_speed, current_timestamp, frame)
+            controller.update_controls()
+            cmd_throttle, cmd_steer, cmd_brake = controller.get_commands()
+            
+            # Envia comandos ao simulador
+            send_control_command(client, throttle=cmd_throttle,
+                                steer=cmd_steer, brake=cmd_brake)
+        # ...
+                               
+\end{lstlisting}
+
+\begin{lstlisting}[style=cmdstyle, caption={\textit{Script} de inicialização completa do sistema.}, label={lst:start_all}]
+@echo off
+echo Starting Self-Driving Car Simulation Environment...
+
+:: Start CARLA simulator in a new window
+start cmd /k call start_carla.bat
+
+:: Wait for CARLA to initialize
+echo Waiting for CARLA simulator to initialize...
+timeout /t 8 /nobreak
+
+:: Start the YOLO detection server in a new window
+start cmd /k call start_detector.bat
+
+:: Wait for detector to initialize
+echo Waiting for detector server to initialize...
+timeout /t 5 /nobreak
+
+:: Start the module_7 client
+start cmd /k call start_client.bat
+
+echo All components started successfully!
+\end{lstlisting}
+
+\begin{lstlisting}[style=cmdstyle, caption={Inicialização do servidor de detecção YOLOv8.}, label={lst:start_detector}]
+@echo off
+echo Starting YOLO Detection Server...
+cd %~dp0\detector_socket
+call conda activate yolo_gpu
+python detector_server.py
+\end{lstlisting}
+
+\begin{lstlisting}[style=cmdstyle, caption={Inicialização do cliente CARLA e sistema de controle.}, label={lst:start_client}]
+@echo off
+echo Starting CARLA Client Module...
+cd C:\Users\danie\Documents\Documents\CURSOS\Self-Driving_Cars_Specialization\CarlaSimulator\PythonClient\FinalProject
+echo Current directory: %CD%
+python module_7.py
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Inicialização do sistema de métricas de desempenho., label=lst:metrics_init]
+class PerformanceMetrics:
+    def __init__(self, output_dir="metrics_output"):
+        """Inicializa o coletor de métricas de desempenho.
+
+        Args:
+            output_dir (str): Diretório para salvar dados de métricas e visualizações
+        """
+        self.output_dir = output_dir
+
+        # Cria diretório de saída se não existir
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+
+        # Métricas de detecção
+        self.detection_times = []
+        self.detection_counts = []
+        self.detection_classes = {}
+        self.confidence_scores = []
+
+        # Rastreamento de correlação aviso-detecção
+        self.warning_detection_correlations = []
+
+        # Métricas de resposta veicular
+        self.sign_detections = []
+        self.vehicle_responses = []
+        self.response_times = []
+
+        # Rastreamento de condições ambientais
+        self.weather_conditions = {
+            0: "DEFAULT", 1: "CLEARNOON", 2: "CLOUDYNOON",
+            # ... outros estados meteorológicos
+        }
+        self.current_weather_id = 1  # Padrão: CLEARNOON
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Método de registro de métricas de detecção., label=lst:record_detection_metrics]
+def record_detection_metrics(self, detection_time, boxes, confidences, classids, idxs):
+    """Registra métricas detalhadas sobre o processo de detecção"""
+    
+    current_time = time.time()
+    frame_time = current_time - self.last_frame_time
+    self.last_frame_time = current_time
+
+    # Registra tempo de detecção
+    self.detection_times.append(detection_time)
+
+    # Conta detecções válidas
+    num_detections = len(idxs) if idxs is not None else 0
+    self.detection_counts.append(num_detections)
+
+    # Registra timestamp
+    timestamp = (datetime.now() - self.init_time).total_seconds()
+    self.timestamps.append(timestamp)
+
+    # Atualiza métricas específicas por condição meteorológica
+    weather_metrics = self.weather_performance[self.current_weather_id]
+    weather_metrics['detections'] += num_detections
+    weather_metrics['detection_times'].append(detection_time)
+
+    if idxs is not None:
+        for i in idxs:
+            class_id = classids[i]
+            class_name = self._get_class_name(class_id)
+            
+            # Atualiza contagem por classe
+            if class_name in self.detection_classes:
+                self.detection_classes[class_name] += 1
+            else:
+                self.detection_classes[class_name] = 1
+            
+            # Registra pontuações de confiança
+            self.confidence_scores.append(confidences[i])
+            
+            # Atualiza métricas específicas por classe
+            if class_id not in self.class_confidence_by_id:
+                self.class_confidence_by_id[class_id] = []
+            self.class_confidence_by_id[class_id].append(confidences[i])
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Método de geração de relatório de resultados., label=lst:generate_report]
+def generate_report(self):
+    """Gera um relatório completo baseado nas métricas coletadas"""
+    
+    # Carrega dados de métricas
+    metrics_data = self._load_metrics_data()
+    
+    if not metrics_data:
+        print("Nenhum dado de métrica encontrado para gerar relatório")
+        return False
+        
+    # Cria diretório de relatórios se não existir
+    if not os.path.exists(self.report_dir):
+        os.makedirs(self.report_dir)
+        
+    # Gera resumo de métricas
+    summary = metrics_data.get('summary', {})
+    summary_html = self._generate_summary_html(summary)
+    
+    # Gera visualizações de gráficos
+    charts_html = self._generate_charts_html()
+    
+    # Gera validação de hipóteses
+    hypothesis_html = self._generate_hypothesis_validation_html(metrics_data)
+    
+    # Integra todas as seções no relatório final
+    html = f"""
+    <!DOCTYPE html>
+    <html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Relatório de Desempenho de Detecção de Objetos</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>Relatório de Desempenho do Sistema de Detecção de Objetos e Avisos</h1>
+        <p>Gerado em: {datetime.now().strftime('%d-%m-%Y %H:%M:%S')}</p>
+        {summary_html}
+        {charts_html}
+        {hypothesis_html}
+    </body>
+    </html>
+    """
+    
+    # Salva o relatório no arquivo HTML
+    report_path = os.path.join(self.report_dir, 'relatorio_desempenho.html')
+    with open(report_path, 'w', encoding='utf-8') as f:
+        f.write(html)
+    
+    print(f"Relatório gerado com sucesso: {report_path}")
+    return True
+\end{lstlisting}
+
+\begin{lstlisting}[style=cmdstyle, caption={Script de encerramento controlado do sistema.}, label={lst:stop_all}]
+@echo off
+echo Cleaning up simulation environment...
+
+:: Find and kill all relevant processes
+taskkill /f /im CarlaUE4.exe
+taskkill /f /im python.exe /fi "WINDOWTITLE eq *detector_server*"
+taskkill /f /im python.exe /fi "WINDOWTITLE eq *module_7*"
+
+echo Cleanup complete!
+\end{lstlisting}
+
+\end{apendicesenv}
+% ---
+
+
+% ----------------------------------------------------------
+% Anexos
+% ----------------------------------------------------------
+
+% ---
+% Inicia os anexos
+% ---
+\begin{anexosenv} 
+
+% Imprime uma página indicando o início dos anexos
+\partanexos
+
+% ---
+\chapter{Material de Relevância}  \label{anexo}
+% --- TO DO
+Neste anexo, fornecemos uma descrição dos materiais relevantes para aprofundamento relacionados a este trabalho, e a sua contribuição.
+
+Iniciamos com o artigo \textit{Vehicle Dynamics COMPENDIUM} de 2020, publicado pela Chalmers University of Technology \cite{jacobson2020vehicle}. Este trabalho é essencial para compreender todos os aspectos relacionados à modelagem abordada nesta pesquisa.
+
+Adicionalmente, temos a dissertação de mestrado \textit{Sensing requirements for an automated vehicle for highway and rural environments}, de 2014, que aborda todos os sensores e métricas associados aos VA, bem como análises desses sensores em diferentes contextos de aplicação \cite{bussemaker2014sensing}.
+
+Além disso, mencionamos o documento SAE $\textit{International J3016}$ de 2021, elaborado para descrever sistemas autônomos \cite{SAE}. Ele engloba todas as discussões e definições relevantes para caracterizar e definir os níveis de condução autônoma. O artigo \textit{Automatic Steering Methods for Autonomous
+Automobile Path Tracking} de 2009 contribuiu de maneira significativa, auxiliando-nos na compreensão de algumas das equações presentes nos modelos apresentados neste trabalho \cite{snider2009automatic}.
+
+Por fim, destaca-se a relevância acadêmica e prática da especialização realizada em \textit{Self-Driving Cars}, oferecida pela \textit{University of Toronto} por meio da plataforma Coursera. A trilha é ministrada pelos professores Steven Waslander e Jonathan Kelly, especialistas reconhecidos na área de VA. Esta especialização fornece fundamentos robustos e aplicações práticas que foram diretamente relevantes para o desenvolvimento deste trabalho.
+
+Dois cursos dessa trilha merecem destaque:
+
+\begin{itemize}
+  \item O curso \textit{Introduction to Self-Driving Cars} \cite{University_of_Toronto2018-fe}, que apresenta os fundamentos essenciais dos VA, abordando percepção, controle e arquitetura de sistemas. O módulo inclui atividades práticas com o simulador CARLA, proporcionando experiência direta com as ferramentas utilizadas nesta monografia.
+
+  \item O curso \textit{Motion Planning for Self-Driving Cars} \cite{University_of_Toronto2018-mp}, que aprofunda os principais algoritmos de planejamento de movimento, como \textit{lattice planning}, \textit{graph search} e métodos baseados em otimização. Esses conteúdos fornecem o embasamento teórico para a etapa de planejamento desenvolvida neste trabalho.
+\end{itemize}
+
+Esses materiais complementares demonstram a interseção entre teoria e prática, fortalecendo a fundamentação científica e tecnológica do sistema proposto nesta monografia.
+
+\end{anexosenv}
+
+%-----------------
+% ---
+% Inicia os apêndices
+%---------------------------------------------------------------------
+% INDICE REMISSIVO
+%---------------------------------------------------------------------
+\phantompart
+\printindex
+%---------------------------------------------------------------------
+
+\end{document}

@@ -1,56 +1,60 @@
-<div align="center">
-  
-  ![GitHub repo size](https://img.shields.io/github/repo-size/codewithsadee/jack-portfolio)
-  ![GitHub stars](https://img.shields.io/github/stars/codewithsadee/jack-portfolio?style=social)
-  ![GitHub forks](https://img.shields.io/github/forks/codewithsadee/jack-portfolio?style=social)
-  [![Twitter Follow](https://img.shields.io/twitter/follow/codewithsadee?style=social)](https://twitter.com/intent/follow?screen_name=codewithsadee)
-  [![YouTube Video Views](https://img.shields.io/youtube/views/DdlVKS7MROY?style=social)](https://youtu.be/DdlVKS7MROY)
+# Academic Portfolio Website - Development Plan
 
-  <br />
-  <br />
-  
-  <img src="./readme-images/project-logo.png" />
+## Key Requirements
 
-  <h2 align="center">Jack - Personal portfolio</h2>
+- **Modular Architecture**: Code must be organized in a modular structure (features and sections and pages in differents files) to facilitate maintenance and future enhancements
+- **Maintainability Focus**: Clean code practices, comprehensive documentation, and consistent coding patterns
+- **Multilingual Support**: Full support for English and Portuguese-Brazil, with extensibility for other languages
+- **Primary Goals**:
+  - Showcase portfolio for academic and professional purposes based on information from aboutme.md and related documents
+  - Provide easy communication channels and highlight research areas and specializations
+  - Present academic achievements, publications, and projects with appropriate context
+- **User Experience**: Intuitive navigation with minimal steps to access key information and contact details
+- **Security**: Protection against common web vulnerabilities and secure data handling
+- **Performance**: Fast loading times and optimized resource delivery
+- **Accessibility**: Ensuring the website is usable by people with various abilities and complies with WCAG guidelines
+- **Responsive Design**: Works seamlessly on all devices from mobile to desktop
 
-  This website is fully responsive personal portfolio, <br />Responsive for all devices, built using HTML, CSS, and JavaScript.
+## Recommendations Before Development
 
-  <a href="https://codewithsadee.github.io/jack-portfolio/"><strong>➥ Live Demo</strong></a>
+### 1. Content Organization & Structure
 
-</div>
+- **Home/Landing Page**: Brief introduction with specialization in autonomous vehicles and data science
+- **About Me**: Expanded bio with personal interests (music, languages, etc.)
+- **Research**: Dedicated section for autonomous vehicles research work
+- **Projects**: Portfolio of key projects with descriptions and links
+- **Publications/Presentations**: Scientific presentations at conferences
+- **Education & Certifications**: Academic background and specialized courses
+- **Contact**: Clear communication channels
 
-<br />
+### 2. Design Considerations
 
-### Demo Screeshots
+- **Academic Aesthetic**: Clean, minimalist design reflecting scholarly professionalism
+- **Color Scheme**: Colors conveying trust and expertise with selective accent colors
+- **Typography**: Clear, readable fonts appropriate for academic content
+- **Visual Hierarchy**: Emphasis on research areas and key achievements
 
-![Jack Portfolio Desktop Demo](./readme-images/desktop.png "Desktop Demo")
+### 3. Technical Implementation Plan
 
-### Prerequisites
+- Use a responsive framework ensuring mobile compatibility and accessibility
+- Implement proper SEO for academic visibility
+- Set up analytics to track visitor engagement
+- Prioritize security best practices from the beginning
 
-Before you begin, ensure you have met the following requirements:
+### 4. Document Integration Strategy
 
-* [Git](https://git-scm.com/downloads "Download Git") must be installed on your operating system.
+- Create summary pages for each document with key takeaways
+- Embed previews where appropriate
+- Extract key content into the website itself
 
-### Run Locally
+## Key Documents to Include
 
-To run **jack-portfolio** locally, run this command on your git bash:
+- CV_DanielTerraGomes-15-07-2025.pdf
+- relatorio_estagio_2025_1_danielTerraGomes.pdf
+- TCC.pdf
+- aboutme.md
+- Links to LinkedIn, GitHub, and Lattes profiles
 
-Linux and macOS:
+## Project Documentation
 
-```bash
-sudo git clone https://github.com/codewithsadee/jack-portfolio.git
-```
-
-Windows:
-
-```bash
-git clone https://github.com/codewithsadee/jack-portfolio.git
-```
-
-### Contact
-
-If you want to contact with me you can reach me at [Twitter](https://www.twitter.com/codewithsadee).
-
-### License
-
-This project is **free to use** and does not contains any license.
+This README will be maintained throughout development to document design decisions, implementation details, and progress updates.
