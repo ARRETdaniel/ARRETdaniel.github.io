@@ -206,56 +206,111 @@ const GithubProjectsSection = ({ t }: GithubProjectsSectionProps) => {
   ];
 
   return (
-    <Box as="section" py={{ base: 12, md: 20 }} bg={bgColor}>
+    <Box
+      as="section"
+      py={{ base: 20, md: 32 }}
+      bg={bgColor}
+      position="relative"
+      _before={{
+        content: '""',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        height: '1px',
+        bgGradient: 'linear(to-r, transparent, gray.200, transparent)',
+      }}
+    >
       <Container maxW="container.xl">
         {/* Section header */}
         <MotionBox
           textAlign="center"
-          mb={12}
+          mb={{ base: 16, md: 20 }}
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
+          position="relative"
+          zIndex={1}
         >
+          <Text
+            color="accent.500"
+            fontWeight="bold"
+            fontSize="sm"
+            textTransform="uppercase"
+            letterSpacing="wide"
+            mb={3}
+          >
+            {t('github.caption')}
+          </Text>
           <Heading
             as="h2"
-            size="xl"
+            fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}
+            fontWeight="bold"
             color={headingColor}
-            mb={4}
+            mb={6}
+            position="relative"
+            display="inline-block"
           >
             {t('github.title')}
           </Heading>
           <Text
-            fontSize="lg"
+            fontSize={{ base: "lg", md: "xl" }}
             maxW="3xl"
             mx="auto"
             color={useColorModeValue('gray.600', 'gray.400')}
+            lineHeight="tall"
           >
             {t('github.subtitle')}
           </Text>
         </MotionBox>
 
         {/* Projects Grid */}
-        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8} mb={12}>
+        <SimpleGrid
+          columns={{ base: 1, md: 2, lg: 3 }}
+          spacing={{ base: 8, md: 10 }}
+          mb={{ base: 16, md: 20 }}
+        >
           {projects.map((project, index) => (
             <GithubProject key={index} {...project} />
           ))}
         </SimpleGrid>
 
         {/* View all projects CTA */}
-        <Flex justify="center" mt={8}>
+        <MotionBox
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          textAlign="center"
+        >
           <Button
             as="a"
             href="https://github.com/ARRETdaniel"
             target="_blank"
             rel="noopener noreferrer"
             size="lg"
-            leftIcon={<Icon as={FaGithub} />}
+            px={10}
+            py={7}
+            fontSize="lg"
+            height="auto"
+            fontWeight="bold"
+            leftIcon={<Icon as={FaGithub} boxSize={5} />}
             colorScheme="brand"
+            borderRadius="md"
+            boxShadow="md"
+            _hover={{
+              transform: "translateY(-3px)",
+              boxShadow: "xl"
+            }}
+            _active={{
+              transform: "scale(0.98)"
+            }}
+            transition="all 0.3s"
           >
             {t('github.viewAllButton')}
           </Button>
-        </Flex>
+        </MotionBox>
       </Container>
     </Box>
   );

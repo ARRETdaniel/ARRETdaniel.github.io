@@ -32,33 +32,65 @@ interface FeatureProps {
 const Feature = ({ icon, title, text }: FeatureProps) => {
   const bgColor = useColorModeValue('white', 'gray.800');
   const borderColor = useColorModeValue('gray.200', 'gray.700');
-  
+
   return (
     <MotionBox
-      p={5}
-      shadow="md"
+      p={8}
+      shadow="lg"
       borderWidth="1px"
-      borderRadius="lg"
+      borderRadius="xl"
       flex="1"
       borderColor={borderColor}
       bg={bgColor}
-      whileHover={{ y: -5 }}
-      transition={{ duration: 0.3 }}
+      whileHover={{
+        y: -8,
+        boxShadow: "2xl"
+      }}
+      transition={{
+        duration: 0.4,
+        ease: "easeOut"
+      }}
+      position="relative"
+      overflow="hidden"
     >
       <Box
-        display="inline-block"
-        p={2}
+        position="absolute"
+        top="0"
+        right="0"
+        width="150px"
+        height="150px"
         bg={useColorModeValue('brand.50', 'brand.900')}
-        borderRadius="md"
+        borderRadius="full"
+        transform="translate(30%, -30%)"
+        opacity="0.2"
+        zIndex="0"
+      />
+      <Box
+        display="inline-flex"
+        p={4}
+        bg={useColorModeValue('brand.50', 'brand.900')}
+        borderRadius="lg"
         color="brand.500"
-        mb={3}
+        mb={4}
+        alignItems="center"
+        justifyContent="center"
+        boxShadow="md"
+        zIndex="1"
+        position="relative"
       >
         {icon}
       </Box>
-      <Heading fontSize="xl" mb={2}>
+      <Heading fontSize="xl" mb={3} position="relative" zIndex="1">
         {title}
       </Heading>
-      <Text>{text}</Text>
+      <Text
+        color={useColorModeValue('gray.600', 'gray.300')}
+        position="relative"
+        zIndex="1"
+        fontSize="md"
+      >
+        {text}
+      </Text>
     </MotionBox>
   );
 };
@@ -72,84 +104,116 @@ const Hero = ({ t }: HeroProps) => {
     'linear(to-r, gray.50, neutrals.50)',
     'linear(to-r, gray.900, gray.800)'
   );
-  
+
   return (
     <Box as="section" pt={{ base: 16, md: 24 }} pb={{ base: 10, md: 20 }}>
       <Container maxW="container.xl">
         <Stack
           direction={{ base: 'column', md: 'row' }}
           align="center"
-          spacing={{ base: 8, md: 10 }}
-          py={{ base: 8, md: 12 }}
-          px={{ base: 4, md: 8 }}
+          spacing={{ base: 12, md: 16 }}
+          py={{ base: 16, md: 24 }}
+          px={{ base: 6, md: 12 }}
           bgGradient={bgGradient}
-          borderRadius="lg"
+          borderRadius="xl"
+          boxShadow="lg"
+          position="relative"
+          overflow="hidden"
+          _before={{
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundImage: 'url("/assets/images/subtle-pattern.png")',
+            backgroundRepeat: 'repeat',
+            opacity: 0.05,
+            zIndex: 0
+          }}
           className="texture-bg"
         >
           {/* Left content column */}
-          <Stack flex={1} spacing={{ base: 5, md: 8 }}>
+          <Stack flex={1} spacing={{ base: 6, md: 10 }} position="relative" zIndex={1}>
+            <MotionBox
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.7 }}
+            >
+              <Text
+                color="accent.500"
+                fontWeight="bold"
+                fontSize="md"
+                textTransform="uppercase"
+                letterSpacing="wide"
+                mb={2}
+              >
+                {t('hero.greeting')}
+              </Text>
+            </MotionBox>
+
             <MotionHeading
               lineHeight={1.1}
-              fontWeight={600}
-              fontSize={{ base: '3xl', sm: '4xl', lg: '5xl' }}
+              fontWeight={700}
+              fontSize={{ base: '4xl', sm: '5xl', lg: '6xl' }}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
             >
               <Text
                 as="span"
                 position="relative"
-                color="brand.600"
-                _after={{
-                  content: "''",
-                  width: 'full',
-                  height: '20%',
-                  position: 'absolute',
-                  bottom: 1,
-                  left: 0,
-                  bg: 'brand.200',
-                  zIndex: -1,
-                }}
+                color={useColorModeValue('gray.800', 'white')}
+                bgGradient={useColorModeValue(
+                  'linear(to-r, brand.600, accent.600)',
+                  'linear(to-r, brand.300, accent.400)'
+                )}
+                bgClip="text"
               >
-                {t('hero.greeting')}
-              </Text>
-              <br />
-              <Text as="span" color={useColorModeValue('gray.800', 'white')}>
                 Daniel Terra Gomes
               </Text>
             </MotionHeading>
-            
+
             <MotionText
               color={useColorModeValue('gray.600', 'gray.300')}
-              fontSize={{ base: 'lg', sm: 'xl' }}
+              fontSize={{ base: 'lg', sm: 'xl', md: '2xl' }}
+              fontWeight="medium"
+              maxW="700px"
+              lineHeight="1.6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               {t('hero.tagline')}
             </MotionText>
-            
+
             <MotionBox
               display="flex"
-              mt={4}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              mt={8}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <HStack spacing={4} flexWrap="wrap">
+              <HStack spacing={6} flexWrap="wrap">
                 <Button
                   size="lg"
                   fontWeight="bold"
                   colorScheme="brand"
                   bg="brand.500"
-                  px={6}
+                  px={8}
+                  py={7}
+                  borderRadius="md"
                   _hover={{
                     bg: 'brand.600',
                     transform: 'translateY(-2px)',
-                    boxShadow: 'lg',
+                    boxShadow: 'xl',
+                  }}
+                  _active={{
+                    transform: 'scale(0.98)',
                   }}
                   as={Link}
                   href="/about"
+                  rightIcon={<Icon as={FaGraduationCap} />}
                 >
                   {t('hero.aboutButton')}
                 </Button>
@@ -158,7 +222,15 @@ const Hero = ({ t }: HeroProps) => {
                   fontWeight="bold"
                   variant="outline"
                   colorScheme="brand"
-                  px={6}
+                  px={8}
+                  py={7}
+                  borderRadius="md"
+                  borderWidth="2px"
+                  _hover={{
+                    transform: 'translateY(-2px)',
+                    boxShadow: 'md',
+                    bg: useColorModeValue('gray.50', 'gray.700'),
+                  }}
                   as={Link}
                   href="/contact"
                 >
@@ -175,9 +247,10 @@ const Hero = ({ t }: HeroProps) => {
             align="center"
             position="relative"
             w="full"
+            zIndex={1}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
           >
             <Box
               position="relative"
@@ -185,16 +258,39 @@ const Hero = ({ t }: HeroProps) => {
               rounded="2xl"
               width="full"
               overflow="hidden"
+              boxShadow="2xl"
             >
+              <Box
+                position="absolute"
+                top="-10px"
+                right="-10px"
+                bottom="-10px"
+                left="-10px"
+                bg={useColorModeValue('brand.50', 'brand.900')}
+                opacity="0.2"
+                filter="blur(30px)"
+              />
               <Image
                 alt={t('hero.imageAlt')}
                 fit="cover"
                 align="center"
                 w="100%"
                 h="100%"
-                src="/assets/images/hero-banner1.png" // Use one of your profile images
+                src="/assets/images/hero-banner1.png"
                 borderRadius="xl"
                 shadow="2xl"
+                zIndex={1}
+                position="relative"
+              />
+              <Box
+                position="absolute"
+                top="0"
+                left="0"
+                right="0"
+                bottom="0"
+                borderRadius="xl"
+                boxShadow="inset 0 0 20px rgba(0,0,0,0.2)"
+                zIndex={2}
               />
             </Box>
           </MotionFlex>
@@ -203,8 +299,9 @@ const Hero = ({ t }: HeroProps) => {
         {/* Features section */}
         <Stack
           direction={{ base: 'column', md: 'row' }}
-          spacing={{ base: 8, md: 6 }}
-          mt={{ base: 12, md: 16 }}
+          spacing={{ base: 8, md: 8 }}
+          mt={{ base: 16, md: 20 }}
+          px={{ base: 4, md: 0 }}
         >
           <Feature
             icon={<Icon as={FaGraduationCap} w={6} h={6} />}

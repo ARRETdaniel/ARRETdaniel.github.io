@@ -1,15 +1,15 @@
-import { NextPage } from 'next';
-import Head from 'next/head';
-import { Box } from '@chakra-ui/react';
-import Layout from '../components/Layout';
-import { useLanguageContext } from '../contexts/LanguageContext';
+import { NextPage } from "next";
+import Head from "next/head";
+import { Box } from "@chakra-ui/react";
+import Layout from "../components/Layout";
+import { useLanguageContext } from "../contexts/LanguageContext";
 
 // Components
-import Hero from '../components/Hero';
-import AboutSection from '../components/AboutSection';
-import ResearchSection from '../components/ResearchSection';
-import GithubProjectsSection from '../components/GithubProjectsSection';
-import ContactSection from '../components/ContactSection';
+import Hero from "../components/Hero";
+import AboutSection from "../components/AboutSection";
+import ResearchSection from "../components/ResearchSection";
+import GithubProjectsSection from "../components/GithubProjectsSection";
+import ContactSection from "../components/ContactSection";
 
 const Home: NextPage = () => {
   const { t, isLoading } = useLanguageContext();
@@ -21,11 +21,11 @@ const Home: NextPage = () => {
   return (
     <Layout>
       <Head>
-        <title>{t('meta.title')}</title>
-        <meta name="description" content={t('meta.description')} />
-        <meta name="keywords" content={t('meta.keywords')} />
-        <meta property="og:title" content={t('meta.title')} />
-        <meta property="og:description" content={t('meta.description')} />
+        <title>{t("meta.title")}</title>
+        <meta name="description" content={t("meta.description")} />
+        <meta name="keywords" content={t("meta.keywords")} />
+        <meta property="og:title" content={t("meta.title")} />
+        <meta property="og:description" content={t("meta.description")} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://danielterra.com" />
         <meta property="og:image" content="/assets/images/hero-banner1.png" />
@@ -37,7 +37,7 @@ const Home: NextPage = () => {
         <AboutSection t={t} />
         <ResearchSection t={t} />
         <GithubProjectsSection t={t} />
-        <ContactSection t={t} />
+        {/* <ContactSection t={t} /> */}
       </Box>
     </Layout>
   );
