@@ -1,4 +1,9 @@
 {
+  "meta": {
+    "title": "Daniel Terra Gomes | Academic Portfolio",
+    "description": "Academic portfolio of Daniel Terra Gomes, a software engineer and researcher focused on autonomous vehicles and intelligent systems.",
+    "keywords": "Daniel Terra Gomes, autonomous vehicles, software engineering, research, computer vision, machine learning"
+  },
   "nav": {
     "home": "Home",
     "about": "About",
@@ -14,29 +19,190 @@
     "intro": "Focused on autonomous vehicles research and software development",
     "cta": "See my work"
   },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "name": "Daniel Terra Gomes",
+    "title": "Software Engineer & Researcher",
+    "subtitle": "Developing intelligent systems for autonomous vehicles",
+    "cta": {
+      "primary": "View My Work",
+      "secondary": "Contact Me"
+    },
+    "skills": ["Autonomous Vehicles", "Computer Vision", "Machine Learning", "Software Engineering", "Research"]
+  },
   "about": {
     "title": "About Me",
-    "bio": "I am a software engineer and researcher with a focus on autonomous vehicles and intelligent systems."
+    "subtitle": "Learn more about my background, skills and interests",
+    "bio": "I am a software engineer and researcher with a focus on autonomous vehicles and intelligent systems. With a background in Computer Science, I combine theoretical knowledge with practical implementation to develop solutions for complex problems. My work sits at the intersection of software engineering, artificial intelligence, and robotics.",
+    "bioExtended": "Throughout my academic and professional journey, I've been dedicated to advancing the field of autonomous vehicles. My research contributes to making transportation safer, more efficient, and more accessible for everyone. I believe in the power of technology to transform our world for the better.",
+    "downloadCV": "Download CV",
+    "contactMe": "Contact Me",
+    "skills": {
+      "title": "Skills & Expertise",
+      "programming": {
+        "title": "Programming",
+        "description": "Experienced software developer with expertise in multiple programming languages and frameworks."
+      },
+      "autonomousVehicles": {
+        "title": "Autonomous Vehicles",
+        "description": "Specialized in developing systems and algorithms for self-driving vehicles and intelligent transportation."
+      },
+      "researchMethods": {
+        "title": "Research Methods",
+        "description": "Skilled in conducting academic research, writing scientific papers, and presenting findings."
+      },
+      "dataScience": {
+        "title": "Data Science",
+        "description": "Proficient in analyzing large datasets, building machine learning models, and extracting actionable insights."
+      }
+    },
+    "meta": {
+      "title": "About Daniel Terra Gomes | Academic Portfolio",
+      "description": "Learn about Daniel Terra Gomes' background, skills, and expertise in autonomous vehicles research and software development.",
+      "keywords": "about Daniel Terra Gomes, autonomous vehicles researcher, software engineer, skills, expertise, academic background"
+    }
   },
   "research": {
-    "title": "Research",
-    "intro": "My research focuses on autonomous vehicles and related technologies."
+    "title": "Research Work",
+    "subtitle": "Exploring the frontiers of autonomous transportation systems",
+    "intro": "My research focuses on autonomous vehicles and related technologies.",
+    "viewAllButton": "View All Research",
+    "featuredProjects": "Featured Research Projects",
+    "areas": {
+      "autonomousVehicles": {
+        "title": "Autonomous Vehicles",
+        "description": "Developing algorithms and systems for self-driving cars with a focus on perception, planning, and control."
+      },
+      "machineLearning": {
+        "title": "Machine Learning",
+        "description": "Applying deep learning and reinforcement learning techniques to solve complex problems in autonomous systems."
+      },
+      "computerVision": {
+        "title": "Computer Vision",
+        "description": "Creating advanced visual perception systems for object detection, tracking, and scene understanding."
+      }
+    },
+    "projects": {
+      "thesis": {
+        "title": "Master's Thesis on Autonomous Navigation",
+        "description": "A comprehensive exploration of vision-based navigation systems for autonomous vehicles in urban environments."
+      },
+      "internship": {
+        "title": "Research Internship Report",
+        "description": "Report on my work developing and implementing machine learning algorithms for vehicle perception systems."
+      },
+      "project3": {
+        "title": "Traffic Pattern Analysis",
+        "description": "Using computer vision and data analysis to understand and predict traffic patterns for smart city applications."
+      }
+    }
   },
-  "projects": {
-    "title": "Projects",
-    "intro": "Here are some of the projects I've worked on."
-  },
-  "portfolio": {
-    "title": "Portfolio",
-    "intro": "A selection of my web development and software engineering projects."
+  "github": {
+    "title": "GitHub Projects",
+    "subtitle": "Open source contributions and personal coding projects",
+    "viewAllButton": "View All on GitHub",
+    "projects": {
+      "project1": {
+        "title": "Personal Portfolio Website",
+        "description": "A responsive academic portfolio website built with Next.js, React, and Chakra UI."
+      },
+      "project2": {
+        "title": "Autonomous Vehicle Perception",
+        "description": "Computer vision algorithms for object detection and tracking in autonomous driving scenarios."
+      },
+      "project3": {
+        "title": "Interactive Data Visualization",
+        "description": "Web-based dashboard for visualizing and analyzing research data with interactive charts."
+      },
+      "project4": {
+        "title": "Embedded Systems for IoT",
+        "description": "Firmware and hardware designs for Internet of Things devices using Arduino and ESP32."
+      },
+      "project5": {
+        "title": "RESTful API Backend",
+        "description": "A Node.js backend with Express and MongoDB for managing research data and user authentication."
+      },
+      "project6": {
+        "title": "Data Science Toolkit",
+        "description": "Python libraries and notebooks for data analysis, preprocessing, and visualization."
+      }
+    }
   },
   "contact": {
-    "title": "Contact",
-    "intro": "Feel free to reach out if you have any questions or want to collaborate.",
-    "name": "Name",
-    "email": "Email",
-    "message": "Message",
-    "submit": "Send Message"
+    "title": "Get In Touch",
+    "subtitle": "Have a question or want to collaborate? Send me a message!",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "your.email@example.com",
+      "subject": "Subject",
+      "subjectPlaceholder": "What's this about?",
+      "message": "Message",
+      "messagePlaceholder": "Your message here...",
+      "submitButton": "Send Message",
+      "errors": {
+        "nameRequired": "Name is required",
+        "emailRequired": "Email is required",
+        "emailInvalid": "Please enter a valid email address",
+        "subjectRequired": "Subject is required",
+        "messageRequired": "Message is required",
+        "messageTooShort": "Message should be at least 20 characters"
+      },
+      "success": {
+        "title": "Message Sent!",
+        "description": "Thank you for your message. I'll get back to you as soon as possible."
+      },
+      "error": {
+        "title": "Error",
+        "description": "There was a problem sending your message. Please try again later."
+      }
+    },
+    "info": {
+      "title": "Contact Information",
+      "description": "Feel free to reach out to me through any of the channels below. I'm always open to discussing new projects, ideas, or opportunities.",
+      "connectTitle": "Connect With Me",
+      "responseTitle": "Response Time",
+      "responseDescription": "I typically respond to emails within 24-48 hours. For urgent matters, please reach out via LinkedIn or Twitter."
+    }
+  },
+    "intro": "A selection of my web development and software engineering projects."
+  },
+  "footer": {
+    "description": "Computer Scientist specializing in autonomous vehicles, AI, and cybersecurity research.",
+    "tagline": "Computer Scientist specializing in autonomous vehicles, AI, and cybersecurity research.",
+    "quickLinks": "Quick Links",
+    "researchAreas": "Research Areas",
+    "contactMe": "Contact Me",
+    "allRightsReserved": "All Rights Reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "cookies": "Cookies Policy",
+    "backToTop": "Back to Top",
+    "autonomousVehicles": "Autonomous Vehicles",
+    "artificialIntelligence": "Artificial Intelligence",
+    "cyberSecurity": "Cyber Security",
+    "machineLearning": "Machine Learning",
+    "computerVision": "Computer Vision",
+    "connectLinkedIn": "Connect on LinkedIn",
+    "navigation": {
+      "title": "Navigation"
+    },
+    "resources": {
+      "title": "Resources",
+      "cv": "Download CV",
+      "thesis": "Master's Thesis",
+      "github": "GitHub Profile",
+      "linkedin": "LinkedIn Profile"
+    },
+    "language": {
+      "title": "Language"
+    },
+    "contact": {
+      "title": "Contact",
+      "email": "Email",
+      "location": "Location"
+    }
   },
   "publications": {
     "title": "Publications",
@@ -45,21 +211,8 @@
     "keywords": "Keywords",
     "viewPdf": "PDF",
     "viewDoi": "DOI"
-  },
-  "footer": {
-    "copyright": "© 2023 Daniel Terra Gomes. All Rights Reserved.",
-    "tagline": "Computer Scientist specializing in autonomous vehicles, AI, and cybersecurity research.",
-    "quickLinks": "Quick Links",
-    "researchAreas": "Research Areas",
-    "contactMe": "Contact Me",
-    "emailPlaceholder": "Your email address",
-    "subscribe": "Subscribe",
-    "allRightsReserved": "All Rights Reserved.",
-    "privacy": "Privacy Policy",
-    "terms": "Terms of Use",
-    "cookies": "Cookies Policy",
-    "autonomousVehicles": "Autonomous Vehicles",
-    "artificialIntelligence": "Artificial Intelligence",
+  }
+}
     "cyberSecurity": "Cyber Security",
     "machineLearning": "Machine Learning",
     "computerVision": "Computer Vision",

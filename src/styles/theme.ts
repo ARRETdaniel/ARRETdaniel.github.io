@@ -1,75 +1,93 @@
 import { extendTheme, type ThemeConfig } from '@chakra-ui/react';
 
-// Color palette inspired by technology and academia
+// Color palette inspired by Daniel's personal style from photos
 const colors = {
   brand: {
-    50: '#e6f7ff',
-    100: '#b3e0ff',
-    200: '#80caff',
-    300: '#4db3ff',
-    400: '#1a9dff',
-    500: '#0077e6',
-    600: '#005cb3',
-    700: '#004280',
-    800: '#00294d',
-    900: '#00121a',
+    50: '#EFF3EE',
+    100: '#D5DED3',
+    200: '#B9C9B6',
+    300: '#9DB49A',
+    400: '#81A07D',
+    500: '#658B61', // Primary olive green from Daniel's shirts
+    600: '#4D5D4A', // Deeper olive for headers
+    700: '#3A4438',
+    800: '#272D26',
+    900: '#131613',
   },
   accent: {
-    50: '#fff8e6',
-    100: '#ffeab3',
-    200: '#ffdc80',
-    300: '#ffcd4d',
-    400: '#ffbf1a',
-    500: '#e6a600',
-    600: '#b38200',
-    700: '#805d00',
-    800: '#4d3800',
-    900: '#1a1300',
+    50: '#FDF3EF',
+    100: '#F8DCCE',
+    200: '#F3C4AD',
+    300: '#EDAC8C',
+    400: '#E8946B',
+    500: '#D95A2B', // Terracotta orange accent
+    600: '#B04B26',
+    700: '#873A1D',
+    800: '#5E2814',
+    900: '#35170B',
   },
   neutrals: {
-    50: '#f2f2f2',
-    100: '#d9d9d9',
-    200: '#bfbfbf',
-    300: '#a6a6a6',
-    400: '#8c8c8c',
-    500: '#737373',
-    600: '#595959',
-    700: '#404040',
-    800: '#262626',
-    900: '#0d0d0d',
+    50: '#F2F4F6',
+    100: '#E5DCC7', // Warm beige
+    200: '#D9D9D9',
+    300: '#A0AEC0',
+    400: '#718096',
+    500: '#607D8B', // Slate grey
+    600: '#4A5568',
+    700: '#2D3748',
+    800: '#1D3557', // Navy blue
+    900: '#171923',
   },
-  // Added tertiary color for research and academic sections
-  tertiary: {
-    50: '#f0e6ff',
-    100: '#d1b3ff',
-    200: '#b380ff',
-    300: '#944dff',
-    400: '#751aff',
-    500: '#6000e6',
-    600: '#4c00b3',
-    700: '#380080',
-    800: '#24004d',
-    900: '#0c001a',
+  // Academic color for research and academic sections
+  academic: {
+    50: '#EBF4FF',
+    100: '#C3DAFE',
+    200: '#A3BFFA',
+    300: '#7F9CF5',
+    400: '#667EEA',
+    500: '#5A67D8', // Academic purple-blue
+    600: '#4C51BF',
+    700: '#434190',
+    800: '#3C366B',
+    900: '#1A1639',
   },
 };
 
-// Font configuration
+// Font configuration with Next.js font variables
 const fonts = {
-  heading: 'Poppins, sans-serif',
-  body: 'Roboto, system-ui, sans-serif',
-  mono: 'SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+  heading: 'var(--font-poppins), Poppins, sans-serif',
+  body: 'var(--font-inter), Inter, system-ui, sans-serif',
+  mono: 'var(--font-roboto), Roboto Mono, SFMono-Regular, Menlo, monospace',
 };
 
-// Enhanced styles
+// Enhanced styles with natural aesthetics
 const styles = {
   global: (props: any) => ({
     body: {
-      bg: props.colorMode === 'dark' ? 'gray.900' : 'white',
-      color: props.colorMode === 'dark' ? 'white' : 'gray.800',
+      bg: props.colorMode === 'dark' ? 'gray.900' : 'gray.50',
+      color: props.colorMode === 'dark' ? 'whiteAlpha.900' : 'gray.800',
+      transition: 'background-color 0.2s ease-in-out',
     },
-    // Add smooth scrolling
+    // Add smooth scrolling and improved typography
     html: {
       scrollBehavior: 'smooth',
+      fontSize: '16px',
+      lineHeight: 'tall',
+    },
+    // Add subtle texture to backgrounds on certain elements
+    '.texture-bg': {
+      position: 'relative',
+      _after: {
+        content: '""',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        opacity: 0.05,
+        backgroundImage: `url('/assets/images/texture.png')`,
+        pointerEvents: 'none',
+      },
     },
   }),
 };
@@ -111,10 +129,10 @@ const components = {
       },
       // Adding academic-styled variant
       academic: {
-        bg: 'tertiary.500',
+        bg: 'academic.500',
         color: 'white',
         _hover: {
-          bg: 'tertiary.600',
+          bg: 'academic.600',
           transform: 'translateY(-2px)',
           boxShadow: 'lg',
         },
@@ -184,8 +202,8 @@ const components = {
         color: 'brand.700',
       },
       research: {
-        bg: 'tertiary.100',
-        color: 'tertiary.700',
+        bg: 'academic.100',
+        color: 'academic.700',
       },
       project: {
         bg: 'accent.100',
