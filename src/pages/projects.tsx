@@ -2,6 +2,7 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import Layout from '../components/Layout';
 import GitHubRepo from '../components/GitHubRepo';
+import EnhancedProjectCard from '../components/projects/EnhancedProjectCard';
 import {
   Box,
   Container,
@@ -27,95 +28,96 @@ import { SiPython, SiJupyter, SiTensorflow } from 'react-icons/si';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 
-interface ProjectCardProps {
-  title: string;
-  description: string;
-  technologies: string[];
-  githubLink: string;
-  demoLink?: string;
-  image: string;
-  category: string;
-}
+// Use EnhancedProjectCard instead of this local component
+// interface ProjectCardProps {
+//   title: string;
+//   description: string;
+//   technologies: string[];
+//   githubLink: string;
+//   demoLink?: string;
+//   image: string;
+//   category: string;
+// }
 
-const ProjectCard = ({ title, description, technologies, githubLink, demoLink, image, category }: ProjectCardProps) => {
-  const cardBg = useColorModeValue('white', 'gray.800');
+// const ProjectCard = ({ title, description, technologies, githubLink, demoLink, image, category }: ProjectCardProps) => {
+//   const cardBg = useColorModeValue('white', 'gray.800');
 
-  return (
-    <Box
-      bg={cardBg}
-      borderRadius="lg"
-      boxShadow="md"
-      overflow="hidden"
-      transition="all 0.3s ease"
-      _hover={{ transform: 'translateY(-5px)', boxShadow: 'xl' }}
-    >
-      <Box height="200px" bg="gray.200" position="relative">
-        {/* Project image */}
-        <Box
-          backgroundImage={`url(${image})`}
-          backgroundSize="cover"
-          backgroundPosition="center"
-          position="absolute"
-          top="0"
-          left="0"
-          right="0"
-          bottom="0"
-        >
-          {/* Add a dark overlay for better text visibility if needed */}
-          <Box
-            position="absolute"
-            top="0"
-            left="0"
-            right="0"
-            bottom="0"
-            bg="rgba(0, 0, 0, 0.3)"
-            opacity={0}
-            transition="opacity 0.3s"
-            _groupHover={{ opacity: 1 }}
-          />
-        </Box>
-      </Box>
-      <Box p={6}>
-        <VStack align="flex-start" spacing={3}>
-          <HStack spacing={2} flexWrap="wrap">
-            {technologies.slice(0, 3).map((tech, index) => (
-              <Badge key={index} colorScheme="brand" mb={1}>
-                {tech}
-              </Badge>
-            ))}
-            {technologies.length > 3 && (
-              <Badge colorScheme="gray" mb={1}>+{technologies.length - 3}</Badge>
-            )}
-          </HStack>
+//   return (
+//     <Box
+//       bg={cardBg}
+//       borderRadius="lg"
+//       boxShadow="md"
+//       overflow="hidden"
+//       transition="all 0.3s ease"
+//       _hover={{ transform: 'translateY(-5px)', boxShadow: 'xl' }}
+//     >
+//       <Box height="200px" bg="gray.200" position="relative">
+//         {/* Project image */}
+//         <Box
+//           backgroundImage={`url(${image})`}
+//           backgroundSize="cover"
+//           backgroundPosition="center"
+//           position="absolute"
+//           top="0"
+//           left="0"
+//           right="0"
+//           bottom="0"
+//         >
+//           {/* Add a dark overlay for better text visibility if needed */}
+//           <Box
+//             position="absolute"
+//             top="0"
+//             left="0"
+//             right="0"
+//             bottom="0"
+//             bg="rgba(0, 0, 0, 0.3)"
+//             opacity={0}
+//             transition="opacity 0.3s"
+//             _groupHover={{ opacity: 1 }}
+//           />
+//         </Box>
+//       </Box>
+//       <Box p={6}>
+//         <VStack align="flex-start" spacing={3}>
+//           <HStack spacing={2} flexWrap="wrap">
+//             {technologies.slice(0, 3).map((tech, index) => (
+//               <Badge key={index} colorScheme="brand" mb={1}>
+//                 {tech}
+//               </Badge>
+//             ))}
+//             {technologies.length > 3 && (
+//               <Badge colorScheme="gray" mb={1}>+{technologies.length - 3}</Badge>
+//             )}
+//           </HStack>
 
-          <Heading as="h3" size="md">
-            {title}
-          </Heading>
+//           <Heading as="h3" size="md">
+//             {title}
+//           </Heading>
 
-          <Text noOfLines={3}>
-            {description}
-          </Text>
+//           <Text noOfLines={3}>
+//             {description}
+//           </Text>
 
-          <HStack spacing={4} mt={2}>
-            <ChakraLink href={githubLink} isExternal>
-              <Button leftIcon={<FaGithub />} size="sm" colorScheme="gray">
-                Code
-              </Button>
-            </ChakraLink>
+//           <HStack spacing={4} mt={2}>
+//             <ChakraLink href={githubLink} isExternal>
+//               <Button leftIcon={<FaGithub />} size="sm" colorScheme="gray">
+//                 Code
+//               </Button>
+//             </ChakraLink>
 
-            {demoLink && (
-              <ChakraLink href={demoLink} isExternal>
-                <Button leftIcon={<FaExternalLinkAlt />} size="sm" colorScheme="brand">
-                  Demo
-                </Button>
-              </ChakraLink>
-            )}
-          </HStack>
-        </VStack>
-      </Box>
-    </Box>
-  );
-};
+//             {demoLink && (
+//               <ChakraLink href={demoLink} isExternal>
+//                 <Button leftIcon={<FaExternalLinkAlt />} size="sm" colorScheme="brand">
+//                   Demo
+//                 </Button>
+//               </ChakraLink>
+//             )}
+//           </HStack>
+//         </VStack>
+//       </Box>
+//     </Box>
+//   );
+// };
 
 const ProjectsPage: NextPage = () => {
   const bgColor = useColorModeValue('gray.50', 'gray.900');
@@ -286,8 +288,9 @@ const ProjectsPage: NextPage = () => {
               <TabPanel px={0}>
                 <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8}>
                   {projects.map((project, index) => (
-                    <ProjectCard
+                    <EnhancedProjectCard
                       key={index}
+                      index={index}
                       title={project.title}
                       description={project.description}
                       technologies={project.technologies}
@@ -307,8 +310,9 @@ const ProjectsPage: NextPage = () => {
                     {projects
                       .filter((project) => project.category === category)
                       .map((project, projIndex) => (
-                        <ProjectCard
+                        <EnhancedProjectCard
                           key={projIndex}
+                          index={projIndex}
                           title={project.title}
                           description={project.description}
                           technologies={project.technologies}

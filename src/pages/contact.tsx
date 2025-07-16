@@ -1,296 +1,207 @@
-import { NextPage } from 'next';
-import Head from 'next/head';
-import Layout from '../components/Layout';
+import { NextPage } from "next";
+import Head from "next/head";
+import Layout from "../components/Layout";
 import {
   Box,
   Container,
   Heading,
   Text,
   SimpleGrid,
-  FormControl,
-  FormLabel,
-  Input,
-  Textarea,
   Button,
   VStack,
   HStack,
   Link as ChakraLink,
   Icon,
   useColorModeValue,
-  FormErrorMessage
-} from '@chakra-ui/react';
-import { useState } from 'react';
-import { FaEnvelope, FaGithub, FaLinkedin, FaTwitter, FaMapMarkerAlt } from 'react-icons/fa';
+  Card,
+  CardBody,
+  Flex,
+  Spacer,
+} from "@chakra-ui/react";
+import {
+  FaEnvelope,
+  FaGithub,
+  FaLinkedin,
+  FaTwitter,
+  FaMapMarkerAlt,
+  FaExternalLinkAlt,
+  FaResearchgate,
+  FaGoogle,
+} from "react-icons/fa";
+import { useLanguageContext } from '../contexts/LanguageContext';
+import SEO from "../components/seo/SEO";
 
 const ContactPage: NextPage = () => {
-  const bgColor = useColorModeValue('gray.50', 'gray.900');
-  const cardBg = useColorModeValue('white', 'gray.800');
-
-  // Form state
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [subject, setSubject] = useState('');
-  const [message, setMessage] = useState('');
-
-  // Form validation
-  const [errors, setErrors] = useState({
-    name: false,
-    email: false,
-    message: false
-  });
-
-  const validateForm = () => {
-    const newErrors = {
-      name: !name.trim(),
-      email: !email.trim() || !/^\S+@\S+\.\S+$/.test(email),
-      message: !message.trim()
-    };
-
-    setErrors(newErrors);
-    return !Object.values(newErrors).some(Boolean);
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (validateForm()) {
-      // Form is valid, would normally submit to backend
-      alert('Thanks for your message! This form is currently for demonstration purposes only.');
-
-      // Reset form
-      setName('');
-      setEmail('');
-      setSubject('');
-      setMessage('');
-    }
-  };
+  const bgColor = useColorModeValue("gray.50", "gray.900");
+  const cardBg = useColorModeValue("white", "gray.800");
+  const { t, isLoading } = useLanguageContext();
 
   return (
     <Layout>
-      <Head>
-        <title>Contact | Daniel Terra Gomes</title>
-        <meta name="description" content="Get in touch with Daniel Terra Gomes for research collaborations, speaking engagements, or other inquiries." />
-      </Head>
+      <SEO
+        title={!isLoading ? t('contact.title') : "Contact"}
+        description={!isLoading ? t('contact.intro') : "Get in touch with Daniel Terra Gomes for collaboration, questions, or project inquiries."}
+        keywords={["contact", "get in touch", "collaboration", "academic contact"]}
+      />
 
       {/* Hero Section */}
       <Box as="section" py={12} bg={bgColor} borderRadius="lg" mb={8}>
         <Container maxW="container.xl">
           <VStack spacing={4} align="center" textAlign="center">
             <Heading as="h1" size="2xl">
-              Get in Touch
+              {!isLoading ? t('contact.title') : "Get in Touch"}
             </Heading>
             <Text fontSize="xl" maxW="container.md">
-              I'm always open to discussing research opportunities, academic collaborations, or answering questions about my work.
-            </Text>
-            <Text fontSize="md" maxW="container.md" color="gray.500">
-              For professional inquiries, you can also reach me directly on <ChakraLink href="https://www.linkedin.com/in/arretdaniel" color="brand.500" isExternal>LinkedIn</ChakraLink>.
+              {!isLoading ? t('contact.intro') : "I'm always open to discussing research opportunities, academic collaborations, or answering questions about my work."}
             </Text>
           </VStack>
         </Container>
       </Box>
 
-      {/* Contact Form and Info */}
+      {/* Contact Options */}
       <Box as="section" mb={16}>
         <Container maxW="container.xl">
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
-            {/* Contact Form */}
-            <Box
-              bg={cardBg}
-              p={8}
-              borderRadius="lg"
-              boxShadow="md"
-            >
-              <VStack as="form" spacing={6} align="stretch" onSubmit={handleSubmit}>
-                <Heading as="h2" size="lg">
-                  Send a Message
-                </Heading>
-
-                <FormControl isRequired isInvalid={errors.name}>
-                  <FormLabel>Name</FormLabel>
-                  <Input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="Your name"
-                  />
-                  {errors.name && <FormErrorMessage>Name is required</FormErrorMessage>}
-                </FormControl>
-
-                <FormControl isRequired isInvalid={errors.email}>
-                  <FormLabel>Email</FormLabel>
-                  <Input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="your.email@example.com"
-                  />
-                  {errors.email && <FormErrorMessage>Valid email is required</FormErrorMessage>}
-                </FormControl>
-
-                <FormControl>
-                  <FormLabel>Subject</FormLabel>
-                  <Input
-                    type="text"
-                    value={subject}
-                    onChange={(e) => setSubject(e.target.value)}
-                    placeholder="What's this regarding?"
-                  />
-                </FormControl>
-
-                <FormControl isRequired isInvalid={errors.message}>
-                  <FormLabel>Message</FormLabel>
-                  <Textarea
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    placeholder="Your message here..."
-                    minH="150px"
-                  />
-                  {errors.message && <FormErrorMessage>Message is required</FormErrorMessage>}
-                </FormControl>
-
-                <Button
-                  type="submit"
-                  colorScheme="brand"
-                  size="lg"
-                  alignSelf="flex-start"
-                >
-                  Send Message
-                </Button>
-              </VStack>
-            </Box>
-
-            {/* Contact Information */}
-            <Box>
-              <VStack align="stretch" spacing={8}>
-                <Heading as="h2" size="lg">
-                  Contact Information
-                </Heading>
-
-                <VStack align="start" spacing={6}>
-                  <HStack spacing={4}>
-                    <Icon as={FaEnvelope} boxSize={6} color="brand.500" />
-                    <VStack align="start" spacing={0}>
-                      <Text fontWeight="bold">Email</Text>
-                      <ChakraLink href="mailto:danielterra244@gmail.com" color="brand.500">
-                        danielterra244@gmail.com
-                      </ChakraLink>
-                    </VStack>
-                  </HStack>
-
-                  <HStack spacing={4}>
-                    <Icon as={FaMapMarkerAlt} boxSize={6} color="brand.500" />
-                    <VStack align="start" spacing={0}>
-                      <Text fontWeight="bold">Location</Text>
-                      <Text>Macaé, Rio de Janeiro, Brazil</Text>
-                    </VStack>
-                  </HStack>
+          <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8}>
+            {/* LinkedIn */}
+            <Card bg={cardBg} boxShadow="md" height="100%">
+              <CardBody>
+                <VStack spacing={4} align="start">
+                  <Flex w="100%">
+                    <Icon as={FaLinkedin} boxSize={8} color="blue.500" />
+                    <Spacer />
+                    <Icon as={FaExternalLinkAlt} boxSize={4} color="gray.400" />
+                  </Flex>
+                  <Heading size="md">LinkedIn</Heading>
+                  <Text>Connect with me professionally and send direct messages on LinkedIn.</Text>
+                  <Spacer />
+                  <Button
+                    as={ChakraLink}
+                    href="https://www.linkedin.com/in/arretdaniel"
+                    isExternal
+                    colorScheme="blue"
+                    rightIcon={<FaExternalLinkAlt />}
+                    width="100%"
+                  >
+                    Connect on LinkedIn
+                  </Button>
                 </VStack>
+              </CardBody>
+            </Card>
 
-                <Box pt={8}>
-                  <Heading as="h3" size="md" mb={4}>
-                    Connect on Social Media
-                  </Heading>
+            {/* Email */}
+            <Card bg={cardBg} boxShadow="md" height="100%">
+              <CardBody>
+                <VStack spacing={4} align="start">
+                  <Flex w="100%">
+                    <Icon as={FaEnvelope} boxSize={8} color="red.500" />
+                    <Spacer />
+                    <Icon as={FaExternalLinkAlt} boxSize={4} color="gray.400" />
+                  </Flex>
+                  <Heading size="md">Email</Heading>
+                  <Text>Send me an email directly for academic or professional inquiries.</Text>
+                  <Text fontWeight="medium">danielterra244@gmail.com</Text>
+                  <Spacer />
+                  <Button
+                    as={ChakraLink}
+                    href="mailto:danielterra244@gmail.com"
+                    colorScheme="red"
+                    rightIcon={<FaEnvelope />}
+                    width="100%"
+                  >
+                    Send Email
+                  </Button>
+                </VStack>
+              </CardBody>
+            </Card>
 
-                  <VStack align="start" spacing={4}>
-                    <HStack spacing={4}>
-                      <Icon as={FaLinkedin} boxSize={6} color="blue.500" />
-                      <ChakraLink href="https://www.linkedin.com/in/arretdaniel" isExternal>
-                        linkedin.com/in/arretdaniel
-                      </ChakraLink>
-                    </HStack>
-
-                    <HStack spacing={4}>
-                      <Icon as={FaGithub} boxSize={6} color="gray.700" />
-                      <ChakraLink href="https://github.com/ARRETdaniel" isExternal>
-                        github.com/ARRETdaniel
-                      </ChakraLink>
-                    </HStack>
-
-                    <HStack spacing={4}>
-                      <Icon as={FaTwitter} boxSize={6} color="blue.400" />
-                      <ChakraLink href="https://twitter.com/arretdaniel" isExternal>
-                        twitter.com/arretdaniel
-                      </ChakraLink>
-                    </HStack>
-                  </VStack>
-                </Box>
-
-                <Box
-                  mt={8}
-                  p={6}
-                  bg={bgColor}
-                  borderRadius="md"
-                  boxShadow="inner"
-                >
-                  <VStack align="start" spacing={3}>
-                    <Heading as="h3" size="md">
-                      Academic Inquiries
-                    </Heading>
-                    <Text>
-                      For academic collaborations, research opportunities, or speaking engagements, please include details about your institution and the specific area of interest in your message.
-                    </Text>
-                  </VStack>
-                </Box>
-              </VStack>
-            </Box>
+            {/* GitHub */}
+            <Card bg={cardBg} boxShadow="md" height="100%">
+              <CardBody>
+                <VStack spacing={4} align="start">
+                  <Flex w="100%">
+                    <Icon as={FaGithub} boxSize={8} color="gray.700" />
+                    <Spacer />
+                    <Icon as={FaExternalLinkAlt} boxSize={4} color="gray.400" />
+                  </Flex>
+                  <Heading size="md">GitHub</Heading>
+                  <Text>Check out my code repositories and open source contributions.</Text>
+                  <Spacer />
+                  <Button
+                    as={ChakraLink}
+                    href="https://github.com/ARRETdaniel"
+                    isExternal
+                    colorScheme="gray"
+                    rightIcon={<FaExternalLinkAlt />}
+                    width="100%"
+                  >
+                    View GitHub Profile
+                  </Button>
+                </VStack>
+              </CardBody>
+            </Card>
           </SimpleGrid>
         </Container>
       </Box>
 
-      {/* FAQ Section */}
-      <Box as="section" py={12} bg={bgColor} borderRadius="lg">
+      {/* Additional Contact Info */}
+      <Box as="section" mb={16}>
         <Container maxW="container.xl">
-          <VStack spacing={8} align="stretch">
-            <Heading as="h2" size="xl" textAlign="center">
-              Frequently Asked Questions
+          <Box bg={cardBg} p={8} borderRadius="lg" boxShadow="md">
+            <Heading as="h2" size="lg" mb={6}>
+              Academic Profiles
             </Heading>
+            <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
+              <HStack spacing={4} align="start">
+                <Icon as={FaGoogle} boxSize={6} color="blue.500" />
+                <Box>
+                  <Text fontWeight="bold">Google Scholar</Text>
+                  <ChakraLink
+                    href="https://scholar.google.com/citations?user=yourprofileid"
+                    isExternal
+                    color="blue.500"
+                  >
+                    View Academic Publications
+                  </ChakraLink>
+                </Box>
+              </HStack>
 
-            <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8}>
-              <Box p={6} bg={cardBg} borderRadius="md" boxShadow="md">
-                <VStack align="start" spacing={3}>
-                  <Heading as="h3" size="md">
-                    Are you available for research collaborations?
-                  </Heading>
-                  <Text>
-                    Yes, I'm open to collaborations in autonomous vehicles, computer vision, and machine learning research. Please provide details about your project in your message.
-                  </Text>
-                </VStack>
-              </Box>
+              <HStack spacing={4} align="start">
+                <Icon as={FaResearchgate} boxSize={6} color="green.500" />
+                <Box>
+                  <Text fontWeight="bold">ResearchGate</Text>
+                  <ChakraLink
+                    href="https://www.researchgate.net/profile/Your_Profile"
+                    isExternal
+                    color="green.500"
+                  >
+                    Connect on ResearchGate
+                  </ChakraLink>
+                </Box>
+              </HStack>
 
-              <Box p={6} bg={cardBg} borderRadius="md" boxShadow="md">
-                <VStack align="start" spacing={3}>
-                  <Heading as="h3" size="md">
-                    Can I get access to your research code?
-                  </Heading>
-                  <Text>
-                    Most of my research code is available on my GitHub profile. For specific projects not publicly available, please contact me directly with your request.
-                  </Text>
-                </VStack>
-              </Box>
+              <HStack spacing={4} align="start">
+                <Icon as={FaMapMarkerAlt} boxSize={6} color="red.500" />
+                <Box>
+                  <Text fontWeight="bold">Location</Text>
+                  <Text>Macaé, Rio de Janeiro, Brazil</Text>
+                </Box>
+              </HStack>
 
-              <Box p={6} bg={cardBg} borderRadius="md" boxShadow="md">
-                <VStack align="start" spacing={3}>
-                  <Heading as="h3" size="md">
-                    How quickly do you respond to messages?
-                  </Heading>
-                  <Text>
-                    I typically respond within 2-3 business days. For urgent matters, please mention the time sensitivity in your subject line.
-                  </Text>
-                </VStack>
-              </Box>
-
-              <Box p={6} bg={cardBg} borderRadius="md" boxShadow="md">
-                <VStack align="start" spacing={3}>
-                  <Heading as="h3" size="md">
-                    Are you available for speaking engagements?
-                  </Heading>
-                  <Text>
-                    Yes, I'm available for presentations on autonomous vehicles, computer vision, and data science topics. Please include event details and dates in your inquiry.
-                  </Text>
-                </VStack>
-              </Box>
+              <HStack spacing={4} align="start">
+                <Icon as={FaTwitter} boxSize={6} color="twitter.500" />
+                <Box>
+                  <Text fontWeight="bold">Twitter</Text>
+                  <ChakraLink
+                    href="https://twitter.com/arretdaniel"
+                    isExternal
+                    color="twitter.500"
+                  >
+                    @arretdaniel
+                  </ChakraLink>
+                </Box>
+              </HStack>
             </SimpleGrid>
-          </VStack>
+          </Box>
         </Container>
       </Box>
     </Layout>

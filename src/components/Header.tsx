@@ -21,8 +21,9 @@ import {
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useTranslation } from 'next-i18next';
+import { useLanguageContext } from '../contexts/LanguageContext';
 import { useRouter } from 'next/router';
+import NoSSR from './NoSSR';
 import LanguageSwitcher from './LanguageSwitcher';
 
 // Navigation links data with translation keys
@@ -40,7 +41,7 @@ const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
   const [scrolled, setScrolled] = useState(false);
-  const { t } = useTranslation('common');
+  const { t, isLoading } = useLanguageContext();
   const router = useRouter();
 
   // Change header background on scroll with useEffect
@@ -152,7 +153,7 @@ const Header = () => {
                       transform: 'translateY(-2px)',
                     }}
                   >
-                    {t(link.name)}
+                    {!isLoading ? t(link.name) : link.name.replace('nav.', '')}
                   </Button>
                 );
               })}
@@ -160,7 +161,9 @@ const Header = () => {
           </HStack>
 
           <Flex alignItems={'center'} gap={2}>
-            <LanguageSwitcher />
+            <NoSSR fallback={<Button size="sm" variant="ghost">Lang</Button>}>
+              <LanguageSwitcher />
+            </NoSSR>
 
             <Button
               onClick={toggleColorMode}
@@ -219,7 +222,7 @@ const Header = () => {
                       color: activeColor,
                     }}
                   >
-                    {t(link.name)}
+                    {!isLoading ? t(link.name) : link.name.replace('nav.', '')}
                   </Button>
                 );
               })}
@@ -241,7 +244,9 @@ const Header = () => {
                 </Flex>
                 <Box mt={4}>
                   <Text fontSize="sm" mb={2}>{t('language')}</Text>
-                  <LanguageSwitcher fullWidth />
+                  <NoSSR fallback={<Button size="sm" variant="ghost" width="full">Lang</Button>}>
+                    <LanguageSwitcher fullWidth />
+                  </NoSSR>
                 </Box>
               </Box>
             </VStack>

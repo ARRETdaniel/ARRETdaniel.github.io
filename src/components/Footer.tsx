@@ -19,12 +19,12 @@ import {
 } from '@chakra-ui/react';
 import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope, FaResearchgate, FaGoogle } from 'react-icons/fa';
 import Link from 'next/link';
-import { useTranslation } from 'next-i18next';
+import { useLanguageContext } from '../contexts/LanguageContext';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const { colorMode } = useColorMode();
-  const { t } = useTranslation('common');
+  const { t, isLoading } = useLanguageContext();
 
   const textColor = useColorModeValue('gray.600', 'gray.400');
   const bgColor = useColorModeValue('gray.50', 'gray.900');
@@ -49,7 +49,7 @@ const Footer = () => {
               Daniel Terra Gomes
             </Heading>
             <Text fontSize="sm" mb={4}>
-              {t('footer.tagline', 'Computer Scientist specializing in autonomous vehicles, AI, and cybersecurity research.')}
+              {t('footer.tagline')}
             </Text>
             <HStack spacing={4} mt={4}>
               <ChakraLink
@@ -107,19 +107,19 @@ const Footer = () => {
             </Heading>
             <VStack align="flex-start" spacing={2}>
               <ChakraLink as={Link} href="/">
-                {t('nav.home')}
+                {!isLoading ? t('nav.home') : 'Home'}
               </ChakraLink>
               <ChakraLink as={Link} href="/about">
-                {t('nav.about')}
+                {!isLoading ? t('nav.about') : 'About'}
               </ChakraLink>
               <ChakraLink as={Link} href="/research">
-                {t('nav.research')}
+                {!isLoading ? t('nav.research') : 'Research'}
               </ChakraLink>
               <ChakraLink as={Link} href="/projects">
-                {t('nav.projects')}
+                {!isLoading ? t('nav.projects') : 'Projects'}
               </ChakraLink>
               <ChakraLink as={Link} href="/publications">
-                {t('nav.publications')}
+                {!isLoading ? t('nav.publications') : 'Publications'}
               </ChakraLink>
             </VStack>
           </Box>
@@ -127,41 +127,38 @@ const Footer = () => {
           {/* Column 3 - Research Areas */}
           <Box>
             <Heading as="h3" size="md" mb={4} color={headingColor}>
-              {t('footer.researchAreas')}
+              {!isLoading ? t('footer.researchAreas') : 'Research Areas'}
             </Heading>
             <VStack align="flex-start" spacing={2}>
-              <ChakraLink href="#">{t('footer.autonomousVehicles')}</ChakraLink>
-              <ChakraLink href="#">{t('footer.artificialIntelligence')}</ChakraLink>
-              <ChakraLink href="#">{t('footer.cyberSecurity')}</ChakraLink>
-              <ChakraLink href="#">{t('footer.machineLearning')}</ChakraLink>
-              <ChakraLink href="#">{t('footer.computerVision')}</ChakraLink>
+              <ChakraLink href="#">{!isLoading ? t('footer.autonomousVehicles') : 'Autonomous Vehicles'}</ChakraLink>
+              <ChakraLink href="#">{!isLoading ? t('footer.artificialIntelligence') : 'Artificial Intelligence'}</ChakraLink>
+              <ChakraLink href="#">{!isLoading ? t('footer.cyberSecurity') : 'Cyber Security'}</ChakraLink>
+              <ChakraLink href="#">{!isLoading ? t('footer.machineLearning') : 'Machine Learning'}</ChakraLink>
+              <ChakraLink href="#">{!isLoading ? t('footer.computerVision') : 'Computer Vision'}</ChakraLink>
             </VStack>
           </Box>
 
           {/* Column 4 - Contact */}
           <Box>
             <Heading as="h3" size="md" mb={4} color={headingColor}>
-              {t('footer.contactMe')}
+              {!isLoading ? t('footer.contactMe') : "Contact Me"}
             </Heading>
             <VStack align="flex-start" spacing={3}>
               <Text fontSize="sm">
                 <Icon as={FaEnvelope} mr={2} />
-                daniel.terra.gomes@gmail.com
+                danielterra244@gmail.com
               </Text>
-              <FormControl>
-                <Input
-                  placeholder={t('footer.emailPlaceholder')}
-                  mb={2}
-                  bg={colorMode === 'light' ? 'white' : 'gray.700'}
-                  borderColor={borderColor}
-                />
-                <Button
-                  colorScheme="brand"
-                  width="full"
-                >
-                  {t('footer.subscribe')}
-                </Button>
-              </FormControl>
+              <Button
+                as={ChakraLink}
+                href="https://www.linkedin.com/in/arretdaniel"
+                isExternal
+                leftIcon={<FaLinkedin />}
+                colorScheme="brand"
+                size="sm"
+                mt={2}
+              >
+                {!isLoading ? t('footer.connectLinkedIn') : "Connect on LinkedIn"}
+              </Button>
             </VStack>
           </Box>
         </SimpleGrid>

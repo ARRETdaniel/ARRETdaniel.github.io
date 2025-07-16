@@ -5,12 +5,10 @@ import { FaCode, FaCar, FaDatabase } from 'react-icons/fa';
 import Layout from '../components/Layout';
 import Link from 'next/link';
 import Image from 'next/image';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useTranslation } from 'next-i18next';
-import { GetStaticProps } from 'next';
+import { useLanguageContext } from '../contexts/LanguageContext';
 
 const Home: NextPage = () => {
-  const { t } = useTranslation('common');
+  const { t } = useLanguageContext();
 
   return (
     <Layout>
@@ -577,14 +575,6 @@ const Home: NextPage = () => {
       </Box>
     </Layout>
   );
-};
-
-export const getStaticProps = async ({ locale = 'en' }: { locale?: string }) => {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ['common'])),
-    },
-  };
 };
 
 export default Home;
