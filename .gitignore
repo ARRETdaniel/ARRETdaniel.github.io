@@ -1,1 +1,5 @@
 *.pdf
+TCC_versao-final
+*.tex
+node_modules
+.next

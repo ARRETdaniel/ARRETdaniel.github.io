@@ -1,0 +1,52 @@
+{
+  "nav": {
+    "home": "Início",
+    "about": "Sobre",
+    "research": "Pesquisa",
+    "projects": "Projetos",
+    "portfolio": "Portfólio",
+    "contact": "Contato",
+    "publications": "Publicações"
+  },
+  "home": {
+    "title": "Daniel Terra Gomes",
+    "subtitle": "Engenheiro de Software & Pesquisador",
+    "intro": "Focado em pesquisa de veículos autônomos e desenvolvimento de software",
+    "cta": "Ver meu trabalho"
+  },
+  "about": {
+    "title": "Sobre Mim",
+    "bio": "Sou um engenheiro de software e pesquisador com foco em veículos autônomos e sistemas inteligentes."
+  },
+  "research": {
+    "title": "Pesquisa",
+    "intro": "Minha pesquisa se concentra em veículos autônomos e tecnologias relacionadas."
+  },
+  "projects": {
+    "title": "Projetos",
+    "intro": "Aqui estão alguns dos projetos em que trabalhei."
+  },
+  "portfolio": {
+    "title": "Portfólio",
+    "intro": "Uma seleção dos meus projetos de desenvolvimento web e engenharia de software."
+  },
+  "contact": {
+    "title": "Contato",
+    "intro": "Sinta-se à vontade para entrar em contato se tiver alguma pergunta ou quiser colaborar.",
+    "name": "Nome",
+    "email": "Email",
+    "message": "Mensagem",
+    "submit": "Enviar Mensagem"
+  },
+  "publications": {
+    "title": "Publicações",
+    "intro": "Minhas publicações de pesquisa são focadas em veículos autônomos, visão computacional e aplicações de aprendizado de máquina.",
+    "abstract": "Resumo",
+    "keywords": "Palavras-chave",
+    "viewPdf": "PDF",
+    "viewDoi": "DOI"
+  },
+  "footer": {
+    "copyright": "© 2023 Daniel Terra Gomes. Todos os direitos reservados."
+  }
+}
