@@ -38,6 +38,19 @@ const colors = {
     800: '#262626',
     900: '#0d0d0d',
   },
+  // Added tertiary color for research and academic sections
+  tertiary: {
+    50: '#f0e6ff',
+    100: '#d1b3ff',
+    200: '#b380ff',
+    300: '#944dff',
+    400: '#751aff',
+    500: '#6000e6',
+    600: '#4c00b3',
+    700: '#380080',
+    800: '#24004d',
+    900: '#0c001a',
+  },
 };
 
 // Font configuration
@@ -45,6 +58,20 @@ const fonts = {
   heading: 'Poppins, sans-serif',
   body: 'Roboto, system-ui, sans-serif',
   mono: 'SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+};
+
+// Enhanced styles
+const styles = {
+  global: (props: any) => ({
+    body: {
+      bg: props.colorMode === 'dark' ? 'gray.900' : 'white',
+      color: props.colorMode === 'dark' ? 'white' : 'gray.800',
+    },
+    // Add smooth scrolling
+    html: {
+      scrollBehavior: 'smooth',
+    },
+  }),
 };
 
 // Component style overrides
@@ -60,6 +87,8 @@ const components = {
         color: 'white',
         _hover: {
           bg: 'brand.600',
+          transform: 'translateY(-2px)',
+          boxShadow: 'lg',
         },
         _active: {
           bg: 'brand.700',
@@ -70,12 +99,24 @@ const components = {
         color: 'brand.500',
         _hover: {
           bg: 'brand.50',
+          transform: 'translateY(-2px)',
+          boxShadow: 'md',
         },
       },
       ghost: {
         color: 'brand.500',
         _hover: {
           bg: 'brand.50',
+        },
+      },
+      // Adding academic-styled variant
+      academic: {
+        bg: 'tertiary.500',
+        color: 'white',
+        _hover: {
+          bg: 'tertiary.600',
+          transform: 'translateY(-2px)',
+          boxShadow: 'lg',
         },
       },
     },
@@ -86,6 +127,10 @@ const components = {
         borderRadius: 'lg',
         overflow: 'hidden',
         transition: 'all 0.3s ease',
+        _hover: {
+          transform: 'translateY(-5px)',
+          boxShadow: 'xl',
+        },
       },
     },
   },
@@ -95,6 +140,56 @@ const components = {
       _hover: {
         textDecoration: 'none',
         color: 'brand.600',
+      },
+    },
+  },
+  // Enhanced heading styles
+  Heading: {
+    baseStyle: {
+      fontWeight: '600',
+      lineHeight: '1.2',
+    },
+    variants: {
+      pageTitle: {
+        fontSize: ['2xl', '3xl', '4xl'],
+        mb: 6,
+        position: 'relative',
+        _after: {
+          content: '""',
+          display: 'block',
+          width: '80px',
+          height: '4px',
+          background: 'brand.500',
+          marginTop: '16px',
+        },
+      },
+      sectionTitle: {
+        fontSize: ['xl', '2xl', '3xl'],
+        mb: 4,
+        color: 'brand.600',
+      },
+    },
+  },
+  // Badge enhancements
+  Badge: {
+    baseStyle: {
+      px: 2,
+      py: 1,
+      borderRadius: 'md',
+      fontWeight: 'medium',
+    },
+    variants: {
+      skill: {
+        bg: 'brand.100',
+        color: 'brand.700',
+      },
+      research: {
+        bg: 'tertiary.100',
+        color: 'tertiary.700',
+      },
+      project: {
+        bg: 'accent.100',
+        color: 'accent.700',
       },
     },
   },
@@ -112,14 +207,7 @@ const theme = extendTheme({
   fonts,
   components,
   config,
-  styles: {
-    global: (props: any) => ({
-      body: {
-        bg: props.colorMode === 'dark' ? 'gray.900' : 'gray.50',
-        color: props.colorMode === 'dark' ? 'white' : 'gray.800',
-      },
-    }),
-  },
+  styles,
 });
 
 export default theme;

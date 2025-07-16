@@ -1,38 +1,188 @@
-import { Box, Container, Stack, Text, Link as ChakraLink, useColorModeValue, Icon, Flex } from '@chakra-ui/react';
-import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import {
+  Box,
+  Container,
+  Stack,
+  SimpleGrid,
+  Text,
+  Link as ChakraLink,
+  useColorModeValue,
+  Icon,
+  Flex,
+  Heading,
+  Button,
+  Input,
+  FormControl,
+  VStack,
+  HStack,
+  Divider,
+  useColorMode
+} from '@chakra-ui/react';
+import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope, FaResearchgate, FaGoogle } from 'react-icons/fa';
+import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { colorMode } = useColorMode();
+  const { t } = useTranslation('common');
+
+  const textColor = useColorModeValue('gray.600', 'gray.400');
+  const bgColor = useColorModeValue('gray.50', 'gray.900');
+  const borderColor = useColorModeValue('gray.200', 'gray.700');
+  const headingColor = useColorModeValue('brand.700', 'brand.300');
+  const iconHoverColor = useColorModeValue('brand.500', 'brand.300');
 
   return (
     <Box
       as="footer"
-      bg={useColorModeValue('gray.50', 'gray.900')}
-      color={useColorModeValue('gray.700', 'gray.200')}
+      bg={bgColor}
+      color={textColor}
       mt="auto"
-      py={6}
+      borderTop="1px solid"
+      borderColor={borderColor}
     >
-      <Container maxW="container.xl">
-        <Stack
-          direction={{ base: 'column', md: 'row' }}
-          spacing={4}
-          justify={{ base: 'center', md: 'space-between' }}
-          align={{ base: 'center', md: 'center' }}
-        >
-          <Text>© {currentYear} Daniel Terra Gomes. All rights reserved.</Text>
+      <Container maxW="container.xl" pt={12} pb={8}>
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={8} mb={10}>
+          {/* Column 1 - About */}
+          <Box>
+            <Heading as="h3" size="md" mb={4} color={headingColor}>
+              Daniel Terra Gomes
+            </Heading>
+            <Text fontSize="sm" mb={4}>
+              {t('footer.tagline', 'Computer Scientist specializing in autonomous vehicles, AI, and cybersecurity research.')}
+            </Text>
+            <HStack spacing={4} mt={4}>
+              <ChakraLink
+                href="https://github.com/ARRETdaniel"
+                isExternal
+                aria-label="GitHub"
+                _hover={{ color: iconHoverColor }}
+                transition="color 0.3s ease"
+              >
+                <Icon as={FaGithub} boxSize={5} />
+              </ChakraLink>
+              <ChakraLink
+                href="https://www.linkedin.com/in/arretdaniel"
+                isExternal
+                aria-label="LinkedIn"
+                _hover={{ color: iconHoverColor }}
+                transition="color 0.3s ease"
+              >
+                <Icon as={FaLinkedin} boxSize={5} />
+              </ChakraLink>
+              <ChakraLink
+                href="https://twitter.com/arretdaniel"
+                isExternal
+                aria-label="Twitter"
+                _hover={{ color: iconHoverColor }}
+                transition="color 0.3s ease"
+              >
+                <Icon as={FaTwitter} boxSize={5} />
+              </ChakraLink>
+              <ChakraLink
+                href="https://scholar.google.com/citations?user=yourprofileid"
+                isExternal
+                aria-label="Google Scholar"
+                _hover={{ color: iconHoverColor }}
+                transition="color 0.3s ease"
+              >
+                <Icon as={FaGoogle} boxSize={5} />
+              </ChakraLink>
+              <ChakraLink
+                href="https://www.researchgate.net/profile/Your_Profile"
+                isExternal
+                aria-label="ResearchGate"
+                _hover={{ color: iconHoverColor }}
+                transition="color 0.3s ease"
+              >
+                <Icon as={FaResearchgate} boxSize={5} />
+              </ChakraLink>
+            </HStack>
+          </Box>
 
-          <Flex gap={4}>
-            <ChakraLink href="https://github.com/ARRETdaniel" isExternal>
-              <Icon as={FaGithub} boxSize={5} />
-            </ChakraLink>
-            <ChakraLink href="https://www.linkedin.com/in/arretdaniel" isExternal>
-              <Icon as={FaLinkedin} boxSize={5} />
-            </ChakraLink>
-            <ChakraLink href="https://twitter.com/arretdaniel" isExternal>
-              <Icon as={FaTwitter} boxSize={5} />
-            </ChakraLink>
-          </Flex>
-        </Stack>
+          {/* Column 2 - Quick Links */}
+          <Box>
+            <Heading as="h3" size="md" mb={4} color={headingColor}>
+              {t('footer.quickLinks')}
+            </Heading>
+            <VStack align="flex-start" spacing={2}>
+              <ChakraLink as={Link} href="/">
+                {t('nav.home')}
+              </ChakraLink>
+              <ChakraLink as={Link} href="/about">
+                {t('nav.about')}
+              </ChakraLink>
+              <ChakraLink as={Link} href="/research">
+                {t('nav.research')}
+              </ChakraLink>
+              <ChakraLink as={Link} href="/projects">
+                {t('nav.projects')}
+              </ChakraLink>
+              <ChakraLink as={Link} href="/publications">
+                {t('nav.publications')}
+              </ChakraLink>
+            </VStack>
+          </Box>
+
+          {/* Column 3 - Research Areas */}
+          <Box>
+            <Heading as="h3" size="md" mb={4} color={headingColor}>
+              {t('footer.researchAreas')}
+            </Heading>
+            <VStack align="flex-start" spacing={2}>
+              <ChakraLink href="#">{t('footer.autonomousVehicles')}</ChakraLink>
+              <ChakraLink href="#">{t('footer.artificialIntelligence')}</ChakraLink>
+              <ChakraLink href="#">{t('footer.cyberSecurity')}</ChakraLink>
+              <ChakraLink href="#">{t('footer.machineLearning')}</ChakraLink>
+              <ChakraLink href="#">{t('footer.computerVision')}</ChakraLink>
+            </VStack>
+          </Box>
+
+          {/* Column 4 - Contact */}
+          <Box>
+            <Heading as="h3" size="md" mb={4} color={headingColor}>
+              {t('footer.contactMe')}
+            </Heading>
+            <VStack align="flex-start" spacing={3}>
+              <Text fontSize="sm">
+                <Icon as={FaEnvelope} mr={2} />
+                daniel.terra.gomes@gmail.com
+              </Text>
+              <FormControl>
+                <Input
+                  placeholder={t('footer.emailPlaceholder')}
+                  mb={2}
+                  bg={colorMode === 'light' ? 'white' : 'gray.700'}
+                  borderColor={borderColor}
+                />
+                <Button
+                  colorScheme="brand"
+                  width="full"
+                >
+                  {t('footer.subscribe')}
+                </Button>
+              </FormControl>
+            </VStack>
+          </Box>
+        </SimpleGrid>
+
+        <Divider borderColor={borderColor} my={6} />
+
+        <Flex
+          direction={{ base: 'column', md: 'row' }}
+          justify="space-between"
+          align={{ base: 'center', md: 'center' }}
+          gap={4}
+        >
+          <Text fontSize="sm">
+            © {currentYear} Daniel Terra Gomes. {t('footer.allRightsReserved')}
+          </Text>
+          <HStack spacing={4} fontSize="sm">
+            <ChakraLink as={Link} href="/privacy">{t('footer.privacy')}</ChakraLink>
+            <ChakraLink as={Link} href="/terms">{t('footer.terms')}</ChakraLink>
+            <ChakraLink as={Link} href="/cookies">{t('footer.cookies')}</ChakraLink>
+          </HStack>
+        </Flex>
       </Container>
     </Box>
   );

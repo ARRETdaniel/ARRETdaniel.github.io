@@ -1,15 +1,15 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
 import Layout from '../../components/Layout';
-import { 
-  Box, 
-  Container, 
-  Heading, 
-  Text, 
-  VStack, 
-  Flex, 
-  Icon, 
-  SimpleGrid, 
+import {
+  Box,
+  Container,
+  Heading,
+  Text,
+  VStack,
+  Flex,
+  Icon,
+  SimpleGrid,
   Accordion,
   AccordionItem,
   AccordionButton,
@@ -28,14 +28,14 @@ import { SiTensorflow, SiPytorch, SiOpenai } from 'react-icons/si';
 const ResearchPage: NextPage = () => {
   const bgColor = useColorModeValue('gray.50', 'gray.900');
   const cardBg = useColorModeValue('white', 'gray.800');
-  
+
   return (
     <Layout>
       <Head>
         <title>Autonomous Vehicles Research | Daniel Terra Gomes</title>
-        <meta 
-          name="description" 
-          content="Explore Daniel Terra Gomes' research on autonomous vehicles, computer vision, and machine learning for self-driving technologies." 
+        <meta
+          name="description"
+          content="Explore Daniel Terra Gomes' research on autonomous vehicles, computer vision, and machine learning for self-driving technologies."
         />
       </Head>
 
@@ -43,9 +43,9 @@ const ResearchPage: NextPage = () => {
       <Box as="section" py={12} bg={bgColor} borderRadius="lg" mb={8}>
         <Container maxW="container.xl">
           <VStack spacing={6} align="stretch">
-            <Heading 
-              as="h1" 
-              size="2xl" 
+            <Heading
+              as="h1"
+              size="2xl"
               textAlign="center"
               bgGradient="linear(to-r, brand.600, blue.500)"
               bgClip="text"
@@ -53,8 +53,12 @@ const ResearchPage: NextPage = () => {
               Autonomous Vehicles Research
             </Heading>
             <Text fontSize="xl" textAlign="center" maxW="container.md" mx="auto">
-              Exploring the intersection of computer vision, control systems, and machine learning 
+              Exploring the intersection of computer vision, control systems, and machine learning
               to enable safer and more efficient autonomous driving technologies.
+            </Text>
+            <Text textAlign="center" maxW="container.md" mx="auto" mt={2}>
+              As an undergraduate researcher at CNPq-UENF from 2022 to 2025, I focused on understanding the key technologies
+              and components necessary for the successful application of autonomous vehicles in society.
             </Text>
           </VStack>
         </Container>
@@ -70,28 +74,28 @@ const ResearchPage: NextPage = () => {
               </Heading>
               <VStack align="start" spacing={4}>
                 <Text>
-                  My research focuses on the development and validation of autonomous vehicle systems, 
+                  My research focuses on the development and validation of autonomous vehicle systems,
                   with particular emphasis on real-time object detection, control algorithms, and driver assistance systems.
                 </Text>
                 <Text>
-                  I specialize in implementing and evaluating control algorithms like PID and Pure Pursuit 
-                  in the CARLA Simulator, as well as integrating computer vision models such as YOLO for real-time 
+                  I specialize in implementing and evaluating control algorithms like PID and Pure Pursuit
+                  in the CARLA Simulator, as well as integrating computer vision models such as YOLO for real-time
                   object detection to improve driver assistance capabilities.
                 </Text>
                 <Text>
-                  The goal of my work is to bridge the gap between theoretical autonomous driving concepts and 
+                  The goal of my work is to bridge the gap between theoretical autonomous driving concepts and
                   practical implementations that can enhance road safety and transportation efficiency.
                 </Text>
               </VStack>
             </Box>
             <Flex justifyContent="center" alignItems="center">
-              <Box 
-                width="100%" 
-                height="300px" 
-                bg="gray.200" 
-                borderRadius="md" 
-                display="flex" 
-                alignItems="center" 
+              <Box
+                width="100%"
+                height="300px"
+                bg="gray.200"
+                borderRadius="md"
+                display="flex"
+                alignItems="center"
                 justifyContent="center"
               >
                 {/* Placeholder for research image/diagram */}
@@ -109,14 +113,14 @@ const ResearchPage: NextPage = () => {
             <Heading as="h2" size="xl" textAlign="center">
               Key Research Areas
             </Heading>
-            
+
             <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8}>
               {/* Area 1 */}
-              <VStack 
-                bg={cardBg} 
-                p={6} 
-                borderRadius="lg" 
-                boxShadow="md" 
+              <VStack
+                bg={cardBg}
+                p={6}
+                borderRadius="lg"
+                boxShadow="md"
                 spacing={4}
                 align="flex-start"
                 height="100%"
@@ -140,13 +144,13 @@ const ResearchPage: NextPage = () => {
                   trajectory optimization, and vehicle dynamics.
                 </Text>
               </VStack>
-              
+
               {/* Area 2 */}
-              <VStack 
-                bg={cardBg} 
-                p={6} 
-                borderRadius="lg" 
-                boxShadow="md" 
+              <VStack
+                bg={cardBg}
+                p={6}
+                borderRadius="lg"
+                boxShadow="md"
                 spacing={4}
                 align="flex-start"
                 height="100%"
@@ -170,13 +174,13 @@ const ResearchPage: NextPage = () => {
                   dynamic driving scenarios.
                 </Text>
               </VStack>
-              
+
               {/* Area 3 */}
-              <VStack 
-                bg={cardBg} 
-                p={6} 
-                borderRadius="lg" 
-                boxShadow="md" 
+              <VStack
+                bg={cardBg}
+                p={6}
+                borderRadius="lg"
+                boxShadow="md"
                 spacing={4}
                 align="flex-start"
                 height="100%"
@@ -212,11 +216,11 @@ const ResearchPage: NextPage = () => {
             <Heading as="h2" size="xl" textAlign="center" mb={4}>
               Featured Research Project
             </Heading>
-            
-            <Box 
-              bg={cardBg} 
-              p={8} 
-              borderRadius="xl" 
+
+            <Box
+              bg={cardBg}
+              p={8}
+              borderRadius="xl"
               boxShadow="lg"
             >
               <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8}>
@@ -230,9 +234,9 @@ const ResearchPage: NextPage = () => {
                     <Badge colorScheme="purple">Computer Vision</Badge>
                   </HStack>
                   <Text>
-                    This research focuses on developing and validating a driver assistance system 
-                    based on YOLO object detection, implemented and tested in the CARLA simulator. 
-                    The system provides real-time feedback to drivers by detecting and classifying 
+                    This research focuses on developing and validating a driver assistance system
+                    based on YOLO object detection, implemented and tested in the CARLA simulator.
+                    The system provides real-time feedback to drivers by detecting and classifying
                     objects in the driving environment.
                   </Text>
                   <Text>
@@ -250,13 +254,13 @@ const ResearchPage: NextPage = () => {
                   </Button>
                 </VStack>
                 <Flex justifyContent="center" alignItems="center">
-                  <Box 
-                    width="100%" 
-                    height="300px" 
-                    bg="gray.200" 
-                    borderRadius="md" 
-                    display="flex" 
-                    alignItems="center" 
+                  <Box
+                    width="100%"
+                    height="300px"
+                    bg="gray.200"
+                    borderRadius="md"
+                    display="flex"
+                    alignItems="center"
                     justifyContent="center"
                   >
                     {/* Placeholder for project image */}
@@ -276,7 +280,7 @@ const ResearchPage: NextPage = () => {
             <Heading as="h2" size="xl" textAlign="center">
               Publications & Presentations
             </Heading>
-            
+
             <Accordion allowToggle>
               <AccordionItem>
                 <h3>
@@ -340,7 +344,7 @@ const ResearchPage: NextPage = () => {
                   </VStack>
                 </AccordionPanel>
               </AccordionItem>
-              
+
               <AccordionItem>
                 <h3>
                   <AccordionButton py={4}>
@@ -356,10 +360,10 @@ const ResearchPage: NextPage = () => {
                     <Text><strong>Type:</strong> Bachelor's Thesis</Text>
                     <Text><strong>Abstract:</strong> This thesis presents the development and validation of a driver assistance system that utilizes YOLO object detection algorithms to enhance vehicle safety through real-time perception of the driving environment. The system was implemented and thoroughly tested in the CARLA simulator to evaluate its performance under various driving conditions.</Text>
                     <HStack spacing={4}>
-                      <Button size="sm" colorScheme="brand">
+                      <Button as="a" href="/TCC.pdf" target="_blank" size="sm" colorScheme="brand">
                         Read Full Thesis
                       </Button>
-                      <Button size="sm" colorScheme="brand" variant="outline">
+                      <Button as="a" href="https://github.com/ARRETdaniel/22-2_AI" target="_blank" size="sm" colorScheme="brand" variant="outline">
                         View Code Repository
                       </Button>
                     </HStack>
@@ -378,7 +382,7 @@ const ResearchPage: NextPage = () => {
             <Heading as="h2" size="xl" textAlign="center">
               Research Tools & Technologies
             </Heading>
-            
+
             <SimpleGrid columns={{ base: 2, md: 4 }} spacing={8}>
               <VStack>
                 <Flex
@@ -394,7 +398,7 @@ const ResearchPage: NextPage = () => {
                 </Flex>
                 <Text fontWeight="medium" textAlign="center">CARLA Simulator</Text>
               </VStack>
-              
+
               <VStack>
                 <Flex
                   w={16}
@@ -409,7 +413,7 @@ const ResearchPage: NextPage = () => {
                 </Flex>
                 <Text fontWeight="medium" textAlign="center">YOLO Object Detection</Text>
               </VStack>
-              
+
               <VStack>
                 <Flex
                   w={16}
@@ -424,7 +428,7 @@ const ResearchPage: NextPage = () => {
                 </Flex>
                 <Text fontWeight="medium" textAlign="center">PyTorch</Text>
               </VStack>
-              
+
               <VStack>
                 <Flex
                   w={16}
@@ -455,10 +459,10 @@ const ResearchPage: NextPage = () => {
               I'm always open to research collaborations, academic discussions, or industry partnerships
               in the fields of autonomous vehicles, computer vision, and machine learning.
             </Text>
-            <Button 
-              as={ChakraLink} 
-              href="/contact" 
-              size="lg" 
+            <Button
+              as={ChakraLink}
+              href="/contact"
+              size="lg"
               colorScheme="brand"
               _hover={{
                 transform: 'translateY(-2px)',

@@ -2,7 +2,11 @@ import { useRouter } from 'next/router';
 import { Button, Menu, MenuButton, MenuList, MenuItem, HStack } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 
-const LanguageSwitcher = () => {
+interface LanguageSwitcherProps {
+  fullWidth?: boolean;
+}
+
+const LanguageSwitcher = ({ fullWidth = false }: LanguageSwitcherProps) => {
   const router = useRouter();
   const { pathname, asPath, query, locale } = router;
 
@@ -12,7 +16,16 @@ const LanguageSwitcher = () => {
 
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<ChevronDownIcon />} variant="ghost" size="sm">
+      <MenuButton
+        as={Button}
+        rightIcon={<ChevronDownIcon />}
+        variant="ghost"
+        size="sm"
+        width={fullWidth ? "full" : "auto"}
+        justifyContent={fullWidth ? "space-between" : "center"}
+        borderRadius="md"
+        fontWeight="medium"
+      >
         {locale === 'en' ? 'EN' : 'PT'}
       </MenuButton>
       <MenuList>

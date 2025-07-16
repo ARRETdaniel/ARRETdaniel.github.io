@@ -50,18 +50,30 @@ const ProjectCard = ({ title, description, technologies, githubLink, demoLink, i
       _hover={{ transform: 'translateY(-5px)', boxShadow: 'xl' }}
     >
       <Box height="200px" bg="gray.200" position="relative">
-        {/* Placeholder for project image */}
-        <Flex
+        {/* Project image */}
+        <Box
+          backgroundImage={`url(${image})`}
+          backgroundSize="cover"
+          backgroundPosition="center"
           position="absolute"
           top="0"
           left="0"
           right="0"
           bottom="0"
-          align="center"
-          justify="center"
         >
-          <Text fontWeight="bold">{title} Image</Text>
-        </Flex>
+          {/* Add a dark overlay for better text visibility if needed */}
+          <Box
+            position="absolute"
+            top="0"
+            left="0"
+            right="0"
+            bottom="0"
+            bg="rgba(0, 0, 0, 0.3)"
+            opacity={0}
+            transition="opacity 0.3s"
+            _groupHover={{ opacity: 1 }}
+          />
+        </Box>
       </Box>
       <Box p={6}>
         <VStack align="flex-start" spacing={3}>
@@ -116,7 +128,7 @@ const ProjectsPage: NextPage = () => {
       technologies: ["Python", "R", "SQL", "Tableau", "LaTeX", "Data Analysis"],
       githubLink: "https://github.com/ARRETdaniel/Google-Data-Analytics-Professional-Certificate",
       demoLink: "",
-      image: "/images/project-1.png",
+      image: "/assets/images/project-1.png",
       category: "Data Analysis"
     },
     {
@@ -125,7 +137,7 @@ const ProjectsPage: NextPage = () => {
       technologies: ["R", "Data Visualization", "Statistical Modeling", "tidyverse"],
       githubLink: "https://github.com/ARRETdaniel/22-2E_topicos_Especiais_em_IA_II_Sistemas_Inteligentes",
       demoLink: "",
-      image: "/images/project-2.png",
+      image: "/assets/images/project-2.png",
       category: "Data Analysis"
     },
     {
@@ -134,7 +146,7 @@ const ProjectsPage: NextPage = () => {
       technologies: ["Python", "PyTorch", "NLP", "Anaconda", "Pandas", "NumPy"],
       githubLink: "https://github.com/ARRETdaniel/22-2_AI",
       demoLink: "",
-      image: "/images/project-3.png",
+      image: "/assets/images/project-3.png",
       category: "Machine Learning"
     },
     {
@@ -143,7 +155,7 @@ const ProjectsPage: NextPage = () => {
       technologies: ["Python", "Algorithms", "Optimization"],
       githubLink: "https://github.com/ARRETdaniel/22-2_topicos_Especiais_Heuristicas_e_Complexidade",
       demoLink: "",
-      image: "/images/project-4.png",
+      image: "/assets/images/project-4.png",
       category: "Algorithms"
     },
     {

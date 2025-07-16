@@ -77,37 +77,37 @@ const Home: NextPage = () => {
                 spacing={{ base: 4, sm: 6 }}
                 direction={{ base: 'column', sm: 'row' }}
               >
-                <Link href="/about" passHref>
-                  <Button
-                    rounded="md"
-                    size="lg"
-                    fontWeight="bold"
-                    px={6}
-                    colorScheme="brand"
-                    _hover={{
-                      transform: 'translateY(-2px)',
-                      boxShadow: 'lg',
-                    }}
-                  >
-                    About Me
-                  </Button>
-                </Link>
-                <Link href="/contact" passHref>
-                  <Button
-                    rounded="md"
-                    size="lg"
-                    fontWeight="bold"
-                    px={6}
-                    variant="outline"
-                    _hover={{
-                      transform: 'translateY(-2px)',
-                      boxShadow: 'lg',
-                      bg: 'brand.50',
-                    }}
-                  >
-                    Contact
-                  </Button>
-                </Link>
+                <Button
+                  as={Link}
+                  href="/about"
+                  rounded="md"
+                  size="lg"
+                  fontWeight="bold"
+                  px={6}
+                  colorScheme="brand"
+                  _hover={{
+                    transform: 'translateY(-2px)',
+                    boxShadow: 'lg',
+                  }}
+                >
+                  About Me
+                </Button>
+                <Button
+                  as={Link}
+                  href="/contact"
+                  rounded="md"
+                  size="lg"
+                  fontWeight="bold"
+                  px={6}
+                  variant="outline"
+                  _hover={{
+                    transform: 'translateY(-2px)',
+                    boxShadow: 'lg',
+                    bg: 'brand.50',
+                  }}
+                >
+                  Contact
+                </Button>
               </Stack>
 
               {/* Skills badges */}
@@ -337,17 +337,17 @@ const Home: NextPage = () => {
                     <Badge colorScheme="purple" p={2} borderRadius="md">Path Planning</Badge>
                     <Badge colorScheme="orange" p={2} borderRadius="md">Obstacle Avoidance</Badge>
                   </HStack>
-                  <Link href="/research" passHref>
-                    <Button
-                      mt={6}
-                      alignSelf="flex-start"
-                      colorScheme="brand"
-                      size="md"
-                      rightIcon={<Icon as={FaCar} />}
-                    >
-                      View Research Details
-                    </Button>
-                  </Link>
+                  <Button
+                    as={Link}
+                    href="/research"
+                    mt={6}
+                    alignSelf="flex-start"
+                    colorScheme="brand"
+                    size="md"
+                    rightIcon={<Icon as={FaCar} />}
+                  >
+                    View Research Details
+                  </Button>
                 </Flex>
                 <Box
                   flex={{ base: 1, md: 1 }}
@@ -440,11 +440,15 @@ const Home: NextPage = () => {
                   >
                     Implementation of PID and Pure Pursuit control algorithms in the CARLA Simulator.
                   </Text>
-                  <Link href="/projects" passHref>
-                    <Button size="sm" colorScheme="brand" mt={2}>
-                      Learn More
-                    </Button>
-                  </Link>
+                  <Button
+                    as={Link}
+                    href="/projects"
+                    size="sm"
+                    colorScheme="brand"
+                    mt={2}
+                  >
+                    Learn More
+                  </Button>
                 </Box>
               </Box>
 
@@ -490,11 +494,15 @@ const Home: NextPage = () => {
                   >
                     Comprehensive data analysis project using Python, R, Tableau, and SQL.
                   </Text>
-                  <Link href="/projects" passHref>
-                    <Button size="sm" colorScheme="brand" mt={2}>
-                      Learn More
-                    </Button>
-                  </Link>
+                  <Button
+                    as={Link}
+                    href="/projects"
+                    size="sm"
+                    colorScheme="brand"
+                    mt={2}
+                  >
+                    Learn More
+                  </Button>
                 </Box>
               </Box>
 
@@ -540,21 +548,29 @@ const Home: NextPage = () => {
                   >
                     NLP-based chatbot using PyTorch that answers questions in Portuguese.
                   </Text>
-                  <Link href="/projects" passHref>
-                    <Button size="sm" colorScheme="brand" mt={2}>
-                      Learn More
-                    </Button>
-                  </Link>
+                  <Button
+                    as={Link}
+                    href="/projects"
+                    size="sm"
+                    colorScheme="brand"
+                    mt={2}
+                  >
+                    Learn More
+                  </Button>
                 </Box>
               </Box>
             </SimpleGrid>
 
             <Box textAlign="center" mt={6}>
-              <Link href="/projects" passHref>
-                <Button size="lg" variant="outline" colorScheme="brand">
-                  View All Projects
-                </Button>
-              </Link>
+              <Button
+                as={Link}
+                href="/projects"
+                size="lg"
+                variant="outline"
+                colorScheme="brand"
+              >
+                View All Projects
+              </Button>
             </Box>
           </VStack>
         </Container>

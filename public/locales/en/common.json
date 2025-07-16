@@ -47,6 +47,24 @@
     "viewDoi": "DOI"
   },
   "footer": {
-    "copyright": "© 2023 Daniel Terra Gomes. All Rights Reserved."
-  }
+    "copyright": "© 2023 Daniel Terra Gomes. All Rights Reserved.",
+    "tagline": "Computer Scientist specializing in autonomous vehicles, AI, and cybersecurity research.",
+    "quickLinks": "Quick Links",
+    "researchAreas": "Research Areas",
+    "contactMe": "Contact Me",
+    "emailPlaceholder": "Your email address",
+    "subscribe": "Subscribe",
+    "allRightsReserved": "All Rights Reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "cookies": "Cookies Policy",
+    "autonomousVehicles": "Autonomous Vehicles",
+    "artificialIntelligence": "Artificial Intelligence",
+    "cyberSecurity": "Cyber Security",
+    "machineLearning": "Machine Learning",
+    "computerVision": "Computer Vision"
+  },
+  "settings": "Settings",
+  "darkMode": "Dark Mode",
+  "language": "Language"
 }
